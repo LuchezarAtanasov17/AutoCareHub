@@ -21,11 +21,13 @@ namespace AutoCareHub.Web.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private readonly RoleManager<IdentityUser> _roleManager;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, RoleManager<IdentityUser> roleManager)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _roleManager = roleManager;
         }
 
         /// <summary>
@@ -86,6 +88,8 @@ namespace AutoCareHub.Web.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            
+
             if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);

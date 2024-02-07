@@ -5,6 +5,8 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCareHub.Web", "AutoCareHub.Web\AutoCareHub.Web.csproj", "{8A83DE58-58C9-4C82-87E9-F00A8E172BF8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCareHub.Data", "AutoCareHub.Data\AutoCareHub.Data.csproj", "{EEC6BED3-E2CB-4700-874D-7727D22847FD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{8A83DE58-58C9-4C82-87E9-F00A8E172BF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A83DE58-58C9-4C82-87E9-F00A8E172BF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A83DE58-58C9-4C82-87E9-F00A8E172BF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC6BED3-E2CB-4700-874D-7727D22847FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC6BED3-E2CB-4700-874D-7727D22847FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC6BED3-E2CB-4700-874D-7727D22847FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC6BED3-E2CB-4700-874D-7727D22847FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
