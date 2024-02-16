@@ -1,132 +1,159 @@
-/*@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700|Poppins:400,500&display=swap');
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  user-select: none;
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700|Poppins:400,500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
 }
-.Autoleaders-scaled-img{
-  background: url('../img/Autoleaders-scaled.jpg');
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
+
+.Autoleaders-scaled-img {
+    background: url('../img/Autoleaders-scaled.jpg');
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
 }
-.Autoleaders-scaled-img::before{
-  position: absolute;
-  content: '';
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(0,0,0,0.7);
+
+    .Autoleaders-scaled-img::before {
+        position: absolute;
+        content: '';
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: rgba(0,0,0,0.7);
+    }
+
+.content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 999;
+    text-align: center;
+    padding: 60px 32px;
+    width: 370px;
+    transform: translate(-50%,-50%);
+    background: rgba(255,255,255,0.04);
+    box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
 }
-.content{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 999;
-  text-align: center;
-  padding: 60px 32px;   
-  width: 370px;
-  transform: translate(-50%,-50%);
-  background: rgba(255,255,255,0.04);
-  box-shadow: -1px 4px 28px 0px rgba(0,0,0,0.75);
+
+    .content header {
+        color: white;
+        font-size: 33px;
+        font-weight: 600;
+        margin: 0 0 35px 0;
+        font-family: 'Montserrat',sans-serif;
+    }
+
+.field {
+    position: relative;
+    height: 45px;
+    width: 100%;
+    display: flex;
+    background: rgba(255,255,255,0.94);
 }
-.content header{
-  color: white;
-  font-size: 33px;
-  font-weight: 600;
-  margin: 0 0 35px 0;
-  font-family: 'Montserrat',sans-serif;
+
+    .field span {
+        color: #222;
+        width: 40px;
+        line-height: 45px;
+    }
+
+    .field input {
+        height: 100%;
+        width: 100%;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #222;
+        font-size: 16px;
+        font-family: 'Poppins',sans-serif;
+    }
+
+.space {
+    margin-top: 16px;
 }
-.field{
-  position: relative;
-  height: 45px;
-  width: 100%;
-  display: flex;
-  background: rgba(255,255,255,0.94);
+
+.content {
+    margin-top: 45px !important;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
 }
-.field span{
-  color: #222;
-  width: 40px;
-  line-height: 45px;
+
+.show {
+    position: absolute;
+    right: 13px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #202C45 !important;
+    display: none;
+    cursor: pointer;
+    font-family: 'Montserrat',sans-serif;
 }
-.field input{
-  height: 100%;
-  width: 100%;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #222;
-  font-size: 16px;
-  font-family: 'Poppins',sans-serif;
+
+.pass-key:valid ~ .show {
+    display: block;
 }
-.space{
-  margin-top: 16px;
+
+.pass {
+    text-align: left;
+    margin: 10px 0;
 }
-.show{
-  position: absolute;
-  right: 13px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #222;
-  display: none;
-  cursor: pointer;
-  font-family: 'Montserrat',sans-serif;
+
+    .pass a {
+        color: white;
+        text-decoration: none;
+        font-family: 'Poppins',sans-serif;
+    }
+
+    .pass:hover a {
+        text-decoration: underline;
+    }
+
+.field input[type="submit"] {
+    background: #3498db;
+    border: 1px solid #2691d9;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Montserrat',sans-serif;
 }
-.pass-key:valid ~ .show{
-  display: block;
+
+    .field input[type="submit"]:hover {
+        background: #2691d9;
+    }
+
+.login {
+    color: white;
+    margin: 20px 0;
+    font-family: 'Poppins',sans-serif;
 }
-.pass{
-  text-align: left;
-  margin: 10px 0;
+
+i span {
+    margin-left: 8px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-size: 16px;
+    font-family: 'Poppins',sans-serif;
 }
-.pass a{
-  color: white;
-  text-decoration: none;
-  font-family: 'Poppins',sans-serif;
+
+.signup {
+    font-size: 15px;
+    color: white;
+    font-family: 'Poppins',sans-serif;
 }
-.pass:hover a{
-  text-decoration: underline;
-}
-.field input[type="submit"]{
-  background: #3498db;
-  border: 1px solid #2691d9;
-  color: white;
-  font-size: 18px;
-  letter-spacing: 1px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: 'Montserrat',sans-serif;
-}
-.field input[type="submit"]:hover{
-  background: #2691d9;
-}
-.login{
-  color: white;
-  margin: 20px 0;
-  font-family: 'Poppins',sans-serif;
-}
-i span{
-  margin-left: 8px;
-  font-weight: 500;
-  letter-spacing: 1px;
-  font-size: 16px;
-  font-family: 'Poppins',sans-serif;
-}
-.signup{
-  font-size: 15px;
-  color: white;
-  font-family: 'Poppins',sans-serif;
-}
-.signup a{
-  color: #3498db;
-  text-decoration: none;
-}
-.signup a:hover{
-  text-decoration: underline;
-}
-*/
+
+    .signup a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+
+        .signup a:hover {
+            text-decoration: underline;
+        }
+
 
 .container,
 .container-fluid,
@@ -190,11 +217,11 @@ a {
     font-size: 16px;
     font-weight: 500;
     color: #ffffff;
-    background: #E81C2E;
+    background: #202C45;
     border: none;
     border-radius: 60px;
     box-shadow: inset 0 0 0 0 #202C45;
-    transition: ease-out 0.5s;
+    transition: ease-out 0.5slogi
     -webkit-transition: ease-out 0.5s;
     -moz-transition: ease-out 0.5s;
 }
@@ -404,7 +431,7 @@ a {
     }
 
     .nav-bar .navbar {
-        padding: 20px 0;
+        padding: 10px 0;
         background: #202C45 !important;
         transition: .3s;
     }
@@ -412,6 +439,14 @@ a {
     .nav-bar.nav-sticky .navbar {
         padding: 5px 0;
     }
+
+.login {
+    color: #ffffff;
+    padding: 15px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 0px;
+}
 
 .title,
 .navbar-dark .navbar-nav .nav-link,
@@ -425,7 +460,7 @@ a {
 }
 
     .navbar-dark .navbar-nav .nav-link:hover,
-    .navbar-dark .navbar-nav .nav-link.active{
+    .navbar-dark .navbar-nav .nav-link.active {
         color: #E81C2E;
     }
 

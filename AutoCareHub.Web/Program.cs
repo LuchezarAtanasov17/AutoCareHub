@@ -1,17 +1,25 @@
-using AutoCareHub.Web.Data;
-using Microsoft.AspNetCore.Identity;
+using AutoCareHub.Data;
 using Microsoft.EntityFrameworkCore;
+using ENTITIES = AutoCareHub.Data.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<AutoCareHubDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<ENTITIES.User>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+})
+    .AddRoles<ENTITIES.Role>()
+    .AddEntityFrameworkStores<AutoCareHubDbContext>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
