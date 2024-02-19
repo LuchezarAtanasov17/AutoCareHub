@@ -29,7 +29,9 @@ namespace AutoCareHub.Data.Models
         [Required]
         public TimeOnly CloseTime { get; set; }
 
-        public User User { get; set; }
+        public string? PictureUrl { get; set; }
+
+        public User? User { get; set; }
 
         public ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
 
