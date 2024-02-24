@@ -1,6 +1,8 @@
 using AutoCareHub.Data;
+using CloudinaryDotNet;
 using Microsoft.EntityFrameworkCore;
 using ENTITIES = AutoCareHub.Data.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,8 @@ builder.Services.AddDefaultIdentity<ENTITIES.User>(options =>
     .AddRoles<ENTITIES.Role>()
     .AddEntityFrameworkStores<AutoCareHubDbContext>();
 builder.Services.AddControllersWithViews();
+
+ConfigureCloudinaryService(builder.Services, builder.Configuration);
 
 var app = builder.Build();
 
@@ -50,3 +54,18 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.Run();
+
+static void ConfigureCloudinaryService(IServiceCollection services, IConfiguration configuration)
+{
+
+    var cloudName = configuration.GetValue<string>("AccountSettings:CloudName");
+    var apiKey = configuration.GetValue<string>("AccountSettings:ApiKey");
+    var apiSecret = configuration.GetValue<string>("AccountSettings:ApiSecret");
+
+    if (new[] { cloudName, apiKey, apiSecret }.Any(string.IsNullOrWhiteSpace))
+    {
+        throw new ArgumentException("Please specify your Cloudinary account Information");
+    }
+
+    services.AddSingleton(new Cloudinary(new Account(cloudName, apiKey, apiSecret)));
+}
