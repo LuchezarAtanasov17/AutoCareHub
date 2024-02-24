@@ -1,4 +1,5 @@
-﻿using AutoCareHub.Data.Models;
+﻿using AutoCareHub.Data.Configuration;
+using AutoCareHub.Data.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,9 +31,9 @@ namespace AutoCareHub.Data
                     .HasPrincipalKey(x => x.Id)
                     .OnDelete(DeleteBehavior.NoAction);
 
-                builder.HasOne(x => x.Category)
+                builder.HasOne(x => x.MainCategory)
                     .WithMany(x => x.Appointments)
-                    .HasForeignKey(x => x.CategoryId)
+                    .HasForeignKey(x => x.MainCategoryId)
                     .HasPrincipalKey(x => x.Id)
                     .OnDelete(DeleteBehavior.Cascade);
             });
@@ -82,17 +83,17 @@ namespace AutoCareHub.Data
                 .OnDelete(DeleteBehavior.Cascade);
             });
 
-            modelBuilder.Entity<CategoryService>(builder =>
+            modelBuilder.Entity<MainCategoryService>(builder =>
             {
-                builder.HasKey(cs => new { cs.CategoryId, cs.ServiceId });
+                builder.HasKey(cs => new { cs.MainCategoryId, cs.ServiceId });
 
-                builder.HasOne(x => x.Category)
+                builder.HasOne(x => x.MainCategory)
                     .WithMany(x => x.CategoryServices)
-                    .HasForeignKey(x => x.CategoryId)
+                    .HasForeignKey(x => x.MainCategoryId)
                     .HasPrincipalKey(x => x.Id);
 
                 builder.HasOne(x => x.Service)
-                    .WithMany(x => x.CategoryServices)
+                    .WithMany(x => x.MainCategoryServices)
                     .HasForeignKey(x => x.ServiceId)
                     .HasPrincipalKey(x => x.Id);
             });
@@ -104,6 +105,13 @@ namespace AutoCareHub.Data
                 .HasForeignKey(x => x.MainCategoryId)
                 .HasPrincipalKey(x => x.Id);
             });
+
+            modelBuilder.ApplyConfiguration(new MainCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new ServiceConfiguration());
+            modelBuilder.ApplyConfiguration(new SubCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new MainCategoryServiceConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -118,7 +126,7 @@ namespace AutoCareHub.Data
 
         public DbSet<Service> Services { get; set; }
 
-        public DbSet<CategoryService> CategoryServices { get; set; }
+        public DbSet<MainCategoryService> MainCategoryServices { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
     }

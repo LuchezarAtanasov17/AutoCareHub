@@ -16,7 +16,7 @@ namespace AutoCareHub.Data.Models
         public Guid UserId { get; set; }
 
         [Required]
-        public Guid CategoryId { get; set; }
+        public Guid MainCategoryId { get; set; }
 
         [Required]
         public DateTime StartDate { get; set; }
@@ -31,6 +31,6 @@ namespace AutoCareHub.Data.Models
 
         public User User { get; set; }
 
-        public MainCategory Category { get; set; }
+        public MainCategory MainCategory { get; set; }
     }
 }

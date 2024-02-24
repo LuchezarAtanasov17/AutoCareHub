@@ -13,7 +13,7 @@ namespace AutoCareHub.Data.Models
         public Guid MainCategoryId { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 5)]
+        [StringLength(70, MinimumLength = 5)]
         public string Name { get; set; } = null!;
 
         public MainCategory MainCategory { get; set; }

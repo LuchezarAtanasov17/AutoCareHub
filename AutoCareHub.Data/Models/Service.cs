@@ -16,7 +16,7 @@ namespace AutoCareHub.Data.Models
         [StringLength(50)]
         public string Name { get; set; } = null!;
 
-        [StringLength(300)]
+        [StringLength(500)]
         public string? Description { get; set; }
 
         [Required]
@@ -37,7 +37,7 @@ namespace AutoCareHub.Data.Models
 
         public ICollection<Rating> Ratings { get; set; } = new HashSet<Rating>();
 
-        public ICollection<CategoryService> CategoryServices { get; set; } = new HashSet<CategoryService>();
+        public ICollection<MainCategoryService> MainCategoryServices { get; set; } = new HashSet<MainCategoryService>();
 
         public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
     }

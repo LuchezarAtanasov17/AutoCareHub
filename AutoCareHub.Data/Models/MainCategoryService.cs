@@ -3,18 +3,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AutoCareHub.Data.Models
 {
-    public class CategoryService
+    public class MainCategoryService
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
         [Required]
-        public Guid CategoryId { get; set; }
+        public Guid MainCategoryId { get; set; }
 
         [Required]
         public Guid ServiceId { get; set; }
 
-        public MainCategory Category { get; set; }
+        public MainCategory MainCategory { get; set; }
 
         public Service Service { get; set; }
     }
