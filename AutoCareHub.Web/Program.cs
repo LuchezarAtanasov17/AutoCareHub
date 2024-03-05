@@ -1,4 +1,12 @@
 using AutoCareHub.Data;
+using AutoCareHub.Services.Appointments;
+using AutoCareHub.Services.Comments;
+using AutoCareHub.Services.Impl;
+using AutoCareHub.Services.MainCategories;
+using AutoCareHub.Services.Ratings;
+using AutoCareHub.Services.Services;
+using AutoCareHub.Services.SubCategories;
+using AutoCareHub.Services.Users;
 using CloudinaryDotNet;
 using Microsoft.EntityFrameworkCore;
 using ENTITIES = AutoCareHub.Data.Models;
@@ -25,6 +33,14 @@ builder.Services.AddDefaultIdentity<ENTITIES.User>(options =>
 builder.Services.AddControllersWithViews();
 
 ConfigureCloudinaryService(builder.Services, builder.Configuration);
+
+builder.Services.AddScoped<IAppointmentService, AppointmentService>();
+builder.Services.AddScoped<ICommentService, CommentService>();
+builder.Services.AddScoped<IMainCategoryService, MainCategoryService>();
+builder.Services.AddScoped<IRatingService, RatingService>();
+builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
+builder.Services.AddScoped<IServiceService, ServiceService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 var app = builder.Build();
 

@@ -24,6 +24,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AutoCareHub.Data\AutoCareHub.Data.csproj" />
+    <ProjectReference Include="..\AutoCareHub.Services.Impl\AutoCareHub.Services.Impl.csproj" />
+    <ProjectReference Include="..\AutoCareHub.Services\AutoCareHub.Services.csproj" />
   </ItemGroup>
 
 </Project>
