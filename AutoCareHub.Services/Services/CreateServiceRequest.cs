@@ -1,0 +1,28 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AutoCareHub.Services.Services
+{
+    public class CreateServiceRequest
+    {
+        public Guid UserId { get; set; }
+
+        public List<Guid> MainCategoryIds { get; set; }
+
+        [Required]
+        [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
+        public string Name { get; set; } = null!;
+
+        [StringLength(500)]
+        public string? Description { get; set; }
+
+        [Required]
+        [StringLength(80, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 10)]
+        public string Location { get; set; } = null!;
+
+        [Required]
+        public TimeOnly OpenTime { get; set; }
+
+        [Required]
+        public TimeOnly CloseTime { get; set; }
+    }
+}
