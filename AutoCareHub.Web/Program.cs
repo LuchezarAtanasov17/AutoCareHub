@@ -56,7 +56,7 @@ app.MapRazorPages();
 // Migrate database
 using (var scope = app.Services.CreateScope())
 {
-    var dataContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    var dataContext = scope.ServiceProvider.GetRequiredService<AutoCareHubDbContext>();
     await dataContext.Database.MigrateAsync();
 }
 
