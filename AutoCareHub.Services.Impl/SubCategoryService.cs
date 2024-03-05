@@ -1,9 +1,9 @@
 ﻿using AutoCareHub.Data;
-using AutoCareHub.Data.Models;
 using AutoCareHub.Services.SubCategories;
 using Microsoft.EntityFrameworkCore;
+using ENTITIES = AutoCareHub.Data.Models;
 
-namespace AutoCareHub.Services.Impl.SubCategories
+namespace AutoCareHub.Services.Impl
 {
     public class SubCategoryService : ISubCategoryService
     {
@@ -14,7 +14,7 @@ namespace AutoCareHub.Services.Impl.SubCategories
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<List<SubCategory>> ListSubCategoriesAsync(Guid? mainCategoryId = null)
+        public async Task<List<ENTITIES.SubCategory>> ListSubCategoriesAsync(Guid? mainCategoryId = null)
         {
             var subCategories = await _context.SubCategories.ToListAsync();
 
@@ -26,7 +26,7 @@ namespace AutoCareHub.Services.Impl.SubCategories
             return subCategories;
         }
 
-        public async Task<SubCategory> GetSubCategoryAsync(Guid id)
+        public async Task<ENTITIES.SubCategory> GetSubCategoryAsync(Guid id)
         {
             var subCategory = await _context.SubCategories.FirstOrDefaultAsync(x => x.Id == id);
 

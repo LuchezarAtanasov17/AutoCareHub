@@ -1,9 +1,8 @@
 ﻿using AutoCareHub.Data;
-using AutoCareHub.Data.Models;
 using AutoCareHub.Services.Ratings;
 using Microsoft.EntityFrameworkCore;
 
-namespace AutoCareHub.Services.Impl.Ratings
+namespace AutoCareHub.Services.Impl
 {
     public class RatingService : IRatingService
     {

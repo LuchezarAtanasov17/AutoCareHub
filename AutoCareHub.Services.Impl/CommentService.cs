@@ -1,9 +1,9 @@
 ﻿using AutoCareHub.Data;
-using AutoCareHub.Data.Models;
 using AutoCareHub.Services.Comments;
 using Microsoft.EntityFrameworkCore;
+using ENTITIES = AutoCareHub.Data.Models;
 
-namespace AutoCareHub.Services.Impl.Comments
+namespace AutoCareHub.Services.Impl
 {
     public class CommentService : ICommentService
     {
@@ -14,10 +14,10 @@ namespace AutoCareHub.Services.Impl.Comments
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<List<Comment>> ListCommentsAsync(Guid? serviceId = null, Guid? userId = null)
+        public async Task<List<ENTITIES.Comment>> ListCommentsAsync(Guid? serviceId = null, Guid? userId = null)
         {
             var comments = await _context.Comments
-                .Include(x=>x.User)
+                .Include(x => x.User)
                 .Include(x => x.Service)
                 .ToListAsync();
 
@@ -53,7 +53,7 @@ namespace AutoCareHub.Services.Impl.Comments
             var comment = await _context.Comments
                 .FirstOrDefaultAsync(x => x.Id == id);
 
-            if (comment != null)
+            if (comment == null)
             {
                 throw new ObjectNotFoundException(nameof(comment));
             }

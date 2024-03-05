@@ -3,7 +3,7 @@ using AutoCareHub.Data.Models;
 using AutoCareHub.Services.Appointments;
 using Microsoft.EntityFrameworkCore;
 
-namespace AutoCareHub.Services.Impl.Appointments
+namespace AutoCareHub.Services.Impl
 {
     public class AppointmentService : IAppointmentService
     {

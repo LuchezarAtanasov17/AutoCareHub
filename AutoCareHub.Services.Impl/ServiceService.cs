@@ -1,10 +1,10 @@
-﻿using AutoCareHub.Data;
-using AutoCareHub.Data.Models;
-using AutoCareHub.Services.Services;
+﻿using AutoCareHub.Services.Services;
 using AutoCareHub.Web.Model.Services;
 using Microsoft.EntityFrameworkCore;
+using AutoCareHub.Data;
+using ENTITIES = AutoCareHub.Data.Models;
 
-namespace AutoCareHub.Services.Impl.Services
+namespace AutoCareHub.Services.Impl
 {
     public class ServiceService : IServiceService
     {
@@ -15,7 +15,7 @@ namespace AutoCareHub.Services.Impl.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<List<Service>> ListServicesAsync(Guid? userId = null)
+        public async Task<List<ENTITIES.Service>> ListServicesAsync(Guid? userId = null)
         {
             var services = await _context.Services.ToListAsync();
 
@@ -29,7 +29,7 @@ namespace AutoCareHub.Services.Impl.Services
             return services;
         }
 
-        public async Task<Service> GetServiceAsync(Guid id)
+        public async Task<ENTITIES.Service> GetServiceAsync(Guid id)
         {
             var service = await _context.Services
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -79,7 +79,7 @@ namespace AutoCareHub.Services.Impl.Services
 
             foreach (var category in request.MainCategories)
             {
-                var categoryService = new MainCategoryService
+                var categoryService = new ENTITIES.MainCategoryService
                 {
                     Id = Guid.NewGuid(),
                     ServiceId = service.Id,
@@ -94,7 +94,7 @@ namespace AutoCareHub.Services.Impl.Services
         public async Task DeleteServiceAsync(Guid id)
         {
             var service = await _context.Services
-                .FirstOrDefaultAsync(x => x.Id == id); 
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (service is null)
             {

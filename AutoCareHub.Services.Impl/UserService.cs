@@ -1,9 +1,9 @@
 ﻿using AutoCareHub.Data;
-using AutoCareHub.Data.Models;
 using AutoCareHub.Services.Users;
 using Microsoft.EntityFrameworkCore;
+using ENTITIES = AutoCareHub.Data.Models;
 
-namespace AutoCareHub.Services.Impl.Users
+namespace AutoCareHub.Services.Impl
 {
     public class UserService : IUserService
     {
@@ -14,7 +14,7 @@ namespace AutoCareHub.Services.Impl.Users
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<List<User>> ListUsersAsync()
+        public async Task<List<ENTITIES.User>> ListUsersAsync()
         {
             var users = await _context.Users
                 .ToListAsync();
@@ -22,7 +22,7 @@ namespace AutoCareHub.Services.Impl.Users
             return users;
         }
 
-        public async Task<User> GetUserAsync(Guid id)
+        public async Task<ENTITIES.User> GetUserAsync(Guid id)
         {
             var user = await _context.Users
                 .FirstOrDefaultAsync(x => x.Id == id);
@@ -39,7 +39,7 @@ namespace AutoCareHub.Services.Impl.Users
         {
             var user = _context.Users.FirstOrDefault(x => x.Id == id);
 
-            if (user == null) 
+            if (user == null)
             {
                 throw new ObjectNotFoundException(nameof(user));
             }
