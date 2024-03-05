@@ -53,6 +53,13 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
 
+// Migrate database
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    await dataContext.Database.MigrateAsync();
+}
+
 app.Run();
 
 static void ConfigureCloudinaryService(IServiceCollection services, IConfiguration configuration)
