@@ -15,7 +15,7 @@ namespace AutoCareHub.Data.Models
 
         public ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
 
-        public ICollection<MainCategoryService> CategoryServices { get; set; } = new HashSet<MainCategoryService>();
+        public ICollection<MainCategoryService> MainCategoryServices { get; set; } = new HashSet<MainCategoryService>();
 
         public ICollection<SubCategory> SubCategories { get; set; } = new HashSet<SubCategory>();
     }

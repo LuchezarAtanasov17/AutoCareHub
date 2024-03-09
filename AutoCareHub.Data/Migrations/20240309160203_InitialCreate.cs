@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AutoCareHub.Data.Migrations
 {
-    public partial class InitialCreateAndSeed : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -179,7 +179,7 @@ namespace AutoCareHub.Data.Migrations
                     Location = table.Column<string>(type: "nvarchar(80)", maxLength: 80, nullable: false),
                     OpenTime = table.Column<TimeSpan>(type: "time", nullable: false),
                     CloseTime = table.Column<TimeSpan>(type: "time", nullable: false),
-                    PictureUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -337,9 +337,9 @@ namespace AutoCareHub.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "b32120a2-e917-47c4-b6ed-52b9f174b5c2", "admin@gmail.com", false, "Luchezar", "Atanasov", false, null, "ADMIN@GMAIL.COM", "ADMINISTRATOR", null, null, false, null, false, "Administrator" },
-                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "ecfd8e3c-1cc0-43b6-a85c-7d2d517122f5", "dimitar@mail.com", false, "Dimitar", "Dimitrov", false, null, "DIMITAR@MAIL.COM", "MEETYOU", null, null, false, null, false, "Meetyou" },
-                    { new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"), 0, "66ecfc2a-9b10-4754-931b-03fca9de713e", "simonipal@mail.com", false, "Dimitar", "Dimitrov", false, null, "SIMONIPAL@MAIL.COM", "MONIBONBONI", null, null, false, null, false, "MoniBonboni" }
+                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "0b22f51f-ec8b-4dc8-8140-800fa68b737a", "admin@gmail.com", false, "Luchezar", "Atanasov", false, null, "ADMIN@GMAIL.COM", "ADMINISTRATOR", null, null, false, null, false, "Administrator" },
+                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "726f967e-da29-4399-9ca6-3d7dcf0aabf1", "dimitar@mail.com", false, "Dimitar", "Dimitrov", false, null, "DIMITAR@MAIL.COM", "MEETYOU", null, null, false, null, false, "Meetyou" },
+                    { new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"), 0, "c50d28d3-82e1-492f-83aa-d4ace4bfafc6", "simonipal@mail.com", false, "Dimitar", "Dimitrov", false, null, "SIMONIPAL@MAIL.COM", "MONIBONBONI", null, null, false, null, false, "MoniBonboni" }
                 });
 
             migrationBuilder.InsertData(
@@ -362,13 +362,13 @@ namespace AutoCareHub.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Services",
-                columns: new[] { "Id", "CloseTime", "Description", "Location", "Name", "OpenTime", "PictureUrl", "UserId" },
+                columns: new[] { "Id", "CloseTime", "Description", "ImageUrl", "Location", "Name", "OpenTime", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("31059a53-4346-4efb-a1e2-b404c16b7fb5"), new TimeSpan(0, 17, 0, 0, 0), "Welcome to AutoPureWash, where your vehicle's shine is our priority. Treat your car to a rejuvenating experience with our expert team and state-of-the-art equipment. From exterior washes to meticulous detailing, we offer a range of services tailored to suit your needs. Experience the ultimate in cleanliness and convenience at AutoPureWash—where every wash leaves your car sparkling like new.", "37 Chestnut Street, Vidin", "AutoPureWash", new TimeSpan(0, 8, 0, 0, 0), "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg", new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c") },
-                    { new Guid("49450e6e-3fea-483c-9df8-ea6f9c91c6f8"), new TimeSpan(0, 18, 0, 0, 0), "Welcome to AutoCare Connect—your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!", "23 Aspen Way, Targovishte", "CarServiceCentral", new TimeSpan(0, 8, 0, 0, 0), "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg", new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c") },
-                    { new Guid("ba0914fa-d680-4f2d-97b4-b6197e7a3902"), new TimeSpan(0, 18, 0, 0, 0), "Experience the ultimate in automotive convenience with DriveEase. Say goodbye to long wait times and tedious phone calls—we've streamlined the process for you. From routine maintenance to emergency repairs, our platform connects you with skilled professionals ready to serve. Relax and let DriveEase take the wheel on your car care journey.", "8 Elmwood Drive, Yambol", "CarProCare", new TimeSpan(0, 9, 0, 0, 0), "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg", new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2") },
-                    { new Guid("dc4ee450-7e0d-4d13-b93f-474487d355d0"), new TimeSpan(0, 18, 0, 0, 0), "Welcome to ServiceSelect — your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!", "17 Oakwood Lane, Gabrovo", "ServiceSelect", new TimeSpan(0, 9, 0, 0, 0), "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png", new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2") }
+                    { new Guid("31059a53-4346-4efb-a1e2-b404c16b7fb5"), new TimeSpan(0, 17, 0, 0, 0), "Welcome to AutoPureWash, where your vehicle's shine is our priority. Treat your car to a rejuvenating experience with our expert team and state-of-the-art equipment. From exterior washes to meticulous detailing, we offer a range of services tailored to suit your needs. Experience the ultimate in cleanliness and convenience at AutoPureWash—where every wash leaves your car sparkling like new.", "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg", "37 Chestnut Street, Vidin", "AutoPureWash", new TimeSpan(0, 8, 0, 0, 0), new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c") },
+                    { new Guid("49450e6e-3fea-483c-9df8-ea6f9c91c6f8"), new TimeSpan(0, 18, 0, 0, 0), "Welcome to AutoCare Connect—your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!", "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg", "23 Aspen Way, Targovishte", "CarServiceCentral", new TimeSpan(0, 8, 0, 0, 0), new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c") },
+                    { new Guid("ba0914fa-d680-4f2d-97b4-b6197e7a3902"), new TimeSpan(0, 18, 0, 0, 0), "Experience the ultimate in automotive convenience with DriveEase. Say goodbye to long wait times and tedious phone calls—we've streamlined the process for you. From routine maintenance to emergency repairs, our platform connects you with skilled professionals ready to serve. Relax and let DriveEase take the wheel on your car care journey.", "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg", "8 Elmwood Drive, Yambol", "CarProCare", new TimeSpan(0, 9, 0, 0, 0), new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2") },
+                    { new Guid("dc4ee450-7e0d-4d13-b93f-474487d355d0"), new TimeSpan(0, 18, 0, 0, 0), "Welcome to ServiceSelect — your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!", "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png", "17 Oakwood Lane, Gabrovo", "ServiceSelect", new TimeSpan(0, 9, 0, 0, 0), new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2") }
                 });
 
             migrationBuilder.InsertData(

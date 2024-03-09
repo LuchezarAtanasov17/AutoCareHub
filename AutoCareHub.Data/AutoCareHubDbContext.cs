@@ -88,7 +88,7 @@ namespace AutoCareHub.Data
                 builder.HasKey(cs => new { cs.MainCategoryId, cs.ServiceId });
 
                 builder.HasOne(x => x.MainCategory)
-                    .WithMany(x => x.CategoryServices)
+                    .WithMany(x => x.MainCategoryServices)
                     .HasForeignKey(x => x.MainCategoryId)
                     .HasPrincipalKey(x => x.Id);
 

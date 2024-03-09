@@ -26,7 +26,7 @@ namespace AutoCareHub.Data.Configuration
                     OpenTime = TimeOnly.Parse("9:00:00"),
                     CloseTime = TimeOnly.Parse("18:00:00"),
                     Location = "17 Oakwood Lane, Gabrovo",
-                    PictureUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png"
+                    ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png"
                 },
                 new()
                 {
@@ -40,7 +40,7 @@ namespace AutoCareHub.Data.Configuration
                     OpenTime = TimeOnly.Parse("9:00:00"),
                     CloseTime = TimeOnly.Parse("18:00:00"),
                     Location = "8 Elmwood Drive, Yambol",
-                    PictureUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg"
+                    ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg"
                 },
                 new()
                 {
@@ -53,7 +53,7 @@ namespace AutoCareHub.Data.Configuration
                     OpenTime = TimeOnly.Parse("8:00:00"),
                     CloseTime = TimeOnly.Parse("18:00:00"),
                     Location = "23 Aspen Way, Targovishte",
-                    PictureUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg",
+                    ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg",
                 },
                 new()
                 {
@@ -67,7 +67,7 @@ namespace AutoCareHub.Data.Configuration
                     OpenTime = TimeOnly.Parse("8:00:00"),
                     CloseTime = TimeOnly.Parse("17:00:00"),
                     Location = "37 Chestnut Street, Vidin",
-                    PictureUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg"
+                    ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg"
                 }
             };
 

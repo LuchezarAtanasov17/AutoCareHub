@@ -292,6 +292,9 @@ namespace AutoCareHub.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasMaxLength(80)
@@ -304,9 +307,6 @@ namespace AutoCareHub.Data.Migrations
 
                     b.Property<TimeSpan>("OpenTime")
                         .HasColumnType("time");
-
-                    b.Property<string>("PictureUrl")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -323,10 +323,10 @@ namespace AutoCareHub.Data.Migrations
                             Id = new Guid("dc4ee450-7e0d-4d13-b93f-474487d355d0"),
                             CloseTime = new TimeSpan(0, 18, 0, 0, 0),
                             Description = "Welcome to ServiceSelect — your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!",
+                            ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png",
                             Location = "17 Oakwood Lane, Gabrovo",
                             Name = "ServiceSelect",
                             OpenTime = new TimeSpan(0, 9, 0, 0, 0),
-                            PictureUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png",
                             UserId = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2")
                         },
                         new
@@ -334,10 +334,10 @@ namespace AutoCareHub.Data.Migrations
                             Id = new Guid("ba0914fa-d680-4f2d-97b4-b6197e7a3902"),
                             CloseTime = new TimeSpan(0, 18, 0, 0, 0),
                             Description = "Experience the ultimate in automotive convenience with DriveEase. Say goodbye to long wait times and tedious phone calls—we've streamlined the process for you. From routine maintenance to emergency repairs, our platform connects you with skilled professionals ready to serve. Relax and let DriveEase take the wheel on your car care journey.",
+                            ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg",
                             Location = "8 Elmwood Drive, Yambol",
                             Name = "CarProCare",
                             OpenTime = new TimeSpan(0, 9, 0, 0, 0),
-                            PictureUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg",
                             UserId = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2")
                         },
                         new
@@ -345,10 +345,10 @@ namespace AutoCareHub.Data.Migrations
                             Id = new Guid("49450e6e-3fea-483c-9df8-ea6f9c91c6f8"),
                             CloseTime = new TimeSpan(0, 18, 0, 0, 0),
                             Description = "Welcome to AutoCare Connect—your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!",
+                            ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg",
                             Location = "23 Aspen Way, Targovishte",
                             Name = "CarServiceCentral",
                             OpenTime = new TimeSpan(0, 8, 0, 0, 0),
-                            PictureUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg",
                             UserId = new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c")
                         },
                         new
@@ -356,10 +356,10 @@ namespace AutoCareHub.Data.Migrations
                             Id = new Guid("31059a53-4346-4efb-a1e2-b404c16b7fb5"),
                             CloseTime = new TimeSpan(0, 17, 0, 0, 0),
                             Description = "Welcome to AutoPureWash, where your vehicle's shine is our priority. Treat your car to a rejuvenating experience with our expert team and state-of-the-art equipment. From exterior washes to meticulous detailing, we offer a range of services tailored to suit your needs. Experience the ultimate in cleanliness and convenience at AutoPureWash—where every wash leaves your car sparkling like new.",
+                            ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg",
                             Location = "37 Chestnut Street, Vidin",
                             Name = "AutoPureWash",
                             OpenTime = new TimeSpan(0, 8, 0, 0, 0),
-                            PictureUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg",
                             UserId = new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c")
                         });
                 });
@@ -777,7 +777,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b32120a2-e917-47c4-b6ed-52b9f174b5c2",
+                            ConcurrencyStamp = "0b22f51f-ec8b-4dc8-8140-800fa68b737a",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Luchezar",
@@ -793,7 +793,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ecfd8e3c-1cc0-43b6-a85c-7d2d517122f5",
+                            ConcurrencyStamp = "726f967e-da29-4399-9ca6-3d7dcf0aabf1",
                             Email = "dimitar@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",
@@ -809,7 +809,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "66ecfc2a-9b10-4754-931b-03fca9de713e",
+                            ConcurrencyStamp = "c50d28d3-82e1-492f-83aa-d4ace4bfafc6",
                             Email = "simonipal@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",
@@ -979,7 +979,7 @@ namespace AutoCareHub.Data.Migrations
             modelBuilder.Entity("AutoCareHub.Data.Models.MainCategoryService", b =>
                 {
                     b.HasOne("AutoCareHub.Data.Models.MainCategory", "MainCategory")
-                        .WithMany("CategoryServices")
+                        .WithMany("MainCategoryServices")
                         .HasForeignKey("MainCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1091,7 +1091,7 @@ namespace AutoCareHub.Data.Migrations
                 {
                     b.Navigation("Appointments");
 
-                    b.Navigation("CategoryServices");
+                    b.Navigation("MainCategoryServices");
 
                     b.Navigation("SubCategories");
                 });
