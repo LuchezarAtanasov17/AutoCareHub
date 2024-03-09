@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AutoCareHub.Services.MainCategories;
+using System.ComponentModel.DataAnnotations;
 
 namespace AutoCareHub.Services.Services
 {
@@ -24,5 +25,9 @@ namespace AutoCareHub.Services.Services
 
         [Required]
         public TimeOnly CloseTime { get; set; }
+
+        public string ImageUrl { get; set; }
+
+        public List<SelectMainCategory> MainCategories { get; set; }
     }
 }

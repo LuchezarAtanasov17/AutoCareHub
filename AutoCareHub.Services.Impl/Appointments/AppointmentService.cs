@@ -1,6 +1,7 @@
 ﻿using AutoCareHub.Data;
 using AutoCareHub.Data.Models;
 using AutoCareHub.Services.Appointments;
+using AutoCareHub.Services.Impl.Appointments;
 using Microsoft.EntityFrameworkCore;
 
 namespace AutoCareHub.Services.Impl
@@ -19,6 +20,7 @@ namespace AutoCareHub.Services.Impl
             var appointments = await _context.Appointments
                 .Include(x => x.User)
                 .Include(x => x.Service)
+                .Include(x=>x.MainCategory)
                 .ToListAsync();
 
             if (serviceId != null)
@@ -59,7 +61,9 @@ namespace AutoCareHub.Services.Impl
                 throw new ArgumentNullException(nameof(request));
             }
 
-            await _context.AddAsync(request);
+            var entityAppointment = Conversion.ConvertAppointment(request);
+
+            await _context.AddAsync(entityAppointment);
             await _context.SaveChangesAsync();
         }
 
@@ -70,7 +74,8 @@ namespace AutoCareHub.Services.Impl
                 throw new ArgumentNullException(nameof(request));
             }
 
-            var entity = await _context.Appointments.FirstOrDefaultAsync(x => x.Id == id);
+            var entity = await _context.Appointments
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (entity is null)
             {

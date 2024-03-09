@@ -1,4 +1,4 @@
-﻿using AutoCareHub.Data.Models;
+﻿using AutoCareHub.Services.MainCategories;
 using System.ComponentModel.DataAnnotations;
 
 namespace AutoCareHub.Web.Model.Services
@@ -24,6 +24,6 @@ namespace AutoCareHub.Web.Model.Services
         [Required]
         public TimeOnly CloseTime { get; set; }
 
-        public List<MainCategory> MainCategories { get; set; }
+        public List<SelectMainCategory> SelectMainCategory { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using AutoCareHub.Services.Users;
 using Microsoft.EntityFrameworkCore;
 using ENTITIES = AutoCareHub.Data.Models;
 
-namespace AutoCareHub.Services.Impl
+namespace AutoCareHub.Services.Impl.Users
 {
     public class UserService : IUserService
     {

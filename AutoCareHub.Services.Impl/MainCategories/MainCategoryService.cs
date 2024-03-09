@@ -3,7 +3,7 @@ using AutoCareHub.Services.MainCategories;
 using Microsoft.EntityFrameworkCore;
 using ENTITIES = AutoCareHub.Data.Models;
 
-namespace AutoCareHub.Services.Impl
+namespace AutoCareHub.Services.Impl.MainCategories
 {
     public class MainCategoryService : IMainCategoryService
     {
@@ -17,7 +17,9 @@ namespace AutoCareHub.Services.Impl
         public async Task<List<ENTITIES.MainCategory>> ListMainCategoriesAsync(Guid? serviceId = null)
         {
             var mainCategories = await _context.MainCategories
-                .Include(x => x.CategoryServices)
+                .Include(x => x.SubCategories)
+                .Include(x => x.Appointments)
+                .Include(x => x.MainCategoryServices)
                 .ToListAsync();
 
             if (serviceId != null)
@@ -34,6 +36,9 @@ namespace AutoCareHub.Services.Impl
         public async Task<ENTITIES.MainCategory> GetMainCategoryAsync(Guid id)
         {
             var mainCategory = await _context.MainCategories
+                 .Include(x => x.SubCategories)
+                 .Include(x => x.Appointments)
+                 .Include(x => x.MainCategoryServices)
                  .FirstOrDefaultAsync(x => x.Id == id);
 
             if (mainCategory == null)
@@ -51,7 +56,9 @@ namespace AutoCareHub.Services.Impl
                 throw new ArgumentNullException(nameof(request));
             }
 
-            await _context.AddAsync(request);
+            var entityMainCategory = Conversion.ConvertMainCategory(request);
+
+            await _context.AddAsync(entityMainCategory);
             await _context.SaveChangesAsync();
         }
 

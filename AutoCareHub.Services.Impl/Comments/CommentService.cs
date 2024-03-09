@@ -1,5 +1,6 @@
 ﻿using AutoCareHub.Data;
 using AutoCareHub.Services.Comments;
+using AutoCareHub.Services.Impl.Comments;
 using Microsoft.EntityFrameworkCore;
 using ENTITIES = AutoCareHub.Data.Models;
 
@@ -44,7 +45,9 @@ namespace AutoCareHub.Services.Impl
                 throw new ArgumentNullException(nameof(request));
             }
 
-            await _context.AddAsync(request);
+            var entityComment = Conversion.ConvertComment(request);
+
+            await _context.AddAsync(entityComment);
             await _context.SaveChangesAsync();
         }
 

@@ -3,7 +3,7 @@ using AutoCareHub.Services.SubCategories;
 using Microsoft.EntityFrameworkCore;
 using ENTITIES = AutoCareHub.Data.Models;
 
-namespace AutoCareHub.Services.Impl
+namespace AutoCareHub.Services.Impl.SubCategories
 {
     public class SubCategoryService : ISubCategoryService
     {
@@ -16,11 +16,15 @@ namespace AutoCareHub.Services.Impl
 
         public async Task<List<ENTITIES.SubCategory>> ListSubCategoriesAsync(Guid? mainCategoryId = null)
         {
-            var subCategories = await _context.SubCategories.ToListAsync();
+            var subCategories = await _context.SubCategories
+                .Include(x=>x.MainCategory)
+                .ToListAsync();
 
             if (mainCategoryId != null)
             {
-                subCategories = subCategories.Where(x => x.MainCategoryId == mainCategoryId).ToList();
+                subCategories = subCategories
+                    .Where(x => x.MainCategoryId == mainCategoryId)
+                    .ToList();
             }
 
             return subCategories;
@@ -28,7 +32,9 @@ namespace AutoCareHub.Services.Impl
 
         public async Task<ENTITIES.SubCategory> GetSubCategoryAsync(Guid id)
         {
-            var subCategory = await _context.SubCategories.FirstOrDefaultAsync(x => x.Id == id);
+            var subCategory = await _context.SubCategories
+                .Include(x => x.MainCategory)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (subCategory == null)
             {
@@ -45,7 +51,9 @@ namespace AutoCareHub.Services.Impl
                 throw new ArgumentNullException(nameof(request));
             }
 
-            await _context.AddAsync(request);
+            var entitySubCategory = Conversion.ConvertSubCategory(request);
+
+            await _context.AddAsync(entitySubCategory);
             await _context.SaveChangesAsync();
         }
 

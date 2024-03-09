@@ -2,7 +2,7 @@
 using AutoCareHub.Services.Ratings;
 using Microsoft.EntityFrameworkCore;
 
-namespace AutoCareHub.Services.Impl
+namespace AutoCareHub.Services.Impl.Ratings
 {
     public class RatingService : IRatingService
     {
@@ -26,7 +26,9 @@ namespace AutoCareHub.Services.Impl
 
             _context.Ratings.RemoveRange(entities);
 
-            await _context.AddAsync(request);
+            var entityRating = Conversion.ConvertRating(request);
+
+            await _context.AddAsync(entityRating);
             await _context.SaveChangesAsync();
         }
     }
