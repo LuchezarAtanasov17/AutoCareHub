@@ -2,6 +2,7 @@
 using WEB_MAIN_CATEGORIES = AutoCareHub.Web.Models.MainCategories;
 using WEB_COMMENTS = AutoCareHub.Web.Models.Comments;
 using WEB_USERS = AutoCareHub.Web.Models.Users;
+using WEB_RATINGS = AutoCareHub.Web.Models.Ratings;
 
 namespace AutoCareHub.Web.Models.Services
 {
@@ -39,6 +40,9 @@ namespace AutoCareHub.Web.Models.Services
                 Comments = source.Comments
                     .Select(WEB_COMMENTS.Conversion.ConvertComment)
                     .ToList(),
+                Ratings = source.Ratings
+                    .Select(WEB_RATINGS.Conversion.ConvertRating)
+                    .ToList()
         };
 
             return target;
