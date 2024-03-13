@@ -71,41 +71,37 @@ namespace AutoCareHub.Data
             modelBuilder.Entity<Comment>(builder =>
             {
                 builder.HasOne(x => x.User)
-                .WithMany(x => x.Comments)
-                .HasForeignKey(x => x.UserId)
-                .HasPrincipalKey(x => x.Id)
-                .OnDelete(DeleteBehavior.Cascade);
+                    .WithMany(x => x.Comments)
+                    .HasForeignKey(x => x.UserId)
+                    .HasPrincipalKey(x => x.Id)
+                    .OnDelete(DeleteBehavior.Cascade);
 
                 builder.HasOne(x=>x.Service)
-                .WithMany(x=> x.Comments)
-                .HasForeignKey(x=>x.ServiceId)
-                .HasPrincipalKey(x=>x.Id) 
-                .OnDelete(DeleteBehavior.Cascade);
+                    .WithMany(x=> x.Comments)
+                    .HasForeignKey(x=>x.ServiceId)
+                    .HasPrincipalKey(x=>x.Id) 
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<MainCategoryService>(builder =>
             {
-                builder.HasKey(cs => new { cs.MainCategoryId, cs.ServiceId });
-
                 builder.HasOne(x => x.MainCategory)
                     .WithMany(x => x.MainCategoryServices)
-                    .HasForeignKey(x => x.MainCategoryId)
-                    .HasPrincipalKey(x => x.Id);
+                    .HasForeignKey(x => x.MainCategoryId);
 
                 builder.HasOne(x => x.Service)
                     .WithMany(x => x.MainCategoryServices)
-                    .HasForeignKey(x => x.ServiceId)
-                    .HasPrincipalKey(x => x.Id);
+                    .HasForeignKey(x => x.ServiceId);
             });
 
             modelBuilder.Entity<SubCategory>(builder =>
             {
                 builder.HasOne(x => x.MainCategory)
-                .WithMany(x => x.SubCategories)
-                .HasForeignKey(x => x.MainCategoryId)
-                .HasPrincipalKey(x => x.Id);
+                    .WithMany(x => x.SubCategories)
+                    .HasForeignKey(x => x.MainCategoryId)
+                    .HasPrincipalKey(x => x.Id);
             });
-
+            
             modelBuilder.ApplyConfiguration(new MainCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new ServiceConfiguration());
