@@ -277,13 +277,13 @@ namespace AutoCareHub.Data.Migrations
                 name: "MainCategoryServices",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MainCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MainCategoryServices", x => new { x.MainCategoryId, x.ServiceId });
+                    table.PrimaryKey("PK_MainCategoryServices", x => x.Id);
                     table.ForeignKey(
                         name: "FK_MainCategoryServices_MainCategories_MainCategoryId",
                         column: x => x.MainCategoryId,
@@ -337,9 +337,9 @@ namespace AutoCareHub.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "0b22f51f-ec8b-4dc8-8140-800fa68b737a", "admin@gmail.com", false, "Luchezar", "Atanasov", false, null, "ADMIN@GMAIL.COM", "ADMINISTRATOR", null, null, false, null, false, "Administrator" },
-                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "726f967e-da29-4399-9ca6-3d7dcf0aabf1", "dimitar@mail.com", false, "Dimitar", "Dimitrov", false, null, "DIMITAR@MAIL.COM", "MEETYOU", null, null, false, null, false, "Meetyou" },
-                    { new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"), 0, "c50d28d3-82e1-492f-83aa-d4ace4bfafc6", "simonipal@mail.com", false, "Dimitar", "Dimitrov", false, null, "SIMONIPAL@MAIL.COM", "MONIBONBONI", null, null, false, null, false, "MoniBonboni" }
+                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "5a3a9d50-0197-44dd-8696-a18bcdb23300", "admin@gmail.com", false, "Luchezar", "Atanasov", false, null, "ADMIN@GMAIL.COM", "ADMINISTRATOR", null, null, false, null, false, "Administrator" },
+                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "773e5a27-86f0-48bc-b234-bfc7b61fd0d8", "dimitar@mail.com", false, "Dimitar", "Dimitrov", false, null, "DIMITAR@MAIL.COM", "MEETYOU", null, null, false, null, false, "Meetyou" },
+                    { new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"), 0, "77a2f1a1-8875-46eb-894c-786422946072", "simonipal@mail.com", false, "Dimitar", "Dimitrov", false, null, "SIMONIPAL@MAIL.COM", "MONIBONBONI", null, null, false, null, false, "MoniBonboni" }
                 });
 
             migrationBuilder.InsertData(
@@ -439,13 +439,13 @@ namespace AutoCareHub.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "MainCategoryServices",
-                columns: new[] { "MainCategoryId", "ServiceId", "Id" },
+                columns: new[] { "Id", "MainCategoryId", "ServiceId" },
                 values: new object[,]
                 {
-                    { new Guid("6a62c3f8-aa54-4857-9599-fcbba31da47d"), new Guid("49450e6e-3fea-483c-9df8-ea6f9c91c6f8"), new Guid("6a62c3f8-aa54-4857-9599-fcbba31da47d") },
-                    { new Guid("8317f4c5-3f8b-4020-bbcf-2adb5e30639b"), new Guid("ba0914fa-d680-4f2d-97b4-b6197e7a3902"), new Guid("8317f4c5-3f8b-4020-bbcf-2adb5e30639b") },
-                    { new Guid("accfbc90-1486-44b8-9a97-caeecf550391"), new Guid("dc4ee450-7e0d-4d13-b93f-474487d355d0"), new Guid("accfbc90-1486-44b8-9a97-caeecf550391") },
-                    { new Guid("f9cd2d78-221c-46ff-9a2f-8d22e3a3f2a3"), new Guid("31059a53-4346-4efb-a1e2-b404c16b7fb5"), new Guid("6a62c3f8-aa54-4857-9599-fcbba31da47d") }
+                    { new Guid("1b04cddc-8fa9-4f11-b6b2-6276eb8cf094"), new Guid("accfbc90-1486-44b8-9a97-caeecf550391"), new Guid("dc4ee450-7e0d-4d13-b93f-474487d355d0") },
+                    { new Guid("1d836613-8598-46b9-b94b-02764d26bb66"), new Guid("f9cd2d78-221c-46ff-9a2f-8d22e3a3f2a3"), new Guid("31059a53-4346-4efb-a1e2-b404c16b7fb5") },
+                    { new Guid("29b077dd-c570-42a7-ba9b-fee2832aa7bd"), new Guid("8317f4c5-3f8b-4020-bbcf-2adb5e30639b"), new Guid("ba0914fa-d680-4f2d-97b4-b6197e7a3902") },
+                    { new Guid("804aff14-701a-4908-8b7f-8a23d66a18dd"), new Guid("6a62c3f8-aa54-4857-9599-fcbba31da47d"), new Guid("49450e6e-3fea-483c-9df8-ea6f9c91c6f8") }
                 });
 
             migrationBuilder.CreateIndex(
@@ -511,6 +511,11 @@ namespace AutoCareHub.Data.Migrations
                 name: "IX_Comments_UserId",
                 table: "Comments",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MainCategoryServices_MainCategoryId",
+                table: "MainCategoryServices",
+                column: "MainCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MainCategoryServices_ServiceId",
