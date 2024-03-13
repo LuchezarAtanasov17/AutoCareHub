@@ -4,7 +4,7 @@ using WEB_SUB_CATEGORIES = AutoCareHub.Web.Models.SubCategories;
 
 namespace AutoCareHub.Web.Models.MainCategories
 {
-   u public class Conversion
+   public class Conversion
     {
         public static MainCategoryViewModel ConvertMainCategory(ENTITIES.MainCategory source)
         {
