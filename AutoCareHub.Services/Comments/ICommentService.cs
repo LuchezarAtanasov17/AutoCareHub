@@ -6,6 +6,8 @@ namespace AutoCareHub.Services.Comments
     {
         Task<List<Comment>> ListCommentsAsync(Guid? serviceId = null, Guid? userId = null);
 
+        Task<Comment> GetCommentAsync(Guid id);
+
         Task CreateCommentAsync(CreateCommentRequest request);
 
         Task DeleteCommentAsync(Guid id);

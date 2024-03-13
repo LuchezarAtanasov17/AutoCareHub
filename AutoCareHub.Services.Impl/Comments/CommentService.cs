@@ -38,6 +38,19 @@ namespace AutoCareHub.Services.Impl
             return comments;
         }
 
+        public async Task<ENTITIES.Comment> GetCommentAsync(Guid id)
+        {
+            var comment = await _context.Comments
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (comment == null)
+            {
+                throw new ObjectNotFoundException(nameof(comment));
+            }
+
+            return comment;
+        }
+
         public async Task CreateCommentAsync(CreateCommentRequest request)
         {
             if (request == null)
