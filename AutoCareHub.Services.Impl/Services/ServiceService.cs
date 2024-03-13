@@ -3,6 +3,7 @@ using AutoCareHub.Web.Model.Services;
 using Microsoft.EntityFrameworkCore;
 using AutoCareHub.Data;
 using ENTITIES = AutoCareHub.Data.Models;
+using AutoCareHub.Data.Models;
 
 namespace AutoCareHub.Services.Impl.Services
 {
@@ -18,12 +19,24 @@ namespace AutoCareHub.Services.Impl.Services
         public async Task<List<ENTITIES.Service>> ListServicesAsync(Guid? userId = null)
         {
             var services = await _context.Services
-                .Include(x=>x.User)
-                .Include(x=>x.Appointments)
-                .Include(x=>x.Comments)
-                .Include(x=>x.Ratings)
+                .Include(x => x.User)
+                .Include(x => x.Appointments)
+                .Include(x => x.Comments)
+                .Include(x => x.Ratings)
                 .Include(x => x.MainCategoryServices)
                 .ToListAsync();
+
+            foreach (var service in services)
+            {
+                foreach (var mainCategoryService in service.MainCategoryServices)
+                {
+                    mainCategoryService.MainCategory = await _context.MainCategoryServices
+                        .Select(x => x.MainCategory)
+                        .FirstOrDefaultAsync(x => x.Id == mainCategoryService!.MainCategoryId) ?? throw new ArgumentNullException();
+
+                    mainCategoryService.MainCategory.SubCategories = await _context.SubCategories.ToListAsync();
+                }
+            }
 
             if (userId != null)
             {
@@ -42,8 +55,17 @@ namespace AutoCareHub.Services.Impl.Services
                 .Include(x => x.Appointments)
                 .Include(x => x.Comments)
                 .Include(x => x.Ratings)
-                .Include(x=>x.MainCategoryServices)
+                .Include(x => x.MainCategoryServices)
                 .FirstOrDefaultAsync(x => x.Id == id);
+
+            foreach (var mainCategoryService in service.MainCategoryServices)
+            {
+                mainCategoryService.MainCategory = await _context.MainCategoryServices
+                    .Select(x => x.MainCategory)
+                    .FirstOrDefaultAsync(x => x.Id == mainCategoryService!.MainCategoryId) ?? throw new ArgumentNullException();
+
+                mainCategoryService.MainCategory.SubCategories = await _context.SubCategories.ToListAsync();
+            }
 
             if (service == null)
             {

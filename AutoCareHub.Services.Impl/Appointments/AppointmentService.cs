@@ -82,11 +82,10 @@ namespace AutoCareHub.Services.Impl
                 throw new ObjectNotFoundException($"Could not find appointment with ID {id}.");
             }
 
-            entity.UserId = request.UserId;
             entity.MainCategoryId = request.MainCategoryId;
             entity.UserId = request.UserId;
             entity.StartDate = request.StartDate;
-            entity.EndDate = request.EndDate;
+            entity.EndDate = request.EndDate.AddDays(1);
             entity.Description = request.Description;
 
             await _context.SaveChangesAsync();
