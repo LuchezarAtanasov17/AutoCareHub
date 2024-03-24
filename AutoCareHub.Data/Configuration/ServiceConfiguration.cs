@@ -25,7 +25,7 @@ namespace AutoCareHub.Data.Configuration
                                 " Experience convenience at your fingertips. Get started today!",
                     OpenTime = TimeOnly.Parse("9:00:00"),
                     CloseTime = TimeOnly.Parse("18:00:00"),
-                    Location = "17 Oakwood Lane, Gabrovo",
+                    Location = "Gabrovo ulitsa \"Orlovska\" 24",
                     ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png"
                 },
                 new()
@@ -39,7 +39,7 @@ namespace AutoCareHub.Data.Configuration
                                 " Relax and let DriveEase take the wheel on your car care journey.",
                     OpenTime = TimeOnly.Parse("9:00:00"),
                     CloseTime = TimeOnly.Parse("18:00:00"),
-                    Location = "8 Elmwood Drive, Yambol",
+                    Location = "Sofia, ulitsa \"Hristo Belchev\" 10",
                     ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg"
                 },
                 new()
@@ -52,7 +52,7 @@ namespace AutoCareHub.Data.Configuration
                                 " Experience convenience at your fingertips. Get started today!",
                     OpenTime = TimeOnly.Parse("8:00:00"),
                     CloseTime = TimeOnly.Parse("18:00:00"),
-                    Location = "23 Aspen Way, Targovishte",
+                    Location = "Varna, ulitsa \"San Stefano\" 14",
                     ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg",
                 },
                 new()
@@ -66,7 +66,7 @@ namespace AutoCareHub.Data.Configuration
                                 "Experience the ultimate in cleanliness and convenience at AutoPureWash—where every wash leaves your car sparkling like new.",
                     OpenTime = TimeOnly.Parse("8:00:00"),
                     CloseTime = TimeOnly.Parse("17:00:00"),
-                    Location = "37 Chestnut Street, Vidin",
+                    Location = "Plovdiv, ulitsa \"Ivan Vazov\" 17",
                     ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg"
                 }
             };
