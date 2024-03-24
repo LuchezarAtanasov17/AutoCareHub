@@ -14,8 +14,10 @@ namespace AutoCareHub.Web.Models.Comments
 
             var target = new CommentViewModel()
             {
+                Id = source.Id,
                 UserId = source.UserId,
                 ServiceId = source.ServiceId,
+                Value = source.Value,
                 Dislikes = source.Dislikes,
                 Likes = source.Likes,
                 PublishedOn = source.PublishedOn,

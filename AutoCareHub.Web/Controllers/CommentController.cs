@@ -1,5 +1,6 @@
 ﻿using AutoCareHub.Services.Comments;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace AutoCareHub.Web.Controllers
 {
@@ -22,27 +23,23 @@ namespace AutoCareHub.Web.Controllers
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (!ModelState.IsValid)
-            {
-                return View("Create", request);
-            }
-
+            request.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             request.ServiceId = id;
 
             await _commentService.CreateCommentAsync(request);
 
-            return RedirectToAction("Get", "Service", request.ServiceId);
+            return RedirectToAction("Get", "Service", new { id = request.ServiceId });
         }
 
         public async Task<IActionResult> Delete(Guid id)
         {
             var comment = await _commentService.GetCommentAsync(id);
-            
+
             var serviceId = comment.ServiceId;
 
             await _commentService.DeleteCommentAsync(id);
 
-            return RedirectToAction("Get", "Service", serviceId);
+            return RedirectToAction("Get", "Service", new { id = serviceId });
         }
     }
 }

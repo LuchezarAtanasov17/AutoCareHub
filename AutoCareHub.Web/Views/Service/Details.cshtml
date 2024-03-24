@@ -1,0 +1,115 @@
+﻿@using AutoCareHub.Web.Models.Services
+@using System.Globalization
+@using System.Security.Claims
+@model ServiceViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Single Post Start-->
+    <div class="single">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="single-content">
+                        <img style="max-height:550px; height:100%" src="@Model.ImageUrl" />
+                        <h2>@Model.Name</h2>
+                        <p>
+                            @Model.Description
+                        </p>
+                    </div>
+
+                    <div class="single-comment">
+                        <h2>@Model.Comments.Count Comments</h2>
+                        <ul class="comment-list  overflow-auto" style="max-height: 500px;">
+                            @foreach (var comment in Model.Comments.OrderByDescending(x => x.PublishedOn))
+                            {
+                                <li class="comment-item">
+                                    <div class="comment-body">
+                                        <div class="comment-text">
+                                            <h3>
+                                                <div style="display:flex; justify-content:space-between">
+                                                    <a href="">@comment.User.FirstName @comment.User.LastName</a>
+                                                    @if (comment.UserId == Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value) 
+                                                    || Model.UserId == Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                                                    {
+                                                        <a asp-controller="Comment" asp-action="Delete" asp-route-id="@comment.Id" class="btn btn-custom" type="submit">Delete</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <i class="fa-solid fa-thumbs-up"></i>
+                                                        <i class="fa-solid fa-thumbs-down"></i>
+                                                    }
+                                                </div>
+                                            </h3>
+                                            <span>
+                                                @(comment.PublishedOn.Date.Day) @CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(comment.PublishedOn.Month) @(comment.PublishedOn.Date.Year)
+                                                at @(comment.PublishedOn.Hour):@(comment.PublishedOn.Minute)
+                                            </span>
+                                            <p>
+                                                @comment.Value
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <partial name="_CreateCommentFormPartial" model="Model.CreateCommentRequest" />
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                        <div class="sidebar-widget location">
+                            <partial name="_CreateAppointmentFormPartial" model="@Model.CreateAppointmentRequest" />
+                        </div>
+
+                        <div class="sidebar-widget">
+                            <h2 class="widget-title">Categories</h2>
+                            <div class="category-widget">
+                                <ul>
+                                    @foreach (var mainCategory in Model.MainCategories)
+                                    {
+                                        <li><a href="">@mainCategory.Name</a><span>(98)</span></li>
+                                        <div class="row">
+                                            @foreach (var subCategory in mainCategory.SubCategories)
+                                            {
+                                                <div class="col-4">
+                                                    <i class="far fa-check-circle" style="color:#E81C2E;"></i> @subCategory.Name
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sidebar-widget">
+                            <h2 class="widget-title">Location</h2>
+                            <a id="location" hidden>
+                                Габрово Център, ул. „Орловска“ 24, Габрово
+                            </a>
+                            <div class="mapouter">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Single Post End-->
+    <script src="~/js/site.js"></script>
+    <script src="~/js/geolocation.js"></script>
+</body>
+</html>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

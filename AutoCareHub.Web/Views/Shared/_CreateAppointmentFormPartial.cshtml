@@ -1,0 +1,30 @@
+﻿@using AutoCareHub.Services.Appointments
+@model CreateAppointmentRequest
+
+<form asp-controller="Appointment" asp-action="Create" asp-route-serviceId="@Model.ServiceId" enctype="multipart/form-data" method="post">
+    <div class="location-form">
+        <h3 class="text-center">Make an appointment</h3>
+        <form>
+            <div class="control-group">
+                <select class="form-control" asp-for="@Model.MainCategoryId">
+                    @foreach (var mainCategory in Model.ServiceMainCategories)
+                    {
+                        <option value="@mainCategory.Id"> @mainCategory.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="MainCategoryId" class="text-black"></span>
+            </div>
+            <div class="control-group">
+                <input class="form-control" asp-for="@Model.StartDate" type="date" value="" required>
+                <span asp-validation-for="StartDate" class="text-black"></span>
+            </div>
+            <div class="control-group">
+                <textarea asp-for="@Model.Description" class="form-control" required placeholder="Description"></textarea>
+                <span asp-validation-for="Description" class="text-black"></span>
+            </div>
+            <div>
+                <button class="btn btn-custom" type="submit">Send Request</button>
+            </div>
+        </form>
+    </div>
+</form>

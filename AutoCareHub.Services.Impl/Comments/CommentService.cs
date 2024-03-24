@@ -58,7 +58,7 @@ namespace AutoCareHub.Services.Impl
                 throw new ArgumentNullException(nameof(request));
             }
 
-            var entityComment = Conversion.ConvertComment(request);
+            ENTITIES.Comment entityComment = Conversion.ConvertComment(request);
 
             await _context.AddAsync(entityComment);
             await _context.SaveChangesAsync();

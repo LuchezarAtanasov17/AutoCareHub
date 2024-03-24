@@ -11,7 +11,6 @@ namespace AutoCareHub.Services.Comments
         public Guid ServiceId { get; set; }
 
         [Required]
-        [StringLength(1000, MinimumLength = 5)]
         public string Value { get; set; }
     }
 }

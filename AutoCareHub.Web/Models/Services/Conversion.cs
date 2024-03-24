@@ -3,6 +3,7 @@ using WEB_MAIN_CATEGORIES = AutoCareHub.Web.Models.MainCategories;
 using WEB_COMMENTS = AutoCareHub.Web.Models.Comments;
 using WEB_USERS = AutoCareHub.Web.Models.Users;
 using WEB_RATINGS = AutoCareHub.Web.Models.Ratings;
+using AutoCareHub.Services.Appointments;
 
 namespace AutoCareHub.Web.Models.Services
 {
@@ -43,9 +44,20 @@ namespace AutoCareHub.Web.Models.Services
                 Ratings = source.Ratings
                     .Select(WEB_RATINGS.Conversion.ConvertRating)
                     .ToList()
-        };
+            };
 
             return target;
         }
-}
+
+        public static ServiceMainCategory ConvertMainCategoryViewModelToServiceMainCategory(WEB_MAIN_CATEGORIES.MainCategoryViewModel request)
+        {
+            var target = new ServiceMainCategory()
+            {
+                Id = request.Id,
+                Name = request.Name,
+            };
+
+            return target;
+        }
+    }
 }

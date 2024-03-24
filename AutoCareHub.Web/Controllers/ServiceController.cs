@@ -1,4 +1,6 @@
-﻿using AutoCareHub.Services.MainCategories;
+﻿using AutoCareHub.Services.Appointments;
+using AutoCareHub.Services.Comments;
+using AutoCareHub.Services.MainCategories;
 using AutoCareHub.Services.Services;
 using AutoCareHub.Services.Users;
 using AutoCareHub.Web.Model.Services;
@@ -74,7 +76,29 @@ namespace AutoCareHub.Web.Controllers
         {
             var serviceService = await _serviceService.GetServiceAsync(id);
 
-            var service = Conversion.ConvertService(serviceService);
+            ServiceViewModel service = Conversion.ConvertService(serviceService);
+
+            if (ModelState.IsValid)
+            {
+                service.CreateAppointmentRequest = new CreateAppointmentRequest()
+                {
+                    ServiceId = id,
+                    ServiceMainCategories = service.MainCategories
+                        .Select(Conversion.ConvertMainCategoryViewModelToServiceMainCategory)
+                        .ToList(),
+                };
+            }
+            else
+            {
+                service.CreateAppointmentRequest.ServiceMainCategories = service.MainCategories
+                                                                        .Select(Conversion.ConvertMainCategoryViewModelToServiceMainCategory)
+                                                                        .ToList();
+            }
+
+            service.CreateCommentRequest = new CreateCommentRequest()
+            {
+                ServiceId = id,
+            };
 
             return View("Details", service);
         }

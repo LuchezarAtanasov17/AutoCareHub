@@ -1,4 +1,6 @@
-﻿using AutoCareHub.Web.Models.Comments;
+﻿using AutoCareHub.Services.Appointments;
+using AutoCareHub.Services.Comments;
+using AutoCareHub.Web.Models.Comments;
 using AutoCareHub.Web.Models.MainCategories;
 using AutoCareHub.Web.Models.Ratings;
 using AutoCareHub.Web.Models.Users;
@@ -26,6 +28,10 @@ namespace AutoCareHub.Web.Models.Services
         //TODO: public UpdateRatingRequest UpdateRatingRequest { get; set; } ???????????
 
         public UserViewModel User { get; set; }
+
+        public CreateAppointmentRequest CreateAppointmentRequest { get; set; }
+
+        public CreateCommentRequest CreateCommentRequest { get; set; }
 
         public ICollection<MainCategoryViewModel> MainCategories { get; set; }
 

@@ -1,11 +1,8 @@
-﻿using AutoCareHub.Data.Models;
-using AutoCareHub.Services.Appointments;
+﻿using AutoCareHub.Services.Appointments;
 using AutoCareHub.Services.MainCategories;
 using AutoCareHub.Services.Services;
 using AutoCareHub.Web.Models.Appointment;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections;
-using System.Collections.Generic;
 using System.Security.Claims;
 
 namespace AutoCareHub.Web.Controllers
@@ -53,22 +50,6 @@ namespace AutoCareHub.Web.Controllers
             return View("ListByUser", appointments);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Create(
-            Guid id)
-        {
-            var model = new CreateAppointmentRequest()
-            {
-                ServiceId = id,
-            };
-
-            var service = await _serviceService.GetServiceAsync(id);
-           
-            model.ServiceName = service.Name;
-
-            return View(model);
-        }
-
         [HttpPost]
         public async Task<IActionResult> Create(
            Guid serviceId,
@@ -83,14 +64,19 @@ namespace AutoCareHub.Web.Controllers
             {
                 ModelState.AddModelError(nameof(request.StartDate), "Invalid date.");
             }
+            if (request.Description == null)
+            {
+                ModelState.AddModelError(nameof(request.Description), "The description field is required.");
+            }
 
             if (!ModelState.IsValid)
             {
-                return View("Create", request);
+                return RedirectToAction("Get", "Service", new { id = serviceId });
             }
 
             request.ServiceId = serviceId;
             request.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            request.EndDate = request.StartDate.AddDays(1);
 
             await _appointmentService.CreateAppointmentAsync(request);
 
@@ -154,7 +140,7 @@ namespace AutoCareHub.Web.Controllers
             Guid id)
         {
             var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            
+
             await _appointmentService.DeleteAppointmentAsync(id);
 
             return RedirectToAction(nameof(ListByUser), new { userId = userId });

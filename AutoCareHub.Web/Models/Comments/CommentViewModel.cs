@@ -5,6 +5,8 @@ namespace AutoCareHub.Web.Models.Comments
 {
     public class CommentViewModel
     {
+        public Guid Id { get; set; }    
+
         public Guid UserId { get; set; }
 
         public Guid ServiceId { get; set; }

@@ -1,4 +1,6 @@
-﻿namespace AutoCareHub.Services.Appointments
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AutoCareHub.Services.Appointments
 {
     public class CreateAppointmentRequest
     {
@@ -14,6 +16,6 @@
 
         public string? Description { get; set; }
 
-        public string ServiceName { get; set; }
+        public List<ServiceMainCategory>? ServiceMainCategories { get; set; }
     }
 }

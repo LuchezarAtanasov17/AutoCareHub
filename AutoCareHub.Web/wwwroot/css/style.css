@@ -7,6 +7,10 @@
     user-select: none;
 }
 
+.far {
+    color: #E81C2E;
+}
+
 .Autoleaders-scaled-img {
     background: url('../img/Autoleaders-scaled.jpg');
     height: 100vh;

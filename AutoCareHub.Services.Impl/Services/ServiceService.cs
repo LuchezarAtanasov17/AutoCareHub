@@ -36,6 +36,11 @@ namespace AutoCareHub.Services.Impl.Services
 
                     mainCategoryService.MainCategory.SubCategories = await _context.SubCategories.ToListAsync();
                 }
+
+                foreach (var comment in service.Comments)
+                {
+                    comment.User = await _context.Users.FirstAsync(x => x.Id == comment.UserId);
+                }
             }
 
             if (userId != null)
@@ -64,7 +69,13 @@ namespace AutoCareHub.Services.Impl.Services
                     .Select(x => x.MainCategory)
                     .FirstOrDefaultAsync(x => x.Id == mainCategoryService!.MainCategoryId) ?? throw new ArgumentNullException();
 
-                mainCategoryService.MainCategory.SubCategories = await _context.SubCategories.ToListAsync();
+                mainCategoryService.MainCategory.SubCategories = await _context.SubCategories
+                    .Where(x=>x.MainCategoryId == mainCategoryService.MainCategoryId)
+                    .ToListAsync();
+            }
+            foreach (var comment in service.Comments)
+            {
+                comment.User = await _context.Users.FirstAsync(x => x.Id == comment.UserId);
             }
 
             if (service == null)
