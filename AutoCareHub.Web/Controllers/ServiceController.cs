@@ -39,20 +39,30 @@ namespace AutoCareHub.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> List([FromQuery] AllServicesQueryModel query)
         {
-            var serviceServices = await _serviceService
-                .ListServicesAsync();
+            var entityServices = await _serviceService
+                .ListServicesAsync(category: query.MainCategory, city: query.City);
 
-            serviceServices = serviceServices
+            var entityMainCategories = await _mainCategoryService
+                .ListMainCategoriesAsync();
+
+            entityServices = entityServices
                 .Where(x => x.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
                 .ToList();
 
-            var services = serviceServices
+            query.Services = entityServices
                 .Select(Conversion.ConvertService)
                 .ToList();
+            query.MainCategories = entityMainCategories
+                .Select(MAIN_CATEGORIES.Conversion.ConvertMainCategory)
+                .Select(x => x.Name)
+                .ToList();
+            query.Cities = query.Services
+                .Select(x => x.City)
+                .ToList();
 
-            return View(services);
+            return View(query);
         }
 
         [HttpGet]
@@ -163,7 +173,8 @@ namespace AutoCareHub.Web.Controllers
             var model = new UpdateServiceRequest()
             {
                 Id = service.Id,
-                Location = service.Location,
+                City = service.City,
+                Address = service.Address,
                 Description = service.Description,
                 Name = service.Name,
                 OpenTime = service.OpenTime,

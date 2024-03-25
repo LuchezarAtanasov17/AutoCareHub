@@ -20,8 +20,12 @@ namespace AutoCareHub.Data.Models
         public string? Description { get; set; }
 
         [Required]
-        [StringLength(80)]
-        public string Location { get; set; } = null!;
+        [StringLength(30)]
+        public string City { get; set; }
+
+        [Required]
+        [StringLength(70)]
+        public string Address { get; set; }
 
         [Required]
         public TimeOnly OpenTime { get; set; }

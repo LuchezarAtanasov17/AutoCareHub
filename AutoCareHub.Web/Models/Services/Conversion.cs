@@ -24,7 +24,8 @@ namespace AutoCareHub.Web.Models.Services
                 Description = source.Description,
                 OpenTime = source.OpenTime,
                 CloseTime = source.CloseTime,
-                Location = source.Location,
+                City = source.City,
+                Address = source.Address,
                 ImageUrl = source.ImageUrl,
                 User = WEB_USERS.Conversion.ConvertUser(source.User),
                 //TODO:

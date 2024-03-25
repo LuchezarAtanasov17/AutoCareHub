@@ -17,8 +17,12 @@ namespace AutoCareHub.Services.Services
         public string? Description { get; set; }
 
         [Required]
-        [StringLength(80, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 10)]
-        public string Location { get; set; } = null!;
+        [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 10)]
+        public string City { get; set; }
+
+        [Required]
+        [StringLength(70, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 10)]
+        public string Address { get; set; }
 
         [Required]
         public TimeOnly OpenTime { get; set; }

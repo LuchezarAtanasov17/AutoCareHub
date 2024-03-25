@@ -1,5 +1,5 @@
 ﻿@using AutoCareHub.Web.Models.Services
-@model List<ServiceViewModel>
+@model AllServicesQueryModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,47 +15,77 @@
     <div class="blog">
         <div class="container">
             <div class="section-header text-center">
-                <p>Our Blog</p>
-                <h2>Latest news & articles</h2>
+                <h2>All services</h2>
             </div>
-            <div class="row" style="height:120px;">
-                @foreach (ServiceViewModel service in Model)
-                {
-                    <div class="col-lg-4">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <img style="max-height:270px;" src="@service.ImageUrl" alt="Image">
-                                <div class="meta-date">
-                                        <span>View</span>
-                                        <strong>More</strong>
-                                </div>
-                            </div>
-                            <div class="blog-text">
-                                <h3><a asp-controller="Service" asp-action="Get" asp-route-id="@service.Id">@service.Name</a></h3>
-                                @if (service.Description.Length > 250)
+            <div>
+                <form method="get">
+                    <div class="row" style="padding-bottom:15px;">
+                        <div class="col-7"></div>
+                        <div class="col-2">
+                            <select class="form-control" asp-for="@Model.City">
+                                <option value="">All</option>
+                                @foreach (var city in Model.Cities)
                                 {
-                                    <p>@service.Description.Substring(0, 250)...</p>
+                                    <option value="@city">@city</option>
                                 }
-                                else
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <select class="form-control" asp-for="@Model.MainCategory">
+                                <option value="">All</option>
+                                @foreach (var mainCategory in Model.MainCategories)
                                 {
-                                    <p>@service.Description</p>
+                                    <option value="@mainCategory">@mainCategory</option>
                                 }
-                            </div>
-                            <div class="blog-meta">
-                                <p><i class="fa fa-location-dot"></i><a>@service.Location</a></p>
-                                @if (service.Ratings.Count > 0)
-                                {
-                                    <p><i class="fa fa-star"></i><a>@service.Ratings.Average(x => x.Value)/5</a></p>
-                                }
-                                else
-                                {
-                                    <p><i class="fa fa-star"></i><a>0/0</a></p>
-                                }
-                                <p><i class="fa fa-comments"></i><a>@service.Comments.Count</a></p>
-                            </div>
+                            </select>
+                        </div>
+                        <div class="col-1">
+                            <input class="btn btn-custom"
+                                   type="submit"
+                                   value="Search"
+                                   style="padding-bottom:10px; margin-top:-3px;">
                         </div>
                     </div>
-                }
+                </form>
+                <div class="row" style="height:120px;">
+                    @foreach (ServiceViewModel service in Model.Services)
+                    {
+                        <div class="col-lg-4">
+                            <div class="blog-item">
+                                <div class="blog-img">
+                                    <img style="max-height:270px;" src="@service.ImageUrl" alt="Image">
+                                    <div class="meta-date">
+                                        <span>View</span>
+                                        <strong>More</strong>
+                                    </div>
+                                </div>
+                                <div class="blog-text">
+                                    <h3><a asp-controller="Service" asp-action="Get" asp-route-id="@service.Id">@service.Name</a></h3>
+                                    @if (service.Description.Length > 250)
+                                    {
+                                        <p>@service.Description.Substring(0, 250)...</p>
+                                    }
+                                    else
+                                    {
+                                        <p>@service.Description</p>
+                                    }
+                                </div>
+                                <div class="blog-meta">
+                                    <p><i class="fa fa-location-dot"></i><a>@service.City, @service.Address</a></p>
+                                    @if (service.Ratings.Count > 0)
+                                    {
+                                        <p><i class="fa fa-star"></i><a>@service.Ratings.Average(x => x.Value)/5</a></p>
+                                    }
+                                    else
+                                    {
+                                        <p><i class="fa fa-star"></i><a>0/0</a></p>
+                                    }
+                                    <p><i class="fa fa-comments"></i><a>@service.Comments.Count</a></p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>

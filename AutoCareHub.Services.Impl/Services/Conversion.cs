@@ -20,7 +20,8 @@ namespace AutoCareHub.Services.Impl.Services
                 Name = source.Name,
                 OpenTime = source.OpenTime,
                 CloseTime = source.CloseTime,
-                Location = source.Location,
+                City = source.City,
+                Address = source.Address,
                 Description = source.Description,
                 ImageUrl = source.ImageUrl,
             };

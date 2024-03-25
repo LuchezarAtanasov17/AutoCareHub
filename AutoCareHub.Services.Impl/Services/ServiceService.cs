@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoCareHub.Data;
 using ENTITIES = AutoCareHub.Data.Models;
 using AutoCareHub.Data.Models;
+using System.Net;
 
 namespace AutoCareHub.Services.Impl.Services
 {
@@ -16,7 +17,7 @@ namespace AutoCareHub.Services.Impl.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<List<ENTITIES.Service>> ListServicesAsync(Guid? userId = null)
+        public async Task<List<ENTITIES.Service>> ListServicesAsync(Guid? userId = null, string? category = null, string? city = null)
         {
             var services = await _context.Services
                 .Include(x => x.User)
@@ -43,6 +44,20 @@ namespace AutoCareHub.Services.Impl.Services
                 }
             }
 
+            if (category != null)
+            {
+                services = services
+                    .Where(x => x.MainCategoryServices
+                        .Select(x => x.MainCategory.Name)
+                        .Contains(category))
+                    .ToList();
+            }
+            if (city != null)
+            {
+                services = services
+                    .Where(x => x.City == city)
+                    .ToList();
+            }
             if (userId != null)
             {
                 services = services
@@ -70,7 +85,7 @@ namespace AutoCareHub.Services.Impl.Services
                     .FirstOrDefaultAsync(x => x.Id == mainCategoryService!.MainCategoryId) ?? throw new ArgumentNullException();
 
                 mainCategoryService.MainCategory.SubCategories = await _context.SubCategories
-                    .Where(x=>x.MainCategoryId == mainCategoryService.MainCategoryId)
+                    .Where(x => x.MainCategoryId == mainCategoryService.MainCategoryId)
                     .ToListAsync();
             }
             foreach (var comment in service.Comments)
@@ -129,7 +144,8 @@ namespace AutoCareHub.Services.Impl.Services
             service.Name = request.Name;
             service.OpenTime = request.OpenTime;
             service.CloseTime = request.CloseTime;
-            service.Location = request.Location;
+            service.City = request.City;
+            service.Address = request.Address;
             service.Description = request.Description;
 
             var mainCategoryServices = _context.MainCategoryServices

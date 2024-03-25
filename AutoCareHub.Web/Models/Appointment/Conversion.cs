@@ -31,7 +31,8 @@ namespace AutoCareHub.Web.Models.Appointment
                     Description = source.Service.Description,
                     OpenTime = source.Service.OpenTime,
                     CloseTime = source.Service.CloseTime,
-                    Location = source.Service.Location,
+                    City = source.Service.City,
+                    Address = source.Service.Address,
                 },
             };
 
