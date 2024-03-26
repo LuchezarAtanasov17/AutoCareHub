@@ -42,7 +42,7 @@ namespace AutoCareHub.Web.Controllers
         public async Task<IActionResult> List([FromQuery] AllServicesQueryModel query)
         {
             var entityServices = await _serviceService
-                .ListServicesAsync(category: query.MainCategory, city: query.City);
+                .ListServicesAsync(category: query.MainCategory, city: query.City, allOrMineOption: query.AllOrMineOption);
 
             var entityMainCategories = await _mainCategoryService
                 .ListMainCategoriesAsync();
@@ -63,20 +63,6 @@ namespace AutoCareHub.Web.Controllers
                 .ToList();
 
             return View(query);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Mine()
-        {
-            Guid userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
-
-            var serviceServices = await _serviceService.ListServicesAsync(userId);
-
-            var services = serviceServices
-                .Select(Conversion.ConvertService)
-                .ToList();
-
-            return View("List", services);
         }
 
         [HttpGet]
@@ -161,7 +147,7 @@ namespace AutoCareHub.Web.Controllers
 
             await _serviceService.CreateServiceAsync(request);
 
-            return RedirectToAction(nameof(Mine));
+            return RedirectToAction(nameof(List));
         }
 
         [HttpGet]
@@ -227,7 +213,7 @@ namespace AutoCareHub.Web.Controllers
         {
             await _serviceService.DeleteServiceAsync(id);
 
-            return RedirectToAction(nameof(Mine));
+            return RedirectToAction(nameof(List));
         }
     }
 }

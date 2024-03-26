@@ -17,7 +17,7 @@ namespace AutoCareHub.Services.Impl.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<List<ENTITIES.Service>> ListServicesAsync(Guid? userId = null, string? category = null, string? city = null)
+        public async Task<List<ENTITIES.Service>> ListServicesAsync(Guid? userId = null, string? category = null, string? city = null, AllOrMineOption? allOrMineOption = null)
         {
             var services = await _context.Services
                 .Include(x => x.User)
@@ -64,6 +64,11 @@ namespace AutoCareHub.Services.Impl.Services
                     .Where(x => x.UserId == userId)
                     .ToList();
             }
+            services = allOrMineOption switch
+            {
+                AllOrMineOption.Mine => services.Where(x => x.UserId == userId).ToList(),
+                _ => services
+            };
 
             return services;
         }

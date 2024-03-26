@@ -1,4 +1,6 @@
-﻿namespace AutoCareHub.Web.Models.Services
+﻿using AutoCareHub.Services.Services;
+
+namespace AutoCareHub.Web.Models.Services
 {
     public class AllServicesQueryModel
     {
@@ -10,8 +12,8 @@
 
         public List<string> Cities { get; set; } = new List<string>();
 
+        public AllOrMineOption AllOrMineOption { get; set; }
+
         public List<ServiceViewModel> Services { get; set; } = new List<ServiceViewModel>();
-
-
     }
 }

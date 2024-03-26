@@ -5,7 +5,7 @@ namespace AutoCareHub.Services.Services
 {
     public interface IServiceService
     {
-        Task<List<Service>> ListServicesAsync(Guid? userId = null, string? category = null, string? city = null);
+        Task<List<Service>> ListServicesAsync(Guid? userId = null, string? category = null, string? city = null, AllOrMineOption? allOrMineOption = null);
 
         Task<Service> GetServiceAsync(Guid id);
 
