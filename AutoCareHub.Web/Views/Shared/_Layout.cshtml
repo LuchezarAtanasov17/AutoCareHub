@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>AutoWash - Car Wash Website Template</title>
+    <title>AutoCareHub</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free Website Template" name="keywords">
     <meta content="Free Website Template" name="description">
@@ -38,27 +38,36 @@
                     </div>
                     @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
                     {
-                        <div class="nav-item nav-link" style="font-size:24px">
-                            <a asp-controller="Service" asp-action="List" class="nav-item nav-link active title">Services</a>
-                        </div>
-                        <div class="nav-item nav-link" style="font-size:24px">
-                            <a asp-controller="Appointment" asp-action="ListByUser" asp-route-userId="@Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))" class="nav-item nav-link active title">My appointments</a>
+                        <div class="collapse navbar-collapse align-items-lg-start" id="navbarCollapse">
+                            <div class="nav-item nav-link">
+                                <a asp-controller="Service"
+                                   asp-action="List"
+                                   class="nav-item nav-link active title"
+                                   style="font-size:18px !important;">Services</a>
+                            </div>
+                            <div class="nav-item nav-link">
+                                <a asp-controller="Appointment"
+                                   asp-action="ListByUser"
+                                   asp-route-userId="@Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))"
+                                   class="nav-item nav-link active title"
+                                   style="font-size:18px !important;">My appointments</a>
+                            </div>
                         </div>
                     }
                     <partial name="_LoginPartial" />
-                    </div>
-                </nav>
-            </div>
+                </div>
+            </nav>
         </div>
-        <div class="">
-            <main role="main" class="pb-3">
-                                @RenderBody()
-            </main>
-        </div>
+    </div>
+    <div class="">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
 
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-                        @await RenderSectionAsync("Scripts", required: false)
-    </body>
-    </html>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

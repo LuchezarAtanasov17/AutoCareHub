@@ -68,15 +68,20 @@
 
                 <div class="col-lg-4">
                     <div class="sidebar">
-                        <div class="sidebar-widget" style="margin:0px; text-align:center; margin-bottom:-25px;">
+                        <div class="sidebar-widget" style="margin:0px; text-align:center;">
                             <a class="btn btn-custom" asp-controller="Service" asp-action="Update" asp-route-id="@Model.Id">Edit</a>
                             <a class="btn btn-custom" asp-controller="Service" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
                             <a class="btn btn-custom" asp-controller="Appointment" asp-action="ListByService" asp-route-serviceId="@Model.Id">Appointments</a>
                         </div>
-                        <div class="sidebar-widget location">
-                            <partial name="_CreateAppointmentFormPartial" model="@Model.CreateAppointmentRequest" />
+                        <div class="sidebar-widget">
+                            <h2 class="widget-title" style="margin-bottom: 10px">Location</h2>
+                            <p style="font-size:14px; font-weight:500; margin-bottom:5px;">(@String.Concat(Model.City, ", ", Model.Address))</p>
+                            <a id="location" hidden>
+                                @String.Concat(Model.City, ", ", Model.Address)
+                            </a>
+                            <div class="mapouter">
+                            </div>
                         </div>
-
                         <div class="sidebar-widget">
                             <h2 class="widget-title">Categories</h2>
                             <div class="category-widget">
@@ -96,14 +101,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="sidebar-widget">
-                            <h2 class="widget-title" style="margin-bottom: 10px">Location</h2>
-                            <p style="font-size:14px; font-weight:500; margin-bottom:5px;">@String.Concat(Model.City, ", ", Model.Address)</p>
-                            <a id="location" hidden>
-                                @String.Concat(Model.City, ", ", Model.Address)
-                            </a>
-                            <div class="mapouter">
-                            </div>
+                        <div class="sidebar-widget location">
+                            <partial name="_CreateAppointmentFormPartial" model="@Model.CreateAppointmentRequest" />
                         </div>
                     </div>
                 </div>
