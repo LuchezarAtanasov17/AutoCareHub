@@ -36,31 +36,29 @@
                     <div class="nav-item nav-link" style="font-size:24px">
                         <a asp-controller="Home" asp-action="Index" class="nav-item nav-link active title">AutoCareHub</a>
                     </div>
-                    <div class="nav-item nav-link" style="font-size:24px">
-                        <a asp-controller="Service" asp-action="List" class="nav-item nav-link active title">Services</a>
-                    </div>
-                    <div class="nav-item nav-link" style="font-size:24px">
-                        <a asp-controller="Appointment" asp-action="ListByUser" asp-route-userId="@Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))" class="nav-item nav-link active title">My appointments</a>
-                    </div>
-                    <div class="navbar-nav mr-auto nav-item nav-link">
-                    </div>
-                    <div class="ml-auto">
-                        <a class="btn btn-custom" href="#">Get Appointment</a>
-                    </div>
+                    @if (this.User?.Identity != null && this.User.Identity.IsAuthenticated)
+                    {
+                        <div class="nav-item nav-link" style="font-size:24px">
+                            <a asp-controller="Service" asp-action="List" class="nav-item nav-link active title">Services</a>
+                        </div>
+                        <div class="nav-item nav-link" style="font-size:24px">
+                            <a asp-controller="Appointment" asp-action="ListByUser" asp-route-userId="@Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))" class="nav-item nav-link active title">My appointments</a>
+                        </div>
+                    }
                     <partial name="_LoginPartial" />
-                </div>
-            </nav>
+                    </div>
+                </nav>
+            </div>
         </div>
-    </div>
-    <div class="">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        <div class="">
+            <main role="main" class="pb-3">
+                                @RenderBody()
+            </main>
+        </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
-</body>
-</html>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+                        @await RenderSectionAsync("Scripts", required: false)
+    </body>
+    </html>
