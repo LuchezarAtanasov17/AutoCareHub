@@ -7,6 +7,10 @@
     user-select: none;
 }
 
+.table-dark {
+    background-color: #202C45 !important;
+}
+
 .far {
     color: #E81C2E;
 }

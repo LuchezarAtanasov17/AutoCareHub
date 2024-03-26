@@ -20,8 +20,7 @@ namespace AutoCareHub.Web.Models.Appointment
                 UserId = source.UserId,
                 ServiceId = source.ServiceId,
                 Description = source.Description,
-                StartDate = source.StartDate,
-                EndDate = source.EndDate,
+                Date = source.Date,
                 User = WEB_USERS.Conversion.ConvertUser(source.User),
                 Service = new WEB_SERVICES.ServiceViewModel
                 {

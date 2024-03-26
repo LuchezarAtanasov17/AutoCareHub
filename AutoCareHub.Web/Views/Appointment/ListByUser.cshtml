@@ -1,0 +1,55 @@
+﻿@using AutoCareHub.Web.Models.Appointment
+
+@model List<AppointmentViewModel>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+</head>
+<body>
+    @if (Model.Count == 0)
+    {
+        <h2 class="text-center">You don't have any appointments.</h2>
+    }
+    else
+    {
+        <h2 class="text-center" style="padding-top: 15px; padding-bottom:15px;">My appointments</h2>
+
+        <table class="table">
+            <thead>
+                <tr class="table-dark" style="background-color: #202C45;">
+                    <th scope="col">#</th>
+                    <th scope="col">Service name</th>
+                    <th scope="col">Starts at</th>
+                    <th scope="col">Ends at</th>
+                    <th scope="col">Description</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@Model[i].Service.Name</td>
+                        <td>@Model[i].Date</td>
+                        <td>@Model[i].Description</td>
+                        <td>
+                            <a class="ml-2 btn btn-danger"
+                               asp-controller="Appointment"
+                               asp-action="DeleteByUser"
+                               asp-route-id="@Model[i].Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</body>
+</html>

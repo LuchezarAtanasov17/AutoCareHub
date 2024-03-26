@@ -1,0 +1,44 @@
+﻿@using AutoCareHub.Web.Models.Appointment
+
+@model List<AppointmentViewModel>
+
+@if (Model.Count == 0)
+{
+    <h2 class="text-center">Your service has no appointments.</h2>
+}
+else
+{
+    <h2 class="text-center">@Model[0].Service.Name appointments</h2>
+    <hr />
+
+    <table class="table">
+        <thead>
+            <tr class="table-dark" style="background-color: #202C45;">
+                <th scope="col">#</th>
+                <th scope="col">Appointment setter full name</th>
+                <th scope="col">Appointment setter email</th>
+                <th scope="col">Starts at</th>
+                <th scope="col">Ends at</th>
+                <th scope="col">Description</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <th scope="row">@(i + 1)</th>
+                    <td>@($"{Model[i].User.FirstName} {Model[i].User.LastName}")</td>
+                    <td>@Model[i].User.Email</td>
+                    <td>@Model[i].Date</td>
+                    <td>@Model[i].Description</td>
+                    <td>@Model[i].</td>
+                    <td>
+                        <a class="ml-2 btn btn-danger" asp-controller="Appointment" asp-action="Delete"
+                           asp-route-id="@Model[i].Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

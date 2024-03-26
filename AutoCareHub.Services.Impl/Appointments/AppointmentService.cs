@@ -84,8 +84,7 @@ namespace AutoCareHub.Services.Impl
 
             entity.MainCategoryId = request.MainCategoryId;
             entity.UserId = request.UserId;
-            entity.StartDate = request.StartDate;
-            entity.EndDate = request.EndDate.AddDays(1);
+            entity.Date = request.Date;
             entity.Description = request.Description;
 
             await _context.SaveChangesAsync();

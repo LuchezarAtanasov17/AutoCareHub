@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -37,6 +38,9 @@
                     </div>
                     <div class="nav-item nav-link" style="font-size:24px">
                         <a asp-controller="Service" asp-action="List" class="nav-item nav-link active title">Services</a>
+                    </div>
+                    <div class="nav-item nav-link" style="font-size:24px">
+                        <a asp-controller="Appointment" asp-action="ListByUser" asp-route-userId="@Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))" class="nav-item nav-link active title">My appointments</a>
                     </div>
                     <div class="navbar-nav mr-auto nav-item nav-link">
                     </div>

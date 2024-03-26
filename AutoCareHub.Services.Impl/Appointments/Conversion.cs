@@ -19,8 +19,7 @@ namespace AutoCareHub.Services.Impl.Appointments
                 ServiceId = source.ServiceId,
                 MainCategoryId = source.MainCategoryId,
                 UserId = source.UserId,
-                StartDate = source.StartDate,
-                EndDate = source.EndDate,
+                Date = source.Date,
                 Description = source.Description,
             };
 

@@ -60,9 +60,9 @@ namespace AutoCareHub.Web.Controllers
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (request.StartDate < DateTime.Now)
+            if (request.Date < DateTime.Now)
             {
-                ModelState.AddModelError(nameof(request.StartDate), "Invalid date.");
+                ModelState.AddModelError(nameof(request.Date), "Invalid date.");
             }
             if (request.Description == null)
             {
@@ -76,7 +76,6 @@ namespace AutoCareHub.Web.Controllers
 
             request.ServiceId = serviceId;
             request.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            request.EndDate = request.StartDate.AddDays(1);
 
             await _appointmentService.CreateAppointmentAsync(request);
 
@@ -93,8 +92,7 @@ namespace AutoCareHub.Web.Controllers
                 UserId = appointment.UserId,
                 MainCategoryId = appointment.MainCategoryId,
                 Description = appointment.Description,
-                StartDate = appointment.StartDate,
-                EndDate = appointment.EndDate,
+                Date = appointment.Date,
                 ServiceName = appointment.Service.Name
             };
 
@@ -109,9 +107,9 @@ namespace AutoCareHub.Web.Controllers
                 throw new ArgumentNullException(nameof(request));
             }
 
-            if (request.StartDate < DateTime.Now)
+            if (request.Date < DateTime.Now)
             {
-                ModelState.AddModelError(nameof(request.StartDate), "Invalid date.");
+                ModelState.AddModelError(nameof(request.Date), "Invalid date.");
             }
 
             if (!ModelState.IsValid)

@@ -19,10 +19,7 @@ namespace AutoCareHub.Data.Models
         public Guid MainCategoryId { get; set; }
 
         [Required]
-        public DateTime StartDate { get; set; }
-
-        [Required]
-        public DateTime EndDate { get; set; }
+        public DateTime Date { get; set; }
 
         [StringLength(300)]
         public string? Description { get; set; }
