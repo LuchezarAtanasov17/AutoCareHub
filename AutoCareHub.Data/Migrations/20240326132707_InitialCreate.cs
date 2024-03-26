@@ -219,8 +219,7 @@ namespace AutoCareHub.Data.Migrations
                     ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MainCategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true)
                 },
                 constraints: table =>
@@ -338,9 +337,9 @@ namespace AutoCareHub.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "4febb5a6-3906-4fe0-9896-a616b69c2a16", "admin@gmail.com", false, "Luchezar", "Atanasov", false, null, "ADMIN@GMAIL.COM", "ADMINISTRATOR", null, null, false, null, false, "Administrator" },
-                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "b7870d9c-a2a2-4936-ad37-2cb63ea19435", "dimitar@mail.com", false, "Dimitar", "Dimitrov", false, null, "DIMITAR@MAIL.COM", "MEETYOU", null, null, false, null, false, "Meetyou" },
-                    { new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"), 0, "a596fea1-e03f-4823-a174-b6419f3fbf56", "simonipal@mail.com", false, "Dimitar", "Dimitrov", false, null, "SIMONIPAL@MAIL.COM", "MONIBONBONI", null, null, false, null, false, "MoniBonboni" }
+                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "43082c74-8471-4ef9-9762-cc5231913c3e", "admin@gmail.com", false, "Luchezar", "Atanasov", false, null, "ADMIN@GMAIL.COM", "ADMINISTRATOR", null, null, false, null, false, "Administrator" },
+                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "b355dd6e-f20a-4f45-86ea-591708c3d286", "dimitar@mail.com", false, "Dimitar", "Dimitrov", false, null, "DIMITAR@MAIL.COM", "MEETYOU", null, null, false, null, false, "Meetyou" },
+                    { new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"), 0, "d07f0ab6-36bf-414e-90b7-b3b5a1d79050", "simonipal@mail.com", false, "Dimitar", "Dimitrov", false, null, "SIMONIPAL@MAIL.COM", "MONIBONBONI", null, null, false, null, false, "MoniBonboni" }
                 });
 
             migrationBuilder.InsertData(
