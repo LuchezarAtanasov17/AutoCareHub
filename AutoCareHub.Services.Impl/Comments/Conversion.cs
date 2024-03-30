@@ -18,8 +18,6 @@ namespace AutoCareHub.Services.Impl.Comments
                 ServiceId = source.ServiceId,
                 UserId = source.UserId,
                 Value = source.Value,
-                Dislikes = 0,
-                Likes = 0,
                 PublishedOn = DateTime.UtcNow,
             };
 

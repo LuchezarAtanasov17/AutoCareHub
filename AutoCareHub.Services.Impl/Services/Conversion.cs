@@ -23,7 +23,6 @@ namespace AutoCareHub.Services.Impl.Services
                 City = source.City,
                 Address = source.Address,
                 Description = source.Description,
-                ImageUrl = source.ImageUrl,
             };
 
             return target;

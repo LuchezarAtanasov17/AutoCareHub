@@ -8,9 +8,9 @@ namespace AutoCareHub.Data
     public class AutoCareHubDbContext : IdentityDbContext<User, Role, Guid>
     {
         public AutoCareHubDbContext(DbContextOptions<AutoCareHubDbContext> options)
-            :base(options)
+            : base(options)
         {
-            
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -76,10 +76,10 @@ namespace AutoCareHub.Data
                     .HasPrincipalKey(x => x.Id)
                     .OnDelete(DeleteBehavior.Cascade);
 
-                builder.HasOne(x=>x.Service)
-                    .WithMany(x=> x.Comments)
-                    .HasForeignKey(x=>x.ServiceId)
-                    .HasPrincipalKey(x=>x.Id) 
+                builder.HasOne(x => x.Service)
+                    .WithMany(x => x.Comments)
+                    .HasForeignKey(x => x.ServiceId)
+                    .HasPrincipalKey(x => x.Id)
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
@@ -101,7 +101,20 @@ namespace AutoCareHub.Data
                     .HasForeignKey(x => x.MainCategoryId)
                     .HasPrincipalKey(x => x.Id);
             });
-            
+
+            modelBuilder.Entity<Like>(builder =>
+            {
+                builder.HasOne(p => p.Comment)
+                .WithMany(l => l.Likes)
+                .HasForeignKey(p => p.CommentId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+                builder.HasOne(u => u.User)
+                .WithMany(l => l.Likes)
+                .HasForeignKey(p => p.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+            });
+
             modelBuilder.ApplyConfiguration(new MainCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new ServiceConfiguration());
@@ -125,5 +138,7 @@ namespace AutoCareHub.Data
         public DbSet<MainCategoryService> MainCategoryServices { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
+
+        public DbSet<Like> Likes { get; set; }
     }
 }

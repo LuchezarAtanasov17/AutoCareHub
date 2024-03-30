@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="3.1.32" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AutoCareHub.Data\AutoCareHub.Data.csproj" />
   </ItemGroup>
 

@@ -61,12 +61,6 @@ namespace AutoCareHub.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Dislikes")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Likes")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("PublishedOn")
                         .HasColumnType("datetime2");
 
@@ -88,6 +82,27 @@ namespace AutoCareHub.Data.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Comments");
+                });
+
+            modelBuilder.Entity("AutoCareHub.Data.Models.Like", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CommentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CommentId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("AutoCareHub.Data.Models.MainCategory", b =>
@@ -301,7 +316,8 @@ namespace AutoCareHub.Data.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("ImageUrls")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -329,7 +345,7 @@ namespace AutoCareHub.Data.Migrations
                             City = "Gabrovo",
                             CloseTime = new TimeSpan(0, 18, 0, 0, 0),
                             Description = "Welcome to ServiceSelect — your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!",
-                            ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png",
+                            ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png\"]",
                             Name = "ServiceSelect",
                             OpenTime = new TimeSpan(0, 9, 0, 0, 0),
                             UserId = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2")
@@ -341,7 +357,7 @@ namespace AutoCareHub.Data.Migrations
                             City = "Sofia",
                             CloseTime = new TimeSpan(0, 18, 0, 0, 0),
                             Description = "Experience the ultimate in automotive convenience with DriveEase. Say goodbye to long wait times and tedious phone calls—we've streamlined the process for you. From routine maintenance to emergency repairs, our platform connects you with skilled professionals ready to serve. Relax and let DriveEase take the wheel on your car care journey.",
-                            ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg",
+                            ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg\"]",
                             Name = "CarProCare",
                             OpenTime = new TimeSpan(0, 9, 0, 0, 0),
                             UserId = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2")
@@ -353,7 +369,7 @@ namespace AutoCareHub.Data.Migrations
                             City = "Varna",
                             CloseTime = new TimeSpan(0, 18, 0, 0, 0),
                             Description = "Welcome to AutoCare Connect—your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!",
-                            ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg",
+                            ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg\"]",
                             Name = "CarServiceCentral",
                             OpenTime = new TimeSpan(0, 8, 0, 0, 0),
                             UserId = new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c")
@@ -365,7 +381,7 @@ namespace AutoCareHub.Data.Migrations
                             City = "Plovdiv",
                             CloseTime = new TimeSpan(0, 17, 0, 0, 0),
                             Description = "Welcome to AutoPureWash, where your vehicle's shine is our priority. Treat your car to a rejuvenating experience with our expert team and state-of-the-art equipment. From exterior washes to meticulous detailing, we offer a range of services tailored to suit your needs. Experience the ultimate in cleanliness and convenience at AutoPureWash—where every wash leaves your car sparkling like new.",
-                            ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg",
+                            ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg\"]",
                             Name = "AutoPureWash",
                             OpenTime = new TimeSpan(0, 8, 0, 0, 0),
                             UserId = new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c")
@@ -785,7 +801,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "43082c74-8471-4ef9-9762-cc5231913c3e",
+                            ConcurrencyStamp = "1a761c99-cbe8-4f04-b778-2694eef03149",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Luchezar",
@@ -801,7 +817,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b355dd6e-f20a-4f45-86ea-591708c3d286",
+                            ConcurrencyStamp = "8f33346a-b9f9-42c4-bbbb-4f45d334dc6f",
                             Email = "dimitar@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",
@@ -817,7 +833,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d07f0ab6-36bf-414e-90b7-b3b5a1d79050",
+                            ConcurrencyStamp = "5b7ee040-d705-4707-9caa-3b50b27ca0e3",
                             Email = "simonipal@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",
@@ -984,6 +1000,25 @@ namespace AutoCareHub.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("AutoCareHub.Data.Models.Like", b =>
+                {
+                    b.HasOne("AutoCareHub.Data.Models.Comment", "Comment")
+                        .WithMany("Likes")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("AutoCareHub.Data.Models.User", "User")
+                        .WithMany("Likes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("AutoCareHub.Data.Models.MainCategoryService", b =>
                 {
                     b.HasOne("AutoCareHub.Data.Models.MainCategory", "MainCategory")
@@ -1095,6 +1130,11 @@ namespace AutoCareHub.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("AutoCareHub.Data.Models.Comment", b =>
+                {
+                    b.Navigation("Likes");
+                });
+
             modelBuilder.Entity("AutoCareHub.Data.Models.MainCategory", b =>
                 {
                     b.Navigation("Appointments");
@@ -1120,6 +1160,8 @@ namespace AutoCareHub.Data.Migrations
                     b.Navigation("Appointments");
 
                     b.Navigation("Comments");
+
+                    b.Navigation("Likes");
 
                     b.Navigation("Ratings");
 

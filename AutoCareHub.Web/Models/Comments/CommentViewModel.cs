@@ -15,9 +15,9 @@ namespace AutoCareHub.Web.Models.Comments
 
         public DateTime PublishedOn { get; set; }
 
-        public int Likes { get; set; }
+        public bool CommentLikedByCurrentUser { get; set; }
 
-        public int Dislikes { get; set; }
+        public int LikeCount { get; set; }
 
         public UserViewModel User { get; set; }
 

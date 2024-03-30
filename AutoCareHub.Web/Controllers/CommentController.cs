@@ -1,4 +1,5 @@
 ﻿using AutoCareHub.Services.Comments;
+using AutoCareHub.Services.Likes;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -7,10 +8,12 @@ namespace AutoCareHub.Web.Controllers
     public class CommentController : Controller
     {
         private readonly ICommentService _commentService;
+        private readonly ILikeService _likeService;
 
-        public CommentController(ICommentService commentService)
+        public CommentController(ICommentService commentService, ILikeService likeService)
         {
             _commentService = commentService ?? throw new ArgumentNullException(nameof(commentService));
+            _likeService = likeService ?? throw new ArgumentNullException(nameof(likeService));
         }
 
         [HttpPost]
@@ -40,6 +43,12 @@ namespace AutoCareHub.Web.Controllers
             await _commentService.DeleteCommentAsync(id);
 
             return RedirectToAction("Get", "Service", new { id = serviceId });
+        }
+
+        [HttpPost]
+        public async Task HandleLike(string commentId)
+        {
+            await _likeService.HandleLikePostAsync(Guid.Parse(commentId), Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)));
         }
     }
 }

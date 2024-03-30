@@ -1,12 +1,16 @@
 using AutoCareHub.Data;
 using AutoCareHub.Services.Appointments;
 using AutoCareHub.Services.Comments;
+using AutoCareHub.Services.Image;
 using AutoCareHub.Services.Impl;
+using AutoCareHub.Services.Impl.Image;
+using AutoCareHub.Services.Impl.Likes;
 using AutoCareHub.Services.Impl.MainCategories;
 using AutoCareHub.Services.Impl.Ratings;
 using AutoCareHub.Services.Impl.Services;
 using AutoCareHub.Services.Impl.SubCategories;
 using AutoCareHub.Services.Impl.Users;
+using AutoCareHub.Services.Likes;
 using AutoCareHub.Services.MainCategories;
 using AutoCareHub.Services.Ratings;
 using AutoCareHub.Services.Services;
@@ -46,6 +50,20 @@ builder.Services.AddScoped<IRatingService, RatingService>();
 builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
 builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IImageService, ImageService>();
+builder.Services.AddScoped<ILikeService, LikeService>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder.WithOrigins("https://localhost:7256")
+                .AllowAnyHeader()
+                .WithMethods("GET", "POST", "PUT")
+                .AllowCredentials();
+        });
+});
 
 var app = builder.Build();
 

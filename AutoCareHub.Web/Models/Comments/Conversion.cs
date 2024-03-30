@@ -18,8 +18,6 @@ namespace AutoCareHub.Web.Models.Comments
                 UserId = source.UserId,
                 ServiceId = source.ServiceId,
                 Value = source.Value,
-                Dislikes = source.Dislikes,
-                Likes = source.Likes,
                 PublishedOn = source.PublishedOn,
                 User = WEB_USERS.Conversion.ConvertUser(source.User),
             };

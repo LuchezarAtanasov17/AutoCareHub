@@ -180,7 +180,7 @@ namespace AutoCareHub.Data.Migrations
                     Address = table.Column<string>(type: "nvarchar(70)", maxLength: 70, nullable: false),
                     OpenTime = table.Column<TimeSpan>(type: "time", nullable: false),
                     CloseTime = table.Column<TimeSpan>(type: "time", nullable: false),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    ImageUrls = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -252,9 +252,7 @@ namespace AutoCareHub.Data.Migrations
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
-                    PublishedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Likes = table.Column<int>(type: "int", nullable: false),
-                    Dislikes = table.Column<int>(type: "int", nullable: false)
+                    PublishedOn = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -323,6 +321,30 @@ namespace AutoCareHub.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Likes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CommentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Likes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Likes_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Likes_Comments_CommentId",
+                        column: x => x.CommentId,
+                        principalTable: "Comments",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
@@ -337,9 +359,9 @@ namespace AutoCareHub.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "43082c74-8471-4ef9-9762-cc5231913c3e", "admin@gmail.com", false, "Luchezar", "Atanasov", false, null, "ADMIN@GMAIL.COM", "ADMINISTRATOR", null, null, false, null, false, "Administrator" },
-                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "b355dd6e-f20a-4f45-86ea-591708c3d286", "dimitar@mail.com", false, "Dimitar", "Dimitrov", false, null, "DIMITAR@MAIL.COM", "MEETYOU", null, null, false, null, false, "Meetyou" },
-                    { new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"), 0, "d07f0ab6-36bf-414e-90b7-b3b5a1d79050", "simonipal@mail.com", false, "Dimitar", "Dimitrov", false, null, "SIMONIPAL@MAIL.COM", "MONIBONBONI", null, null, false, null, false, "MoniBonboni" }
+                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "1a761c99-cbe8-4f04-b778-2694eef03149", "admin@gmail.com", false, "Luchezar", "Atanasov", false, null, "ADMIN@GMAIL.COM", "ADMINISTRATOR", null, null, false, null, false, "Administrator" },
+                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "8f33346a-b9f9-42c4-bbbb-4f45d334dc6f", "dimitar@mail.com", false, "Dimitar", "Dimitrov", false, null, "DIMITAR@MAIL.COM", "MEETYOU", null, null, false, null, false, "Meetyou" },
+                    { new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"), 0, "5b7ee040-d705-4707-9caa-3b50b27ca0e3", "simonipal@mail.com", false, "Dimitar", "Dimitrov", false, null, "SIMONIPAL@MAIL.COM", "MONIBONBONI", null, null, false, null, false, "MoniBonboni" }
                 });
 
             migrationBuilder.InsertData(
@@ -362,13 +384,13 @@ namespace AutoCareHub.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Services",
-                columns: new[] { "Id", "Address", "City", "CloseTime", "Description", "ImageUrl", "Name", "OpenTime", "UserId" },
+                columns: new[] { "Id", "Address", "City", "CloseTime", "Description", "ImageUrls", "Name", "OpenTime", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("31059a53-4346-4efb-a1e2-b404c16b7fb5"), "ulitsa Ivan Vazov 17", "Plovdiv", new TimeSpan(0, 17, 0, 0, 0), "Welcome to AutoPureWash, where your vehicle's shine is our priority. Treat your car to a rejuvenating experience with our expert team and state-of-the-art equipment. From exterior washes to meticulous detailing, we offer a range of services tailored to suit your needs. Experience the ultimate in cleanliness and convenience at AutoPureWash—where every wash leaves your car sparkling like new.", "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg", "AutoPureWash", new TimeSpan(0, 8, 0, 0, 0), new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c") },
-                    { new Guid("49450e6e-3fea-483c-9df8-ea6f9c91c6f8"), "ulitsa San Stefano 14", "Varna", new TimeSpan(0, 18, 0, 0, 0), "Welcome to AutoCare Connect—your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!", "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg", "CarServiceCentral", new TimeSpan(0, 8, 0, 0, 0), new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c") },
-                    { new Guid("ba0914fa-d680-4f2d-97b4-b6197e7a3902"), "ulitsa Hristo Belchev 10", "Sofia", new TimeSpan(0, 18, 0, 0, 0), "Experience the ultimate in automotive convenience with DriveEase. Say goodbye to long wait times and tedious phone calls—we've streamlined the process for you. From routine maintenance to emergency repairs, our platform connects you with skilled professionals ready to serve. Relax and let DriveEase take the wheel on your car care journey.", "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg", "CarProCare", new TimeSpan(0, 9, 0, 0, 0), new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2") },
-                    { new Guid("dc4ee450-7e0d-4d13-b93f-474487d355d0"), "ulitsa Orlovska 24", "Gabrovo", new TimeSpan(0, 18, 0, 0, 0), "Welcome to ServiceSelect — your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!", "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png", "ServiceSelect", new TimeSpan(0, 9, 0, 0, 0), new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2") }
+                    { new Guid("31059a53-4346-4efb-a1e2-b404c16b7fb5"), "ulitsa Ivan Vazov 17", "Plovdiv", new TimeSpan(0, 17, 0, 0, 0), "Welcome to AutoPureWash, where your vehicle's shine is our priority. Treat your car to a rejuvenating experience with our expert team and state-of-the-art equipment. From exterior washes to meticulous detailing, we offer a range of services tailored to suit your needs. Experience the ultimate in cleanliness and convenience at AutoPureWash—where every wash leaves your car sparkling like new.", "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg\"]", "AutoPureWash", new TimeSpan(0, 8, 0, 0, 0), new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c") },
+                    { new Guid("49450e6e-3fea-483c-9df8-ea6f9c91c6f8"), "ulitsa San Stefano 14", "Varna", new TimeSpan(0, 18, 0, 0, 0), "Welcome to AutoCare Connect—your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!", "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg\"]", "CarServiceCentral", new TimeSpan(0, 8, 0, 0, 0), new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c") },
+                    { new Guid("ba0914fa-d680-4f2d-97b4-b6197e7a3902"), "ulitsa Hristo Belchev 10", "Sofia", new TimeSpan(0, 18, 0, 0, 0), "Experience the ultimate in automotive convenience with DriveEase. Say goodbye to long wait times and tedious phone calls—we've streamlined the process for you. From routine maintenance to emergency repairs, our platform connects you with skilled professionals ready to serve. Relax and let DriveEase take the wheel on your car care journey.", "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg\"]", "CarProCare", new TimeSpan(0, 9, 0, 0, 0), new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2") },
+                    { new Guid("dc4ee450-7e0d-4d13-b93f-474487d355d0"), "ulitsa Orlovska 24", "Gabrovo", new TimeSpan(0, 18, 0, 0, 0), "Welcome to ServiceSelect — your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!", "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png\"]", "ServiceSelect", new TimeSpan(0, 9, 0, 0, 0), new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2") }
                 });
 
             migrationBuilder.InsertData(
@@ -513,6 +535,16 @@ namespace AutoCareHub.Data.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Likes_CommentId",
+                table: "Likes",
+                column: "CommentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Likes_UserId",
+                table: "Likes",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MainCategoryServices_MainCategoryId",
                 table: "MainCategoryServices",
                 column: "MainCategoryId");
@@ -564,7 +596,7 @@ namespace AutoCareHub.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "Likes");
 
             migrationBuilder.DropTable(
                 name: "MainCategoryServices");
@@ -579,10 +611,13 @@ namespace AutoCareHub.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Services");
+                name: "Comments");
 
             migrationBuilder.DropTable(
                 name: "MainCategories");
+
+            migrationBuilder.DropTable(
+                name: "Services");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -18,5 +18,7 @@ namespace AutoCareHub.Data.Models
         public ICollection<Rating> Ratings { get; set; } = new HashSet<Rating>();
 
         public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
+
+        public ICollection<Like> Likes { get; set; } = new HashSet<Like>();
     }
 }

@@ -5,16 +5,20 @@ using AutoCareHub.Data;
 using ENTITIES = AutoCareHub.Data.Models;
 using AutoCareHub.Data.Models;
 using System.Net;
+using AutoCareHub.Services.Image;
+using System.Text.Json;
 
 namespace AutoCareHub.Services.Impl.Services
 {
     public class ServiceService : IServiceService
     {
         private readonly AutoCareHubDbContext _context;
+        private readonly IImageService _imageService;
 
-        public ServiceService(AutoCareHubDbContext context)
+        public ServiceService(AutoCareHubDbContext context, IImageService imageService)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
+            _imageService = imageService;
         }
 
         public async Task<List<ENTITIES.Service>> ListServicesAsync(Guid? userId = null, string? category = null, string? city = null, AllOrMineOption? allOrMineOption = null)
@@ -129,6 +133,20 @@ namespace AutoCareHub.Services.Impl.Services
 
             await _context.AddAsync(entityService);
             await _context.SaveChangesAsync();
+
+            if (request.Images != null)
+            {
+                foreach (var imageInfo in request.Images)
+                {
+                    var image = await _imageService.UploadImage(imageInfo, "images", entityService);
+
+                    var imageUrls = JsonSerializer.Deserialize<List<string>>(image);
+                    imageUrls.Add(image);
+
+                    entityService.ImageUrls = JsonSerializer.Serialize(imageUrls);
+                }
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task UpdateServiceAsync(Guid id, UpdateServiceRequest request)

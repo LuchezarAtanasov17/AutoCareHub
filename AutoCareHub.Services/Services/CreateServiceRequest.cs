@@ -1,4 +1,5 @@
 ﻿using AutoCareHub.Services.MainCategories;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace AutoCareHub.Services.Services
@@ -16,7 +17,7 @@ namespace AutoCareHub.Services.Services
         [StringLength(500)]
         public string? Description { get; set; }
 
-        [Required]
+         [Required]
         [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 10)]
         public string City { get; set; }
 
@@ -30,8 +31,8 @@ namespace AutoCareHub.Services.Services
         [Required]
         public TimeOnly CloseTime { get; set; }
 
-        public string ImageUrl { get; set; }
-
         public List<SelectMainCategory> MainCategories { get; set; }
+
+        public List<IFormFile> Images { get; set; }
     }
 }

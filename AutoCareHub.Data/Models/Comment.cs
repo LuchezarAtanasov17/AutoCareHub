@@ -20,14 +20,10 @@ namespace AutoCareHub.Data.Models
         [Required]
         public DateTime PublishedOn { get; set; }
 
-        [Required]
-        public int Likes { get; set; }
-
-        [Required]
-        public int Dislikes { get; set; }
-
         public User User { get; set; }
 
         public Service Service { get; set; }
+
+        public ICollection<Like> Likes { get; set; } = new HashSet<Like>();
     }
 }

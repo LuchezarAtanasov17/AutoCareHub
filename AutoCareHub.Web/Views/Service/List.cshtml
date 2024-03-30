@@ -28,10 +28,13 @@
                 <div>
                     <form method="get">
                         <div class="row" style="padding-bottom:15px;">
-                            <div class="col-5"></div>
+                            <div class="col-1">
+                                <a asp-controller="Service" asp-action="Create" class="btn btn-custom">Create</a>
+                            </div>
+                            <div class="col-4"></div>
                             <div class="col-2">
                                 <select class="form-control" asp-for="@Model.City">
-                                    <option value="">All</option>
+                                    <option value="">All cities</option>
                                     @foreach (var city in Model.Cities)
                                     {
                                         <option value="@city">@city</option>
@@ -40,7 +43,7 @@
                             </div>
                             <div class="col-2">
                                 <select class="form-control" asp-for="@Model.MainCategory">
-                                    <option value="">All</option>
+                                    <option value="">All categories</option>
                                     @foreach (var mainCategory in Model.MainCategories)
                                     {
                                         <option value="@mainCategory">@mainCategory</option>
@@ -67,7 +70,7 @@
                             <div class="col-lg-4">
                                 <div class="blog-item">
                                     <div class="blog-img">
-                                        <img style="max-height:270px;" src="@service.ImageUrl" alt="Image">
+                                        <img style="max-height:270px;" src="@service.ImageUrls[0]" alt="Image">
                                         <div class="meta-date">
                                             <span>View</span>
                                             <strong>More</strong>

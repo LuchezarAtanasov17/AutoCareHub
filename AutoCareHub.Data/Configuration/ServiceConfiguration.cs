@@ -1,6 +1,7 @@
 ﻿using AutoCareHub.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Text.Json;
 
 namespace AutoCareHub.Data.Configuration
 {
@@ -27,7 +28,10 @@ namespace AutoCareHub.Data.Configuration
                     CloseTime = TimeOnly.Parse("18:00:00"),
                     City = "Gabrovo",
                     Address = "ulitsa Orlovska 24",
-                    ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png"
+                    ImageUrls = JsonSerializer.Serialize( new List<string>()
+                    {
+                        "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png"
+                    })
                 },
                 new()
                 {
@@ -42,7 +46,10 @@ namespace AutoCareHub.Data.Configuration
                     CloseTime = TimeOnly.Parse("18:00:00"),
                     City = "Sofia",
                     Address = "ulitsa Hristo Belchev 10",
-                    ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg"
+                    ImageUrls = JsonSerializer.Serialize(new List<string>()
+                    {
+                        "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg"
+                    })
                 },
                 new()
                 {
@@ -56,7 +63,10 @@ namespace AutoCareHub.Data.Configuration
                     CloseTime = TimeOnly.Parse("18:00:00"),
                     City = "Varna",
                     Address = "ulitsa San Stefano 14",
-                    ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg",
+                    ImageUrls = JsonSerializer.Serialize( new List<string>()
+                    {
+                        "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg"
+                    }),
                 },
                 new()
                 {
@@ -71,7 +81,10 @@ namespace AutoCareHub.Data.Configuration
                     CloseTime = TimeOnly.Parse("17:00:00"),
                     City = "Plovdiv",
                     Address = "ulitsa Ivan Vazov 17",
-                    ImageUrl = "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg"
+                    ImageUrls =JsonSerializer.Serialize( new List<string>()
+                    {
+                        "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg"
+                    })
                 }
             };
 

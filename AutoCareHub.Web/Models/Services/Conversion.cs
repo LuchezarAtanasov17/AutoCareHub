@@ -4,6 +4,7 @@ using WEB_COMMENTS = AutoCareHub.Web.Models.Comments;
 using WEB_USERS = AutoCareHub.Web.Models.Users;
 using WEB_RATINGS = AutoCareHub.Web.Models.Ratings;
 using AutoCareHub.Services.Appointments;
+using System.Text.Json;
 
 namespace AutoCareHub.Web.Models.Services
 {
@@ -26,7 +27,6 @@ namespace AutoCareHub.Web.Models.Services
                 CloseTime = source.CloseTime,
                 City = source.City,
                 Address = source.Address,
-                ImageUrl = source.ImageUrl,
                 User = WEB_USERS.Conversion.ConvertUser(source.User),
                 //TODO:
                 //UpdateRatingRequest = new UpdateRatingRequest
@@ -46,6 +46,11 @@ namespace AutoCareHub.Web.Models.Services
                     .Select(WEB_RATINGS.Conversion.ConvertRating)
                     .ToList()
             };
+
+            if (source.ImageUrls is not null)
+            {
+                target.ImageUrls = JsonSerializer.Deserialize<string[]>(source.ImageUrls)!;
+            }
 
             return target;
         }

@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="single-content">
-                        <img style="max-height:550px; height:100%" src="@Model.ImageUrl" />
+                        <img style="max-height:550px; height:100%" src="@Model.ImageUrls" />
                         <h2>@Model.Name</h2>
                         <p>
                             @Model.Description
@@ -43,11 +43,15 @@
                                                     {
                                                         <a asp-controller="Comment" asp-action="Delete" asp-route-id="@comment.Id" class="btn btn-custom" type="submit">Delete</a>
                                                     }
-                                                    else
-                                                    {
-                                                        <i class="fa-solid fa-thumbs-up"></i>
-                                                        <i class="fa-solid fa-thumbs-down"></i>
-                                                    }
+                                                    <div class="post-row">
+                                                        <div class="activity-icons">
+                                                            <p style="font-size: 18px; margin: 0.5em 1em 0 0.5em">
+                                                                <input type="hidden" id="@comment.Id-is-liked" name="@comment.Id" value="@comment.CommentLikedByCurrentUser.ToString().ToLower()">
+                                                                <i class="fa fa-solid fa-heart @(comment.CommentLikedByCurrentUser ? "likedPost" : "notLikedPost")" onclick="onLikeButtonPress('@comment.Id')" style="cursor:pointer" id="like-icon-@comment.Id"></i>
+                                                                <span id="likes-@comment.Id">@comment.LikeCount</span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </h3>
                                             <span>
@@ -88,12 +92,12 @@
                                 <ul>
                                     @foreach (var mainCategory in Model.MainCategories)
                                     {
-                                        <li><a href="">@mainCategory.Name</a><span>(98)</span></li>
+                                        <li><a style="font-size:18px; font-weight:600;">@mainCategory.Name</a></li>
                                         <div class="row">
                                             @foreach (var subCategory in mainCategory.SubCategories)
                                             {
                                                 <div class="col-4">
-                                                    <i class="far fa-check-circle" style="color:#E81C2E;"></i> @subCategory.Name
+                                                    <i class="far fa-check-circle" style="color:#E81C2E; font-weight:300;"></i> @subCategory.Name
                                                 </div>
                                             }
                                         </div>
@@ -112,6 +116,7 @@
     <!-- Single Post End-->
     <script src="~/js/site.js"></script>
     <script src="~/js/geolocation.js"></script>
+    <script asp-append-version="true" src="~/js/publications.js"></script>
 </body>
 </html>
 

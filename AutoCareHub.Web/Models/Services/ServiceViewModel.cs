@@ -26,7 +26,7 @@ namespace AutoCareHub.Web.Models.Services
 
         public TimeOnly CloseTime { get; set; }
 
-        public string ImageUrl { get; set; }
+        public string[] ImageUrls { get; set; }
 
         //TODO: public UpdateRatingRequest UpdateRatingRequest { get; set; } ???????????
 
@@ -35,8 +35,6 @@ namespace AutoCareHub.Web.Models.Services
         public CreateAppointmentRequest CreateAppointmentRequest { get; set; }
 
         public CreateCommentRequest CreateCommentRequest { get; set; }
-
-        public FilterViewModel Filter { get; set; }
 
         public ICollection<MainCategoryViewModel> MainCategories { get; set; }
 
