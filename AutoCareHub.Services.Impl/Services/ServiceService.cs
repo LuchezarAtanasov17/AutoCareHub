@@ -1,12 +1,11 @@
-﻿using AutoCareHub.Services.Services;
+﻿using AutoCareHub.Data;
+using AutoCareHub.Services.Image;
+using AutoCareHub.Services.Services;
 using AutoCareHub.Web.Model.Services;
 using Microsoft.EntityFrameworkCore;
-using AutoCareHub.Data;
+using System.Security.Claims;
+using CLAIMS = System.Security.Claims;
 using ENTITIES = AutoCareHub.Data.Models;
-using AutoCareHub.Data.Models;
-using System.Net;
-using AutoCareHub.Services.Image;
-using System.Text.Json;
 
 namespace AutoCareHub.Services.Impl.Services
 {
@@ -62,16 +61,11 @@ namespace AutoCareHub.Services.Impl.Services
                     .Where(x => x.City == city)
                     .ToList();
             }
-            if (userId != null)
-            {
-                services = services
-                    .Where(x => x.UserId == userId)
-                    .ToList();
-            }
+
             services = allOrMineOption switch
             {
                 AllOrMineOption.Mine => services.Where(x => x.UserId == userId).ToList(),
-                _ => services
+                _ => services.Where(x => x.UserId != userId).ToList()
             };
 
             return services;
@@ -139,11 +133,6 @@ namespace AutoCareHub.Services.Impl.Services
                 foreach (var imageInfo in request.Images)
                 {
                     var image = await _imageService.UploadImage(imageInfo, "images", entityService);
-
-                    var imageUrls = JsonSerializer.Deserialize<List<string>>(image);
-                    imageUrls.Add(image);
-
-                    entityService.ImageUrls = JsonSerializer.Serialize(imageUrls);
                 }
                 await _context.SaveChangesAsync();
             }

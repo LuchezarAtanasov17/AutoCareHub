@@ -20,13 +20,29 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="single-content">
-                        <img style="max-height:550px; height:100%" src="@Model.ImageUrls" />
-                        <h2>@Model.Name</h2>
+                        <!-- Carousel Start -->
+                        <div class="carousel">
+                            <div class="container-fluid">
+                                <div class="owl-carousel">
+                                    @foreach (var imageUrl in Model.ImageUrls)
+                                    {
+                                        <div class="carousel-item">
+                                            <div class="carousel-img">
+                                                <img style="max-height:550px; margin-bottom:0px;" src="@imageUrl" alt="Image">
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Carousel End -->
+                    </div>
+                    <div class="single-content">
+                        <h2 style="font-weight:700">@Model.Name</h2>
                         <p>
                             @Model.Description
                         </p>
                     </div>
-
                     <div class="single-comment">
                         <h2>@Model.Comments.Count Comments</h2>
                         <ul class="comment-list  overflow-auto" style="max-height: 500px;">
@@ -37,19 +53,30 @@
                                         <div class="comment-text">
                                             <h3>
                                                 <div style="display:flex; justify-content:space-between">
-                                                    <a href="">@comment.User.FirstName @comment.User.LastName</a>
-                                                    @if (comment.UserId == Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)
-                                                   || Model.UserId == Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-                                                    {
-                                                        <a asp-controller="Comment" asp-action="Delete" asp-route-id="@comment.Id" class="btn btn-custom" type="submit">Delete</a>
-                                                    }
-                                                    <div class="post-row">
-                                                        <div class="activity-icons">
-                                                            <p style="font-size: 18px; margin: 0.5em 1em 0 0.5em">
-                                                                <input type="hidden" id="@comment.Id-is-liked" name="@comment.Id" value="@comment.CommentLikedByCurrentUser.ToString().ToLower()">
-                                                                <i class="fa fa-solid fa-heart @(comment.CommentLikedByCurrentUser ? "likedPost" : "notLikedPost")" onclick="onLikeButtonPress('@comment.Id')" style="cursor:pointer" id="like-icon-@comment.Id"></i>
-                                                                <span id="likes-@comment.Id">@comment.LikeCount</span>
-                                                            </p>
+                                                    <div style="justify-content:left">
+                                                        <a>@comment.User.FirstName @comment.User.LastName</a>
+                                                    </div>
+                                                    <div style="display:flex; flex-direction:row;">
+                                                        <div>
+                                                            @if (comment.UserId == Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)
+                                                           || Model.UserId == Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                                                            {
+                                                                <a asp-controller="Comment"
+                                                                   asp-action="Delete"
+                                                                   asp-route-id="@comment.Id"
+                                                                   class="btn btn-custom"
+                                                                   style="height:30px;"
+                                                                   type="submit">Delete</a>
+                                                            }
+                                                        </div>
+                                                        <div class="post-row">
+                                                            <div class="activity-icons">
+                                                                <p style="font-size: 18px; margin-left: 5px;">
+                                                                    <input type="hidden" id="@comment.Id-is-liked" name="@comment.Id" value="@comment.CommentLikedByCurrentUser.ToString().ToLower()">
+                                                                    <i class="fa fa-solid fa-thumbs-up @(comment.CommentLikedByCurrentUser ? "likedPost" : "notLikedPost")" onclick="onLikeButtonPress('@comment.Id')" style="cursor:pointer" id="like-icon-@comment.Id"></i>
+                                                                    <span id="likes-@comment.Id">@comment.LikeCount</span>
+                                                                </p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -83,8 +110,7 @@
                             <a id="location" hidden>
                                 @String.Concat(Model.City, ", ", Model.Address)
                             </a>
-                            <div class="mapouter">
-                            </div>
+                            <div class="mapouter"></div>
                         </div>
                         <div class="sidebar-widget">
                             <h2 class="widget-title">Categories</h2>

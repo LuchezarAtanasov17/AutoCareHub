@@ -16,10 +16,11 @@ namespace AutoCareHub.Services.Impl.Services
 
             var target = new ENTITIES.Service()
             {
+                Id = Guid.NewGuid(),
                 UserId = source.UserId,
                 Name = source.Name,
-                OpenTime = source.OpenTime,
-                CloseTime = source.CloseTime,
+                OpenTime = TimeOnly.Parse(source.OpenTime),
+                CloseTime = TimeOnly.Parse(source.CloseTime),
                 City = source.City,
                 Address = source.Address,
                 Description = source.Description,

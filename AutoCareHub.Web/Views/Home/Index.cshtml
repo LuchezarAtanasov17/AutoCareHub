@@ -35,12 +35,12 @@
                 {
                     <div class="carousel-item">
                         <div class="carousel-img">
-                            <img src="img/carousel-1.jpg" alt="Image">
+                            <img style="max-height:850px" src="@service.ImageUrls[0]" alt="Image">
                         </div>
                         <div class="carousel-text">
                             <h3>@(string.Join(", ", service.MainCategories.Select(x => x.Name)))</h3>
                             <h1>@service.Name</h1>
-                            <p>@(service.Description.Substring(0, 100))...</p>
+                            <p>@(service.Description?.Substring(0, 100) ?? "")...</p>
                             <a asp-controller="Service" asp-action="Get" asp-route-id="@service.Id" class="btn btn-custom">Explore More</a>
                         </div>
                     </div>

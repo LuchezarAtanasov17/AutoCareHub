@@ -33,7 +33,7 @@ namespace AutoCareHub.Data.Models
         [Required]
         public TimeOnly CloseTime { get; set; }
 
-        public string ImageUrls { get; set; }
+        public string? ImageUrls { get; set; }
 
         public User? User { get; set; }
 

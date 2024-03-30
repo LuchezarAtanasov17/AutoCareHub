@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoCareHub.Data.Migrations
 {
     [DbContext(typeof(AutoCareHubDbContext))]
-    [Migration("20240329134117_InitialCreate")]
+    [Migration("20240330220109_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -319,7 +319,6 @@ namespace AutoCareHub.Data.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("ImageUrls")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -803,7 +802,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1a761c99-cbe8-4f04-b778-2694eef03149",
+                            ConcurrencyStamp = "ebab4b8d-48c9-4e99-91b7-1abc7c7160a2",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Luchezar",
@@ -819,7 +818,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8f33346a-b9f9-42c4-bbbb-4f45d334dc6f",
+                            ConcurrencyStamp = "2478e39a-16d2-4343-9918-49e58d26ed72",
                             Email = "dimitar@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",
@@ -835,7 +834,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5b7ee040-d705-4707-9caa-3b50b27ca0e3",
+                            ConcurrencyStamp = "a90e48a5-84f7-4140-852a-1a64deeab2d5",
                             Email = "simonipal@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",

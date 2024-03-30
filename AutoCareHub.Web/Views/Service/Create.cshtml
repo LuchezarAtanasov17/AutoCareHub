@@ -59,7 +59,7 @@
                     <br />
                 </div>
                 <div class="row">
-                    <div class="mb-3 col-6">
+                    <div class="mb-3 col-3">
                         <label asp-for="@Model.OpenTime" class="form-label">OpenTime</label><br />
                         <select asp-for="@Model.OpenTime">
                             <option value="00:00">00:00</option>
@@ -89,7 +89,7 @@
                         </select>
                         <span asp-validation-for="OpenTime" class="text-danger"></span>
                     </div>
-                    <div class="mb-3 col-6">
+                    <div class="mb-3 col-3">
                         <label asp-for="@Model.CloseTime" class="form-label">CloseTime</label><br />
                         <select asp-for="@Model.CloseTime">
                             <option value="00:00">00:00</option>
@@ -120,6 +120,7 @@
                         <br />
                         <span asp-validation-for="CloseTime" class="text-danger"></span>
                     </div>
+                    <div class="col-6"></div>
                 </div>
                 <div style="display: flex; justify-content: space-between; ">
                     <div class="btn btn-light" style="font-size: 16px; margin-top: 0.5em; margin-left: 0em; color: white; background-color: #202C45; font-weight: 400; border-radius: 13px; padding: 0.4em 1em 0.4em 1em; width: 255px">

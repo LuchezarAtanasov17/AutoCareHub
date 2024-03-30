@@ -35,8 +35,17 @@ namespace AutoCareHub.Services.Impl.Image
                 throw new InvalidOperationException(result.Error.Message);
             }
 
-            var imageUrls = JsonSerializer.Deserialize<List<string>>(service.ImageUrls);
-            imageUrls.Add(result.Url.ToString());
+            var imageUrls = new List<string>();
+
+            if (service.ImageUrls == null)
+            {
+                imageUrls.Add(result.Url.ToString());
+            }
+            else
+            {
+                imageUrls = JsonSerializer.Deserialize<List<string>>(service.ImageUrls);
+                imageUrls.Add(result.Url.ToString());
+            }
 
             service.ImageUrls = JsonSerializer.Serialize(imageUrls);
 

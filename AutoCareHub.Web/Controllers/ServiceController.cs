@@ -42,14 +42,14 @@ namespace AutoCareHub.Web.Controllers
         public async Task<IActionResult> List([FromQuery] AllServicesQueryModel query)
         {
             var entityServices = await _serviceService
-                .ListServicesAsync(category: query.MainCategory, city: query.City, allOrMineOption: query.AllOrMineOption);
+                .ListServicesAsync(
+                userId: Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value),
+                category: query.MainCategory,
+                city: query.City,
+                allOrMineOption: query.AllOrMineOption);
 
             var entityMainCategories = await _mainCategoryService
                 .ListMainCategoriesAsync();
-
-            entityServices = entityServices
-                .Where(x => x.UserId != Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)))
-                .ToList();
 
             query.Services = entityServices
                 .Select(Conversion.ConvertService)
@@ -128,10 +128,15 @@ namespace AutoCareHub.Web.Controllers
             {
                 ModelState.AddModelError(nameof(request.MainCategories), "You should select at least one category.");
             }
-            if (request.OpenTime == request.CloseTime || DateTime.Parse(request.OpenTime.ToString()) < DateTime.Parse(request.CloseTime.ToString()))
+            if (request.OpenTime == request.CloseTime || DateTime.Parse(request.OpenTime.ToString()) > DateTime.Parse(request.CloseTime.ToString()))
             {
                 ModelState.AddModelError(nameof(request.CloseTime), "You should select correct open and close times.");
             }
+
+            request.MainCategoryIds = request.MainCategories
+                .Where(x => x.IsSelected)
+                .Select(x => x.Id)
+                .ToList();
 
             if (!ModelState.IsValid)
             {
@@ -139,11 +144,6 @@ namespace AutoCareHub.Web.Controllers
             }
 
             request.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-            request.MainCategoryIds = request.MainCategories
-                .Where(x => x.IsSelected)
-                .Select(x => x.Id)
-                .ToList();
 
             await _serviceService.CreateServiceAsync(request);
 

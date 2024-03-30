@@ -8,7 +8,7 @@ namespace AutoCareHub.Services.Services
     {
         public Guid UserId { get; set; }
 
-        public List<Guid> MainCategoryIds { get; set; }
+        public List<Guid>? MainCategoryIds { get; set; }
 
         [Required]
         [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 3)]
@@ -18,7 +18,7 @@ namespace AutoCareHub.Services.Services
         public string? Description { get; set; }
 
          [Required]
-        [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 10)]
+        [StringLength(30, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 2)]
         public string City { get; set; }
 
         [Required]
@@ -26,10 +26,10 @@ namespace AutoCareHub.Services.Services
         public string Address { get; set; }
 
         [Required]
-        public TimeOnly OpenTime { get; set; }
+        public string OpenTime { get; set; }
 
         [Required]
-        public TimeOnly CloseTime { get; set; }
+        public string CloseTime { get; set; }
 
         public List<SelectMainCategory> MainCategories { get; set; }
 
