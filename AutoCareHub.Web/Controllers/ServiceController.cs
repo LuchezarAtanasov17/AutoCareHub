@@ -3,7 +3,6 @@ using AutoCareHub.Services.Comments;
 using AutoCareHub.Services.MainCategories;
 using AutoCareHub.Services.Services;
 using AutoCareHub.Services.Users;
-using AutoCareHub.Web.Model.Services;
 using AutoCareHub.Web.Models.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;

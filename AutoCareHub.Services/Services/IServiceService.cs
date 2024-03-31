@@ -1,5 +1,4 @@
 ﻿using AutoCareHub.Data.Models;
-using AutoCareHub.Web.Model.Services;
 
 namespace AutoCareHub.Services.Services
 {

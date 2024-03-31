@@ -1,10 +1,7 @@
 ﻿using AutoCareHub.Data;
 using AutoCareHub.Services.Image;
 using AutoCareHub.Services.Services;
-using AutoCareHub.Web.Model.Services;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
-using CLAIMS = System.Security.Claims;
 using ENTITIES = AutoCareHub.Data.Models;
 
 namespace AutoCareHub.Services.Impl.Services
