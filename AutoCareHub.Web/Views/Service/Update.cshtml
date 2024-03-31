@@ -1,0 +1,136 @@
+﻿@using AutoCareHub.Services.Services
+
+@model UpdateServiceRequest
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <h2 class="text-center" style="padding-bottom:20px; padding-top:20px;">Create service</h2>
+
+    <form enctype="multipart/form-data" method="post">
+        <div class="row" style="padding-left: 50px; padding-right:20px;">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label asp-for="@Model.Name" class="form-label">Car service name</label>
+                    <input asp-for="@Model.Name" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.City" class="form-label">City</label>
+                    <input asp-for="@Model.City" class="form-control" aria-required="true" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Address" class="form-label">Address</label>
+                    <input asp-for="@Model.Address" class="form-control" aria-required="true" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="@Model.Description" class="form-label">Description</label>
+                    <textarea asp-for="@Model.Description" class="form-control" aria-required="true"> </textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label asp-for="SelectMainCategory">Categories:</label>
+                    <br />
+                    <div class="row">
+                        @for (int i = 0; i < @Model.SelectMainCategory.Count; i++)
+                        {
+                            <div class="col-4">
+                                <input type="checkbox" asp-for="@Model.SelectMainCategory[i].IsSelected" />
+                                <label style="font-weight:200;">@Model.SelectMainCategory[i].Name</label>
+                                <input type="hidden" asp-for="@Model.SelectMainCategory[i].Id" />
+                                <input type="hidden" asp-for="@Model.SelectMainCategory[i].Name" />
+                            </div>
+                            <br />
+                        }
+                    </div>
+                    <span asp-validation-for="SelectMainCategory" class="text-danger"></span>
+                    <br />
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-3">
+                        <label asp-for="@Model.OpenTime" class="form-label">OpenTime</label><br />
+                        <select asp-for="@Model.OpenTime">
+                            <option value="00:00">00:00</option>
+                            <option value="1:00">1:00</option>
+                            <option value="2:00">2:00</option>
+                            <option value="3:00">3:00</option>
+                            <option value="4:00">4:00</option>
+                            <option value="5:00">5:00</option>
+                            <option value="6:00">6:00</option>
+                            <option value="7:00">7:00</option>
+                            <option value="8:00">8:00</option>
+                            <option value="9:00">9:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="18:00">18:00</option>
+                            <option value="19:00">19:00</option>
+                            <option value="20:00">20:00</option>
+                            <option value="21:00">21:00</option>
+                            <option value="22:00">22:00</option>
+                            <option value="23:00">23:00</option>
+                        </select>
+                        <span asp-validation-for="OpenTime" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3 col-3">
+                        <label asp-for="@Model.CloseTime" class="form-label">CloseTime</label><br />
+                        <select asp-for="@Model.CloseTime">
+                            <option value="00:00">00:00</option>
+                            <option value="1:00">1:00</option>
+                            <option value="2:00">2:00</option>
+                            <option value="3:00">3:00</option>
+                            <option value="4:00">4:00</option>
+                            <option value="5:00">5:00</option>
+                            <option value="6:00">6:00</option>
+                            <option value="7:00">7:00</option>
+                            <option value="8:00">8:00</option>
+                            <option value="9:00">9:00</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                            <option value="18:00">18:00</option>
+                            <option value="19:00">19:00</option>
+                            <option value="20:00">20:00</option>
+                            <option value="21:00">21:00</option>
+                            <option value="22:00">22:00</option>
+                            <option value="23:00">23:00</option>
+                        </select>
+                        <br />
+                        <span asp-validation-for="CloseTime" class="text-danger"></span>
+                    </div>
+                    <div class="col-6"></div>
+                </div>
+            </div>
+        </div>
+        <div style="display:flex;flex-direction:row; justify-content:center">
+            <input class="btn btn-custom" style="font-size:18px; padding-left:40px; padding-right: 45px;" asp-controller="Service" asp-action="Update" asp-route-id="@Model.Id" type="submit" value="Save" />
+        </div>
+    </form>
+</body>
+</html>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

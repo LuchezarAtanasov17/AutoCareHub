@@ -162,8 +162,8 @@ namespace AutoCareHub.Web.Controllers
                 Address = service.Address,
                 Description = service.Description,
                 Name = service.Name,
-                OpenTime = service.OpenTime,
-                CloseTime = service.CloseTime,
+                OpenTime = service.OpenTime.ToString(),
+                CloseTime = service.CloseTime.ToString(),
                 SelectMainCategory = mainCategories
                     .Select(x => MAIN_CATEGORIES.Conversion.ConvertSelectMainCategory(x))
                     .ToList()
@@ -192,7 +192,7 @@ namespace AutoCareHub.Web.Controllers
             {
                 ModelState.AddModelError(nameof(request.SelectMainCategory), "You should select at least one category.");
             }
-            if (request.OpenTime == request.CloseTime)
+            if (request.OpenTime == request.CloseTime || DateTime.Parse(request.OpenTime) > DateTime.Parse(request.CloseTime))
             {
                 ModelState.AddModelError(nameof(request.CloseTime), "You should select correct open and close times.");
             }

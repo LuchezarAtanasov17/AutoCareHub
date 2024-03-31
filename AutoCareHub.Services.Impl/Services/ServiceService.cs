@@ -151,8 +151,8 @@ namespace AutoCareHub.Services.Impl.Services
             }
 
             service.Name = request.Name;
-            service.OpenTime = request.OpenTime;
-            service.CloseTime = request.CloseTime;
+            service.OpenTime = TimeOnly.Parse(request.OpenTime);
+            service.CloseTime = TimeOnly.Parse(request.CloseTime);
             service.City = request.City;
             service.Address = request.Address;
             service.Description = request.Description;
@@ -161,7 +161,7 @@ namespace AutoCareHub.Services.Impl.Services
                 .Where(x => x.ServiceId == service.Id);
             _context.MainCategoryServices.RemoveRange(mainCategoryServices);
 
-            foreach (var mainCategory in request.SelectMainCategory)
+            foreach (var mainCategory in request.SelectMainCategory.Where(x => x.IsSelected == true))
             {
                 var mainCategoryService = new ENTITIES.MainCategoryService
                 {

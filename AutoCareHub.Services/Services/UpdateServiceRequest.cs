@@ -23,10 +23,10 @@ namespace AutoCareHub.Services.Services
         public string Address { get; set; }
 
         [Required]
-        public TimeOnly OpenTime { get; set; }
+        public string OpenTime { get; set; }
 
         [Required]
-        public TimeOnly CloseTime { get; set; }
+        public string CloseTime { get; set; }
 
         public List<SelectMainCategory> SelectMainCategory { get; set; }
     }
