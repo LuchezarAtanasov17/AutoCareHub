@@ -125,7 +125,7 @@
                 <div style="display: flex; justify-content: space-between; ">
                     <div class="btn btn-light" style="font-size: 16px; margin-top: 0.5em; margin-left: 0em; color: white; background-color: #202C45; font-weight: 400; border-radius: 13px; padding: 0.4em 1em 0.4em 1em; width: 255px">
                         <span asp-validation-for="@Model.Images" class="text-danger"></span>
-                        <input type="file" asp-for="@Model.Images" style="width: 255px" accept="image/gif, image/jpeg, image/png, image/jpg" aria-required="true" />
+                        <input asp-for="@Model.Images" style="width: 255px" accept="image/gif, image/jpeg, image/png, image/jpg" aria-required="true" />
                     </div>
                     <div>
                         <img alt="Uploaded Image" accept="image/gif, image/jpeg, image/png, image/jpg" style="display:none;">
