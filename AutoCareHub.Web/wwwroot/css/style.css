@@ -2256,11 +2256,3 @@ a {
                 .footer .copyright p a:hover {
                     color: #ffffff;
                 }
-
-.likedPost {
-    color: #F9A392;
-}
-
-.notLikedPost {
-    color: #626262;
-}
