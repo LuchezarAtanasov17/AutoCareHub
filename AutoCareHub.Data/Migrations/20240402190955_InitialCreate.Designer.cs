@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoCareHub.Data.Migrations
 {
     [DbContext(typeof(AutoCareHubDbContext))]
-    [Migration("20240330220109_InitialCreate")]
+    [Migration("20240402190955_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -802,7 +802,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ebab4b8d-48c9-4e99-91b7-1abc7c7160a2",
+                            ConcurrencyStamp = "8aefab1a-3b53-4420-b614-7b2d1a925746",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Luchezar",
@@ -810,6 +810,7 @@ namespace AutoCareHub.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMINISTRATOR",
+                            PhoneNumber = "1234567891",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
@@ -818,7 +819,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2478e39a-16d2-4343-9918-49e58d26ed72",
+                            ConcurrencyStamp = "7286d8da-0e2d-4f32-a6be-1ce4c83466f9",
                             Email = "dimitar@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",
@@ -826,6 +827,7 @@ namespace AutoCareHub.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "DIMITAR@MAIL.COM",
                             NormalizedUserName = "MEETYOU",
+                            PhoneNumber = "1234567899",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "Meetyou"
@@ -834,7 +836,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a90e48a5-84f7-4140-852a-1a64deeab2d5",
+                            ConcurrencyStamp = "3ef80094-c0f7-4dcb-a290-0f00283ec81e",
                             Email = "simonipal@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",
@@ -842,6 +844,7 @@ namespace AutoCareHub.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "SIMONIPAL@MAIL.COM",
                             NormalizedUserName = "MONIBONBONI",
+                            PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
                             TwoFactorEnabled = false,
                             UserName = "MoniBonboni"

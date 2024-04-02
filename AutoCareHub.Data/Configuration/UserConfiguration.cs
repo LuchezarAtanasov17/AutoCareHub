@@ -24,6 +24,7 @@ namespace AutoCareHub.Data.Configuration
                     NormalizedEmail = "admin@gmail.com".ToUpper(),
                     FirstName = "Luchezar",
                     LastName = "Atanasov",
+                    PhoneNumber = "1234567891"
                 },
                 new()
                 {
@@ -33,7 +34,8 @@ namespace AutoCareHub.Data.Configuration
                     Email = "dimitar@mail.com",
                     NormalizedEmail = "dimitar@mail.com".ToUpper(),
                     FirstName = "Dimitar",
-                    LastName = "Dimitrov"
+                    LastName = "Dimitrov",
+                    PhoneNumber = "1234567899"
                 },
                 new()
                 {
@@ -43,7 +45,8 @@ namespace AutoCareHub.Data.Configuration
                     Email = "simonipal@mail.com",
                     NormalizedEmail = "simonipal@mail.com".ToUpper(),
                     FirstName = "Dimitar",
-                    LastName = "Dimitrov"
+                    LastName = "Dimitrov",
+                    PhoneNumber = "1234567890",
                 },
             };
 
