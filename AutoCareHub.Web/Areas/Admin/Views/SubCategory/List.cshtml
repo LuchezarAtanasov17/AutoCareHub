@@ -1,0 +1,40 @@
+﻿@using AutoCareHub.Web.Models.SubCategories
+
+@model List<SubCategoryViewModel>
+
+<h2 class="text-center">All sub categories</h2>
+
+<table class="table">
+    <thead>
+        <tr class="table-dark">
+            @* <th scope="col">#</th> *@
+            <th scope="col">Sub category</th>
+            <th scope="col">Main category</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col">
+                <a class="ml-2 btn btn-primary" asp-area="Admin" asp-controller="SubCategory" asp-action="Create">Create</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var subCategory in Model.OrderBy(x => x.MainCategoryName).ThenBy(x => x.Name))
+        {
+            <tr>
+                @* <th scope="row">@(i + 1)</th> *@
+                <td>@subCategory.Name</td>
+                <td>@subCategory.MainCategoryName</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a class="ml-2 btn btn-danger" asp-area="Admin" asp-controller="SubCategory" asp-action="Delete"
+                       asp-route-id="@subCategory.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

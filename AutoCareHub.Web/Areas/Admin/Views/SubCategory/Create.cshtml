@@ -1,0 +1,31 @@
+﻿@using AutoCareHub.Services.SubCategories
+
+@model CreateSubCategoryRequest
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form enctype="multipart/form-data" method="post">
+            <div class="mb-3">
+                <h4 class="form-label text-center">Create sub category</h4>
+            </div>
+            <div class="mb-3">
+                <label asp-for="@Model.Name" class="form-label">Name</label>
+                <input type="text" asp-for="@Model.Name" class="form-control" aria-required="true" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3 col-3">
+                <label asp-for="@Model.MainCategoryId" class="form-label">Main category:</label><br />
+                <select asp-for="@Model.MainCategoryId">
+                    @foreach (var mainCategory in Model.MainCategories)
+                    {
+                        <option value="@mainCategory.Id">@mainCategory.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="MainCategoryId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" asp-area="Admin" asp-controller="SubCategory" asp-action="Create" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>

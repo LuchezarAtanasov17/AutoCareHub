@@ -1,0 +1,35 @@
+﻿@using AutoCareHub.Web.Models.Appointment
+
+@model List<AppointmentViewModel>
+
+<h2 class="text-center">All appointments</h2>
+
+<table class="table">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col">#</th>
+            <th scope="col">Service</th>
+            <th scope="col">Appointment setter full name</th>
+            <th scope="col">Appointment setter phone number</th>
+            <th scope="col">Date</th>
+            <th scope="col"></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <th scope="row">@(i + 1)</th>
+                <td>@Model[i].Service.Name</td>
+                <td>@($"{Model[i].User.FirstName} {@Model[i].User.LastName}")</td>
+                <td>@Model[i].User.PhoneNumber</td>
+                <td>@Model[i].Date</td>
+                <td>
+                    <a class="ml-2 btn btn-danger" asp-area="Admin" asp-controller="Appointment" asp-action="Delete"
+                       asp-route-id="@Model[i].Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

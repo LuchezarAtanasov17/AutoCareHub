@@ -17,10 +17,16 @@ namespace AutoCareHub.Services.Impl.MainCategories
         public async Task<List<ENTITIES.MainCategory>> ListMainCategoriesAsync(Guid? serviceId = null)
         {
             var mainCategories = await _context.MainCategories
-                .Include(x => x.SubCategories)
                 .Include(x => x.Appointments)
                 .Include(x => x.MainCategoryServices)
                 .ToListAsync();
+
+            foreach (var mainCategory in mainCategories)
+            {
+                mainCategory.SubCategories = await _context.SubCategories
+                    .Where(x=>x.MainCategoryId == mainCategory.Id)
+                    .ToListAsync();
+            }
 
             if (serviceId != null)
             {
@@ -58,13 +64,13 @@ namespace AutoCareHub.Services.Impl.MainCategories
 
             var entityMainCategory = Conversion.ConvertMainCategory(request);
 
-            await _context.AddAsync(entityMainCategory);
+            await _context.MainCategories.AddAsync(entityMainCategory);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteMainCategoryAsync(Guid id)
         {
-            var mainCategory = _context.MainCategories
+            var mainCategory = await _context.MainCategories
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (mainCategory == null)

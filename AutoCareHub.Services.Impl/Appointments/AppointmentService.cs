@@ -63,7 +63,7 @@ namespace AutoCareHub.Services.Impl
 
             var entityAppointment = Conversion.ConvertAppointment(request);
 
-            await _context.AddAsync(entityAppointment);
+            await _context.Appointments.AddAsync(entityAppointment);
             await _context.SaveChangesAsync();
         }
 

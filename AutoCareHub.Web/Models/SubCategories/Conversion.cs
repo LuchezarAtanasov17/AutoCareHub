@@ -13,8 +13,10 @@ namespace AutoCareHub.Web.Models.SubCategories
 
             SubCategoryViewModel target = new SubCategoryViewModel()
             {
+                Id = source.Id,
                 MainCategoryId = source.MainCategoryId,
                 Name = source.Name,
+                MainCategoryName = source.MainCategory.Name,
             };
 
             return target;

@@ -28,7 +28,7 @@ namespace AutoCareHub.Services.Impl.Ratings
 
             var entityRating = Conversion.ConvertRating(request);
 
-            await _context.AddAsync(entityRating);
+            await _context.Ratings.AddAsync(entityRating);
             await _context.SaveChangesAsync();
         }
     }

@@ -52,6 +52,16 @@
                                    class="nav-item nav-link active title"
                                    style="font-size:18px !important;">My appointments</a>
                             </div>
+                            @if (this.User.IsInRole("Administrator"))
+                            {
+                                <div class="nav-item nav-link">
+                                    <a asp-area="Admin"
+                                       asp-controller="Admin"
+                                       asp-action="Index"
+                                       class="nav-item nav-link active title"
+                                       style="font-size:18px !important;">Go to admin area</a>
+                                </div>
+                            }
                         </div>
                     }
                     <partial name="_LoginPartial" />

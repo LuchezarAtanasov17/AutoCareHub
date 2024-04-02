@@ -53,7 +53,7 @@ namespace AutoCareHub.Services.Impl.SubCategories
 
             var entitySubCategory = Conversion.ConvertSubCategory(request);
 
-            await _context.AddAsync(entitySubCategory);
+            await _context.SubCategories.AddAsync(entitySubCategory);
             await _context.SaveChangesAsync();
         }
 

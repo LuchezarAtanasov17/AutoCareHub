@@ -1,0 +1,19 @@
+﻿@using AutoCareHub.Data.Models
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="nav-item">
+        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="nav-link btn btn-custom">Logout</button>
+        </form>
+    </div>
+}
+else
+{
+    <div class="nav-item nav-link">
+        <a class="nav-item nav-link login" asp-area="Identity" asp-page="/Account/Login">Sign in</a>
+    </div>
+}

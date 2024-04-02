@@ -132,6 +132,17 @@ namespace AutoCareHub.Web.Areas.Identity.Pages.Account
 
                 if (result.Succeeded)
                 {
+                    // Three default users are already seeded, so the first real registered user will acquire Administrator privileges.
+                    if (_userManager.Users.Count() < 5)
+                    {
+                        await _userManager.AddToRoleAsync(user, "Administrator");
+                    }
+                    // All other users will take User role.
+                    else
+                    {
+                        await _userManager.AddToRoleAsync(user, "User");
+                    }
+
                     _logger.LogInformation("User created a new account with password.");
 
                     var userId = await _userManager.GetUserIdAsync(user);

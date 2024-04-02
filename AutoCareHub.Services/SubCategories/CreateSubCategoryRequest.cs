@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AutoCareHub.Services.MainCategories;
+using System.ComponentModel.DataAnnotations;
 
 namespace AutoCareHub.Services.SubCategories
 {
@@ -9,5 +10,7 @@ namespace AutoCareHub.Services.SubCategories
 
         [Required]
         public string Name { get; set; }
+
+        public List<SelectMainCategory>? MainCategories { get; set; }
     }
 }

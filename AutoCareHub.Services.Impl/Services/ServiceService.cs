@@ -17,7 +17,10 @@ namespace AutoCareHub.Services.Impl.Services
             _imageService = imageService;
         }
 
-        public async Task<List<ENTITIES.Service>> ListServicesAsync(Guid? userId = null, string? category = null, string? city = null, AllOrMineOption? allOrMineOption = null)
+        public async Task<List<ENTITIES.Service>> ListServicesAsync(Guid? userId = null,
+            string? category = null,
+            string? city = null,
+            AllOrMineOption? allOrMineOption = null)
         {
             var services = await _context.Services
                 .Include(x => x.User)
@@ -35,7 +38,9 @@ namespace AutoCareHub.Services.Impl.Services
                         .Select(x => x.MainCategory)
                         .FirstOrDefaultAsync(x => x.Id == mainCategoryService!.MainCategoryId) ?? throw new ArgumentNullException();
 
-                    mainCategoryService.MainCategory.SubCategories = await _context.SubCategories.ToListAsync();
+                    mainCategoryService.MainCategory.SubCategories = await _context.SubCategories
+                        .Where(x=>x.MainCategoryId==mainCategoryService.MainCategoryId)
+                        .ToListAsync();
                 }
 
                 foreach (var comment in service.Comments)
@@ -122,7 +127,7 @@ namespace AutoCareHub.Services.Impl.Services
                 await _context.MainCategoryServices.AddAsync(mainCategoryService);
             }
 
-            await _context.AddAsync(entityService);
+            await _context.Services.AddAsync(entityService);
             await _context.SaveChangesAsync();
 
             if (request.Images != null)

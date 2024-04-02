@@ -60,7 +60,7 @@ namespace AutoCareHub.Services.Impl
 
             ENTITIES.Comment entityComment = Conversion.ConvertComment(request);
 
-            await _context.AddAsync(entityComment);
+            await _context.Comments.AddAsync(entityComment);
             await _context.SaveChangesAsync();
         }
 
