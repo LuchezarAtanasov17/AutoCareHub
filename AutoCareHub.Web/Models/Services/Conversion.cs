@@ -2,7 +2,6 @@
 using WEB_MAIN_CATEGORIES = AutoCareHub.Web.Models.MainCategories;
 using WEB_COMMENTS = AutoCareHub.Web.Models.Comments;
 using WEB_USERS = AutoCareHub.Web.Models.Users;
-using WEB_RATINGS = AutoCareHub.Web.Models.Ratings;
 using AutoCareHub.Services.Appointments;
 using System.Text.Json;
 
@@ -29,13 +28,6 @@ namespace AutoCareHub.Web.Models.Services
                 Address = source.Address,
                 IsApproved = source.IsApproved,
                 User = WEB_USERS.Conversion.ConvertUser(source.User),
-                //TODO:
-                //UpdateRatingRequest = new UpdateRatingRequest
-                //{
-                //    ServiceId = source.Id,
-                //    Value = (int)Math.Floor(source.AverageRating),
-                //    AverageRating = Math.Round(source.AverageRating, 2),
-                //},
                 MainCategories = source.MainCategoryServices
                     .Select(x => x.MainCategory)
                     .Select(WEB_MAIN_CATEGORIES.Conversion.ConvertMainCategory)
@@ -43,9 +35,6 @@ namespace AutoCareHub.Web.Models.Services
                 Comments = source.Comments
                     .Select(WEB_COMMENTS.Conversion.ConvertComment)
                     .ToList(),
-                Ratings = source.Ratings
-                    .Select(WEB_RATINGS.Conversion.ConvertRating)
-                    .ToList()
             };
 
             if (source.ImageUrls is not null)

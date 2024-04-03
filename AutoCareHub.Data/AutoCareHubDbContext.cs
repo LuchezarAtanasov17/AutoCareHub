@@ -38,21 +38,6 @@ namespace AutoCareHub.Data
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
-            modelBuilder.Entity<Rating>(builder =>
-            {
-                builder.HasOne(x => x.Service)
-                    .WithMany(x => x.Ratings)
-                    .HasForeignKey(x => x.ServiceId)
-                    .HasPrincipalKey(x => x.Id)
-                    .OnDelete(DeleteBehavior.Cascade);
-
-                builder.HasOne(x => x.User)
-                    .WithMany(x => x.Ratings)
-                    .HasForeignKey(x => x.UserId)
-                    .HasPrincipalKey(x => x.Id)
-                    .OnDelete(DeleteBehavior.NoAction);
-            });
-
             modelBuilder.Entity<Service>(builder =>
             {
                 builder.Property(x => x.OpenTime)
@@ -130,8 +115,6 @@ namespace AutoCareHub.Data
         public DbSet<MainCategory> MainCategories { get; set; }
 
         public DbSet<SubCategory> SubCategories { get; set; }
-
-        public DbSet<Rating> Ratings { get; set; }
 
         public DbSet<Service> Services { get; set; }
 

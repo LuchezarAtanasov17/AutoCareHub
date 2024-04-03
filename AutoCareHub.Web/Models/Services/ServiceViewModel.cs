@@ -2,9 +2,7 @@
 using AutoCareHub.Services.Comments;
 using AutoCareHub.Web.Models.Comments;
 using AutoCareHub.Web.Models.MainCategories;
-using AutoCareHub.Web.Models.Ratings;
 using AutoCareHub.Web.Models.Users;
-using System.Reflection.Metadata.Ecma335;
 
 namespace AutoCareHub.Web.Models.Services
 {
@@ -30,8 +28,6 @@ namespace AutoCareHub.Web.Models.Services
 
         public string[] ImageUrls { get; set; }
 
-        //TODO: public UpdateRatingRequest UpdateRatingRequest { get; set; } ???????????
-
         public UserViewModel User { get; set; }
 
         public CreateAppointmentRequest CreateAppointmentRequest { get; set; }
@@ -41,9 +37,5 @@ namespace AutoCareHub.Web.Models.Services
         public ICollection<MainCategoryViewModel> MainCategories { get; set; }
 
         public ICollection<CommentViewModel> Comments { get; set; }
-
-        public ICollection<RatingViewModel> Ratings { get; set; }
-
-        //TODO: RATING?
     }
 }

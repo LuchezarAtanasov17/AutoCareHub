@@ -27,7 +27,6 @@ namespace AutoCareHub.Services.Impl.Services
                 .Include(x => x.User)
                 .Include(x => x.Appointments)
                 .Include(x => x.Comments)
-                .Include(x => x.Ratings)
                 .Include(x => x.MainCategoryServices)
                 .ToListAsync();
 
@@ -80,7 +79,6 @@ namespace AutoCareHub.Services.Impl.Services
                 .Include(x => x.User)
                 .Include(x => x.Appointments)
                 .Include(x => x.Comments)
-                .Include(x => x.Ratings)
                 .Include(x => x.MainCategoryServices)
                 .FirstOrDefaultAsync(x => x.Id == id);
 

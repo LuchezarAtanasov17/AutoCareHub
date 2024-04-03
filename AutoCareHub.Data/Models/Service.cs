@@ -44,8 +44,6 @@ namespace AutoCareHub.Data.Models
 
         public ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
 
-        public ICollection<Rating> Ratings { get; set; } = new HashSet<Rating>();
-
         public ICollection<MainCategoryService> MainCategoryServices { get; set; } = new HashSet<MainCategoryService>();
 
         public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();

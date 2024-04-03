@@ -89,14 +89,6 @@
                                     </div>
                                     <div class="blog-meta">
                                         <p><i class="fa fa-location-dot"></i><a>@service.City, @service.Address</a></p>
-                                        @if (service.Ratings.Count > 0)
-                                        {
-                                            <p><i class="fa fa-star"></i><a>@service.Ratings.Average(x => x.Value)/5</a></p>
-                                        }
-                                        else
-                                        {
-                                            <p><i class="fa fa-star"></i><a>0/0</a></p>
-                                        }
                                         <p><i class="fa fa-comments"></i><a>@service.Comments.Count</a></p>
                                     </div>
                                 </div>

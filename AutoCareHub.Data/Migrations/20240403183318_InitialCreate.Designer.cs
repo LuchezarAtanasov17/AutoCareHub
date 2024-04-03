@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoCareHub.Data.Migrations
 {
     [DbContext(typeof(AutoCareHubDbContext))]
-    [Migration("20240403082115_InitialCreate")]
+    [Migration("20240403183318_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -225,30 +225,6 @@ namespace AutoCareHub.Data.Migrations
                             MainCategoryId = new Guid("f9cd2d78-221c-46ff-9a2f-8d22e3a3f2a3"),
                             ServiceId = new Guid("31059a53-4346-4efb-a1e2-b404c16b7fb5")
                         });
-                });
-
-            modelBuilder.Entity("AutoCareHub.Data.Models.Rating", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ServiceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Value")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ServiceId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("AutoCareHub.Data.Models.Role", b =>
@@ -829,7 +805,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2d07f4ed-e3e1-4700-8fc5-ee24833bcefb",
+                            ConcurrencyStamp = "67de3b38-762f-4213-bf44-f85cfd938dab",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Luchezar",
@@ -846,7 +822,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8ead4655-5655-4759-ae87-eb8994d347dc",
+                            ConcurrencyStamp = "a315a6c2-6827-4f74-979e-cf710d33d37e",
                             Email = "dimitar@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",
@@ -863,7 +839,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "71e36902-1fe1-4cb7-ab93-057d608d566e",
+                            ConcurrencyStamp = "d080bd9f-0557-436c-82ad-63e2c8d10f7f",
                             Email = "simonipal@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",
@@ -1069,25 +1045,6 @@ namespace AutoCareHub.Data.Migrations
                     b.Navigation("Service");
                 });
 
-            modelBuilder.Entity("AutoCareHub.Data.Models.Rating", b =>
-                {
-                    b.HasOne("AutoCareHub.Data.Models.Service", "Service")
-                        .WithMany("Ratings")
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("AutoCareHub.Data.Models.User", "User")
-                        .WithMany("Ratings")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Service");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("AutoCareHub.Data.Models.Service", b =>
                 {
                     b.HasOne("AutoCareHub.Data.Models.User", "User")
@@ -1194,8 +1151,6 @@ namespace AutoCareHub.Data.Migrations
 
                     b.Navigation("MainCategoryServices");
 
-                    b.Navigation("Ratings");
-
                     b.Navigation("ServiceRequest");
                 });
 
@@ -1206,8 +1161,6 @@ namespace AutoCareHub.Data.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Likes");
-
-                    b.Navigation("Ratings");
 
                     b.Navigation("Services");
                 });
