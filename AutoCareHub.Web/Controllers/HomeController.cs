@@ -35,6 +35,7 @@ namespace AutoCareHub.Web.Controllers
             HomePageViewModel model = new HomePageViewModel()
             {
                 Services = entityServices
+                    .Where(x => x.IsApproved == true)
                     .Select(SERVICES.Conversion.ConvertService)
                     .ToList(),
                 MainCategories = entityMainCategories

@@ -1,12 +1,14 @@
 using AutoCareHub.Data;
 using AutoCareHub.Services.Appointments;
 using AutoCareHub.Services.Comments;
+using AutoCareHub.Services.CreateServiceRequests;
 using AutoCareHub.Services.Image;
 using AutoCareHub.Services.Impl;
 using AutoCareHub.Services.Impl.Image;
 using AutoCareHub.Services.Impl.Likes;
 using AutoCareHub.Services.Impl.MainCategories;
 using AutoCareHub.Services.Impl.Ratings;
+using AutoCareHub.Services.Impl.ServiceRequests;
 using AutoCareHub.Services.Impl.Services;
 using AutoCareHub.Services.Impl.SubCategories;
 using AutoCareHub.Services.Impl.Users;
@@ -52,6 +54,7 @@ builder.Services.AddScoped<IServiceService, ServiceService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<ILikeService, LikeService>();
+builder.Services.AddScoped<IServiceRequestService, ServiceRequestService>();
 
 builder.Services.AddCors(options =>
 {

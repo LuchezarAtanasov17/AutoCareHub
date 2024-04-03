@@ -40,7 +40,17 @@
                         <div class="carousel-text">
                             <h3>@(string.Join(", ", service.MainCategories.Select(x => x.Name)))</h3>
                             <h1>@service.Name</h1>
-                            <p>@(service.Description?.Substring(0, 100) ?? "")...</p>
+                            @if (service.Description is not null)
+                            {
+                                @if (service.Description.Length < 100)
+                                {
+                                    <p>@service.Description...</p>
+                                }
+                                else
+                                {
+                                    <p>@(service.Description?.Substring(0, 100) ?? "")...</p>
+                                }
+                            }
                             <a asp-controller="Service" asp-action="Get" asp-route-id="@service.Id" class="btn btn-custom">Explore More</a>
                         </div>
                     </div>

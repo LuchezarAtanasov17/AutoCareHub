@@ -1,4 +1,5 @@
 ﻿using AutoCareHub.Data;
+using AutoCareHub.Data.Models;
 using AutoCareHub.Services.Image;
 using AutoCareHub.Services.Services;
 using Microsoft.EntityFrameworkCore;
@@ -39,7 +40,7 @@ namespace AutoCareHub.Services.Impl.Services
                         .FirstOrDefaultAsync(x => x.Id == mainCategoryService!.MainCategoryId) ?? throw new ArgumentNullException();
 
                     mainCategoryService.MainCategory.SubCategories = await _context.SubCategories
-                        .Where(x=>x.MainCategoryId==mainCategoryService.MainCategoryId)
+                        .Where(x => x.MainCategoryId == mainCategoryService.MainCategoryId)
                         .ToListAsync();
                 }
 
@@ -138,6 +139,16 @@ namespace AutoCareHub.Services.Impl.Services
                 }
                 await _context.SaveChangesAsync();
             }
+
+            ServiceRequest registerRequest = new ServiceRequest()
+            {
+                Id = Guid.NewGuid(),
+                ServiceId = entityService.Id,
+                CreatedOn = DateTime.UtcNow,
+            };
+
+            await _context.ServiceRequests.AddAsync(registerRequest);
+            await _context.SaveChangesAsync();
         }
 
         public async Task UpdateServiceAsync(Guid id, UpdateServiceRequest request)

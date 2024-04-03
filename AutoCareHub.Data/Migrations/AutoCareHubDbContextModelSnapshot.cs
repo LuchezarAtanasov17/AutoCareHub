@@ -319,6 +319,9 @@ namespace AutoCareHub.Data.Migrations
                     b.Property<string>("ImageUrls")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsApproved")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -345,6 +348,7 @@ namespace AutoCareHub.Data.Migrations
                             CloseTime = new TimeSpan(0, 18, 0, 0, 0),
                             Description = "Welcome to ServiceSelect — your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!",
                             ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png\"]",
+                            IsApproved = true,
                             Name = "ServiceSelect",
                             OpenTime = new TimeSpan(0, 9, 0, 0, 0),
                             UserId = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2")
@@ -357,6 +361,7 @@ namespace AutoCareHub.Data.Migrations
                             CloseTime = new TimeSpan(0, 18, 0, 0, 0),
                             Description = "Experience the ultimate in automotive convenience with DriveEase. Say goodbye to long wait times and tedious phone calls—we've streamlined the process for you. From routine maintenance to emergency repairs, our platform connects you with skilled professionals ready to serve. Relax and let DriveEase take the wheel on your car care journey.",
                             ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg\"]",
+                            IsApproved = true,
                             Name = "CarProCare",
                             OpenTime = new TimeSpan(0, 9, 0, 0, 0),
                             UserId = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2")
@@ -369,6 +374,7 @@ namespace AutoCareHub.Data.Migrations
                             CloseTime = new TimeSpan(0, 18, 0, 0, 0),
                             Description = "Welcome to AutoCare Connect—your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!",
                             ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg\"]",
+                            IsApproved = true,
                             Name = "CarServiceCentral",
                             OpenTime = new TimeSpan(0, 8, 0, 0, 0),
                             UserId = new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c")
@@ -381,10 +387,31 @@ namespace AutoCareHub.Data.Migrations
                             CloseTime = new TimeSpan(0, 17, 0, 0, 0),
                             Description = "Welcome to AutoPureWash, where your vehicle's shine is our priority. Treat your car to a rejuvenating experience with our expert team and state-of-the-art equipment. From exterior washes to meticulous detailing, we offer a range of services tailored to suit your needs. Experience the ultimate in cleanliness and convenience at AutoPureWash—where every wash leaves your car sparkling like new.",
                             ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg\"]",
+                            IsApproved = true,
                             Name = "AutoPureWash",
                             OpenTime = new TimeSpan(0, 8, 0, 0, 0),
                             UserId = new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c")
                         });
+                });
+
+            modelBuilder.Entity("AutoCareHub.Data.Models.ServiceRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ServiceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceId")
+                        .IsUnique();
+
+                    b.ToTable("ServiceRequests");
                 });
 
             modelBuilder.Entity("AutoCareHub.Data.Models.SubCategory", b =>
@@ -800,7 +827,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8aefab1a-3b53-4420-b614-7b2d1a925746",
+                            ConcurrencyStamp = "2d07f4ed-e3e1-4700-8fc5-ee24833bcefb",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Luchezar",
@@ -817,7 +844,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7286d8da-0e2d-4f32-a6be-1ce4c83466f9",
+                            ConcurrencyStamp = "8ead4655-5655-4759-ae87-eb8994d347dc",
                             Email = "dimitar@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",
@@ -834,7 +861,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3ef80094-c0f7-4dcb-a290-0f00283ec81e",
+                            ConcurrencyStamp = "71e36902-1fe1-4cb7-ab93-057d608d566e",
                             Email = "simonipal@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",
@@ -1070,6 +1097,17 @@ namespace AutoCareHub.Data.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("AutoCareHub.Data.Models.ServiceRequest", b =>
+                {
+                    b.HasOne("AutoCareHub.Data.Models.Service", "Service")
+                        .WithOne("ServiceRequest")
+                        .HasForeignKey("AutoCareHub.Data.Models.ServiceRequest", "ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Service");
+                });
+
             modelBuilder.Entity("AutoCareHub.Data.Models.SubCategory", b =>
                 {
                     b.HasOne("AutoCareHub.Data.Models.MainCategory", "MainCategory")
@@ -1155,6 +1193,8 @@ namespace AutoCareHub.Data.Migrations
                     b.Navigation("MainCategoryServices");
 
                     b.Navigation("Ratings");
+
+                    b.Navigation("ServiceRequest");
                 });
 
             modelBuilder.Entity("AutoCareHub.Data.Models.User", b =>

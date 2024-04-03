@@ -26,6 +26,8 @@ namespace AutoCareHub.Web.Models.Services
 
         public TimeOnly CloseTime { get; set; }
 
+        public bool IsApproved { get; set; }
+
         public string[] ImageUrls { get; set; }
 
         //TODO: public UpdateRatingRequest UpdateRatingRequest { get; set; } ???????????

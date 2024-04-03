@@ -27,6 +27,7 @@ namespace AutoCareHub.Web.Models.Services
                 CloseTime = source.CloseTime,
                 City = source.City,
                 Address = source.Address,
+                IsApproved = source.IsApproved,
                 User = WEB_USERS.Conversion.ConvertUser(source.User),
                 //TODO:
                 //UpdateRatingRequest = new UpdateRatingRequest

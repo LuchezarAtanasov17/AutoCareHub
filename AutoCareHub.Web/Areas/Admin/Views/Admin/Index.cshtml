@@ -12,6 +12,9 @@
         You can <b>read</b>, <b>add</b> and <b>delete</b> main and sub categories.
     </p>
     <p class="lead mt-1">
+        You can <b>read</b>, <b>approve</b> and <b>decline</b> requests for creating service.
+    </p>
+    <p class="lead mt-1">
         You can also see <b>all users</b> in the system.
     </p>
     <hr class="my-4">
@@ -29,4 +32,7 @@
 
     <a asp-area="Admin" asp-controller="User" asp-action="List"
        class="btn btn-primary btn-lg">All Users</a>
+
+    <a asp-area="Admin" asp-controller="ServiceRequest" asp-action="List"
+       class="btn btn-primary btn-lg">Service Requests</a>
 </div>

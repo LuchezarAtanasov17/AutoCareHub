@@ -51,6 +51,7 @@ namespace AutoCareHub.Web.Controllers
                 .ListMainCategoriesAsync();
 
             query.Services = entityServices
+                .Where(x=>x.IsApproved == true)
                 .Select(Conversion.ConvertService)
                 .ToList();
             query.MainCategories = entityMainCategories
