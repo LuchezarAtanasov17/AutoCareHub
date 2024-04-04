@@ -32,7 +32,7 @@
                 <td></td>
                 <td>
                     <a class="ml-2 btn btn-danger" asp-area="Admin" asp-controller="MainCategory" asp-action="Delete"
-                       asp-route-id="@Model[i].Id">Delete</a>
+                       asp-route-id="@Model[i].Id" onclick="return confirm('Are you sure you want to delete this main category?')">Delete</a>
                 </td>
             </tr>
         }
