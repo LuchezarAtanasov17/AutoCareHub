@@ -9,7 +9,7 @@
                 <select class="form-control" asp-for="@Model.MainCategoryId">
                     @foreach (var mainCategory in Model.ServiceMainCategories)
                     {
-                        <option value="@mainCategory.Id"> @mainCategory.Name</option>
+                        <option value="@mainCategory.Id" style="color:black"> @mainCategory.Name</option>
                     }
                 </select>
                 <span asp-validation-for="MainCategoryId" class="text-black"></span>
