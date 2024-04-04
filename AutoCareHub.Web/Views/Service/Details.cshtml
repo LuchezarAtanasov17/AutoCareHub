@@ -59,7 +59,7 @@
                                 <li class="comment-item">
                                     <div class="comment-body">
                                         <div class="comment-text">
-                                            <h3>
+                                            <h3 style="margin-bottom: -25px;">
                                                 <div style="display:flex; justify-content:space-between">
                                                     <div style="justify-content:left">
                                                         <a>@comment.User.FirstName @comment.User.LastName</a>
@@ -93,7 +93,7 @@
                                                 @(comment.PublishedOn.Date.Day) @CultureInfo.InvariantCulture.DateTimeFormat.GetMonthName(comment.PublishedOn.Month) @(comment.PublishedOn.Date.Year)
                                                 at @(comment.PublishedOn.Hour):@(comment.PublishedOn.Minute)
                                             </span>
-                                            <p>
+                                            <p style="padding-top:15px;">
                                                 @comment.Value
                                             </p>
                                         </div>
@@ -131,7 +131,7 @@
                                     @foreach (var mainCategory in Model.MainCategories)
                                     {
                                         <li><a style="font-size:18px; font-weight:600;">@mainCategory.Name</a></li>
-                                        <div class="row">
+                                        <div class="row" style="padding-bottom: 25px;">
                                             @foreach (var subCategory in mainCategory.SubCategories)
                                             {
                                                 <div class="col-4">
