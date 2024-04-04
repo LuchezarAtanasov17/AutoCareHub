@@ -124,13 +124,11 @@ namespace AutoCareHub.Web.Controllers
             return RedirectToAction(nameof(ListByUser), new { userId = request.UserId });
         }
 
-        public async Task<IActionResult> DeleteByService(
-            [FromRoute]
-            Guid id)
+        public async Task<IActionResult> DeleteByService(Guid id, Guid serviceId)
         {
             await _appointmentService.DeleteAppointmentAsync(id);
 
-            return RedirectToAction(nameof(ListByService), new { serviceId = id });
+            return RedirectToAction(nameof(ListByService), new { serviceId = serviceId });
         }
 
         public async Task<IActionResult> DeleteByUser(

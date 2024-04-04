@@ -43,8 +43,9 @@
                         <td>@Model[i].Date.ToString("dd/MM/yyyy")</td>
                         <td>@Model[i].Description</td>
                         <td>
-                            <a class="ml-2 btn btn-danger" asp-controller="Appointment" asp-action="Delete"
-                               asp-route-id="@Model[i].Id" onclick="return confirm('Are you sure you want to delete this appointment?')">Delete</a>
+                            <div class="ml-2 btn btn-danger" onclick="return confirm('Are you sure you want to delete this publication?')">
+                                @Html.ActionLink("Delete", "DeleteByService", "Appointment", new { id = Model[i].Id, serviceId = Model[i].ServiceId}, null)
+                            </div>
                         </td>
                     </tr>
                 }
