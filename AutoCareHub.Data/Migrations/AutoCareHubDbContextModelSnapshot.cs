@@ -702,25 +702,25 @@ namespace AutoCareHub.Data.Migrations
                         new
                         {
                             Id = new Guid("7fba968c-06a0-48af-b0d6-219795431073"),
-                            MainCategoryId = new Guid("b17b4f22-1199-4220-b651-e3e6b2927a0a"),
+                            MainCategoryId = new Guid("f2c8d10f-f034-420f-a08f-c3d964689b72"),
                             Name = "Deluxe wash (includes waxing and polishing)"
                         },
                         new
                         {
                             Id = new Guid("7a46bde2-59b1-4df5-a72d-ce74451aae1a"),
-                            MainCategoryId = new Guid("b17b4f22-1199-4220-b651-e3e6b2927a0a"),
+                            MainCategoryId = new Guid("f2c8d10f-f034-420f-a08f-c3d964689b72"),
                             Name = "Executive detail (includes interior and exterior detailing)"
                         },
                         new
                         {
                             Id = new Guid("73da4868-555b-496c-b8e2-4188c0f59495"),
-                            MainCategoryId = new Guid("b17b4f22-1199-4220-b651-e3e6b2927a0a"),
+                            MainCategoryId = new Guid("f2c8d10f-f034-420f-a08f-c3d964689b72"),
                             Name = "Ceramic coating application"
                         },
                         new
                         {
                             Id = new Guid("2142b12d-b35f-43d3-9eda-2add0185440e"),
-                            MainCategoryId = new Guid("b17b4f22-1199-4220-b651-e3e6b2927a0a"),
+                            MainCategoryId = new Guid("f2c8d10f-f034-420f-a08f-c3d964689b72"),
                             Name = "Paint protection film installation"
                         });
                 });
@@ -803,7 +803,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "67de3b38-762f-4213-bf44-f85cfd938dab",
+                            ConcurrencyStamp = "c49b6c53-6035-4e5a-8588-089192bcf5f8",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Luchezar",
@@ -820,7 +820,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a315a6c2-6827-4f74-979e-cf710d33d37e",
+                            ConcurrencyStamp = "ea9ba76d-1ea2-4595-b73d-f0c367899c71",
                             Email = "dimitar@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",
@@ -837,7 +837,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d080bd9f-0557-436c-82ad-63e2c8d10f7f",
+                            ConcurrencyStamp = "da3fff58-3847-4d6f-b450-3efd80505039",
                             Email = "simonipal@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",

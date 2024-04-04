@@ -413,25 +413,25 @@ namespace AutoCareHub.Data.Configuration
                 new SubCategory()
                 {
                     Id = Guid.Parse("7fba968c-06a0-48af-b0d6-219795431073"),
-                    MainCategoryId = Guid.Parse("b17b4f22-1199-4220-b651-e3e6b2927a0a"),
+                    MainCategoryId = Guid.Parse("f2c8d10f-f034-420f-a08f-c3d964689b72"),
                     Name = "Deluxe wash (includes waxing and polishing)",
                 },
                 new SubCategory()
                 {
                     Id = Guid.Parse("7a46bde2-59b1-4df5-a72d-ce74451aae1a"),
-                    MainCategoryId = Guid.Parse("b17b4f22-1199-4220-b651-e3e6b2927a0a"),
+                    MainCategoryId = Guid.Parse("f2c8d10f-f034-420f-a08f-c3d964689b72"),
                     Name = "Executive detail (includes interior and exterior detailing)",
                 },
                 new SubCategory()
                 {
                     Id = Guid.Parse("73da4868-555b-496c-b8e2-4188c0f59495"),
-                    MainCategoryId = Guid.Parse("b17b4f22-1199-4220-b651-e3e6b2927a0a"),
+                    MainCategoryId = Guid.Parse("f2c8d10f-f034-420f-a08f-c3d964689b72"),
                     Name = "Ceramic coating application",
                 },
                 new SubCategory()
                 {
                     Id = Guid.Parse("2142b12d-b35f-43d3-9eda-2add0185440e"),
-                    MainCategoryId = Guid.Parse("b17b4f22-1199-4220-b651-e3e6b2927a0a"),
+                    MainCategoryId = Guid.Parse("f2c8d10f-f034-420f-a08f-c3d964689b72"),
                     Name = "Paint protection film installation",
                 },
             };

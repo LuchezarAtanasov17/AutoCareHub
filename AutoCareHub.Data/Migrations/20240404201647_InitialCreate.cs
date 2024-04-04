@@ -354,9 +354,9 @@ namespace AutoCareHub.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "67de3b38-762f-4213-bf44-f85cfd938dab", "admin@gmail.com", false, "Luchezar", "Atanasov", false, null, "ADMIN@GMAIL.COM", "ADMINISTRATOR", null, "1234567891", false, null, false, "Administrator" },
-                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "a315a6c2-6827-4f74-979e-cf710d33d37e", "dimitar@mail.com", false, "Dimitar", "Dimitrov", false, null, "DIMITAR@MAIL.COM", "MEETYOU", null, "1234567899", false, null, false, "Meetyou" },
-                    { new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"), 0, "d080bd9f-0557-436c-82ad-63e2c8d10f7f", "simonipal@mail.com", false, "Dimitar", "Dimitrov", false, null, "SIMONIPAL@MAIL.COM", "MONIBONBONI", null, "1234567890", false, null, false, "MoniBonboni" }
+                    { new Guid("1456c79b-7080-4586-8467-900a3cb033fe"), 0, "c49b6c53-6035-4e5a-8588-089192bcf5f8", "admin@gmail.com", false, "Luchezar", "Atanasov", false, null, "ADMIN@GMAIL.COM", "ADMINISTRATOR", null, "1234567891", false, null, false, "Administrator" },
+                    { new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"), 0, "ea9ba76d-1ea2-4595-b73d-f0c367899c71", "dimitar@mail.com", false, "Dimitar", "Dimitrov", false, null, "DIMITAR@MAIL.COM", "MEETYOU", null, "1234567899", false, null, false, "Meetyou" },
+                    { new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"), 0, "da3fff58-3847-4d6f-b450-3efd80505039", "simonipal@mail.com", false, "Dimitar", "Dimitrov", false, null, "SIMONIPAL@MAIL.COM", "MONIBONBONI", null, "1234567890", false, null, false, "MoniBonboni" }
                 });
 
             migrationBuilder.InsertData(
@@ -404,7 +404,7 @@ namespace AutoCareHub.Data.Migrations
                     { new Guid("1ac17698-13f1-45ec-a06a-bd79f2fc7ba5"), new Guid("fe659df3-55ef-4c4b-b163-3a40f2c23397"), "Upholstery cleaning (cloth and leather)" },
                     { new Guid("1ae92eca-75b8-4c67-80a6-e735ba5978e2"), new Guid("8317f4c5-3f8b-4020-bbcf-2adb5e30639b"), "Battery Checks and Replacements" },
                     { new Guid("20302865-c0f0-45ec-aa1c-051d3078e76a"), new Guid("b17b4f22-1199-4220-b651-e3e6b2927a0a"), "Waxing" },
-                    { new Guid("2142b12d-b35f-43d3-9eda-2add0185440e"), new Guid("b17b4f22-1199-4220-b651-e3e6b2927a0a"), "Paint protection film installation" },
+                    { new Guid("2142b12d-b35f-43d3-9eda-2add0185440e"), new Guid("f2c8d10f-f034-420f-a08f-c3d964689b72"), "Paint protection film installation" },
                     { new Guid("2fd08be9-afe6-4d07-96fa-6200ba603412"), new Guid("d8ca8195-48f6-4041-ac87-8b919d651e67"), "Brake system inspections" },
                     { new Guid("2ffbd815-9cd9-4705-b92e-2d399e92fb77"), new Guid("61790e6f-1cb7-48b9-a207-8868ef458c63"), "Lighting System Repairs (headlights, taillights, etc.)" },
                     { new Guid("3d7fd174-c8bb-4736-a471-a068d5d9ed48"), new Guid("61790e6f-1cb7-48b9-a207-8868ef458c63"), "Accessory installation" },
@@ -414,11 +414,11 @@ namespace AutoCareHub.Data.Migrations
                     { new Guid("5c1d3518-a1db-4227-9fc6-97f41a90431b"), new Guid("6a62c3f8-aa54-4857-9599-fcbba31da47d"), "Scratch repair" },
                     { new Guid("6d979ed1-2dc2-4aa3-b93e-63bfeaa236bc"), new Guid("b17b4f22-1199-4220-b651-e3e6b2927a0a"), "Polishing" },
                     { new Guid("6dd2ecf1-4247-4917-be81-fc7ce8e16b90"), new Guid("fe659df3-55ef-4c4b-b163-3a40f2c23397"), "Carpet cleaning" },
-                    { new Guid("73da4868-555b-496c-b8e2-4188c0f59495"), new Guid("b17b4f22-1199-4220-b651-e3e6b2927a0a"), "Ceramic coating application" },
+                    { new Guid("73da4868-555b-496c-b8e2-4188c0f59495"), new Guid("f2c8d10f-f034-420f-a08f-c3d964689b72"), "Ceramic coating application" },
                     { new Guid("78f24d6e-46fe-4319-9e8b-dd874eb869b6"), new Guid("6a62c3f8-aa54-4857-9599-fcbba31da47d"), "Paint touch-ups" },
                     { new Guid("798939fe-a6c9-44fc-948b-87b3294790c9"), new Guid("b17b4f22-1199-4220-b651-e3e6b2927a0a"), "Clay bar treatment" },
-                    { new Guid("7a46bde2-59b1-4df5-a72d-ce74451aae1a"), new Guid("b17b4f22-1199-4220-b651-e3e6b2927a0a"), "Executive detail (includes interior and exterior detailing)" },
-                    { new Guid("7fba968c-06a0-48af-b0d6-219795431073"), new Guid("b17b4f22-1199-4220-b651-e3e6b2927a0a"), "Deluxe wash (includes waxing and polishing)" },
+                    { new Guid("7a46bde2-59b1-4df5-a72d-ce74451aae1a"), new Guid("f2c8d10f-f034-420f-a08f-c3d964689b72"), "Executive detail (includes interior and exterior detailing)" },
+                    { new Guid("7fba968c-06a0-48af-b0d6-219795431073"), new Guid("f2c8d10f-f034-420f-a08f-c3d964689b72"), "Deluxe wash (includes waxing and polishing)" },
                     { new Guid("81337b94-310e-489b-af1e-c7ec871d712d"), new Guid("d8ca8195-48f6-4041-ac87-8b919d651e67"), "Emissions testing" },
                     { new Guid("81f4bc54-7760-41a8-b3a1-15686003be70"), new Guid("f9cd2d78-221c-46ff-9a2f-8d22e3a3f2a3"), "Automated wash" },
                     { new Guid("83f88cea-8cfc-4e1a-ac1c-fb584b3d651b"), new Guid("d8ca8195-48f6-4041-ac87-8b919d651e67"), "Pre-purchase inspections" },
