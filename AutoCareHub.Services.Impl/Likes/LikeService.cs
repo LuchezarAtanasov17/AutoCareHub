@@ -1,4 +1,5 @@
 ﻿using AutoCareHub.Data;
+using AutoCareHub.Services.Exceptions;
 using AutoCareHub.Services.Likes;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,33 +14,40 @@ namespace AutoCareHub.Services.Impl.Likes
             this._context = context;
         }
 
-        public async Task HandleLikePostAsync(Guid commentId, Guid userId)
+        public async Task HandleLikeCommentAsync(Guid commentId, Guid userId)
         {
-            var model = await _context.Users.Include(x => x.Likes).FirstOrDefaultAsync(x => x.Id == userId);
-
-            if (model != null && !model.Likes.Select(x => x.CommentId).Contains(commentId))
+            try
             {
-                var like = new Data.Models.Like()
-                {
-                    Id = Guid.NewGuid(),
-                    CommentId = commentId,
-                    UserId = userId
-                };
+                var model = await _context.Users.Include(x => x.Likes).FirstOrDefaultAsync(x => x.Id == userId);
 
-                await _context.Likes.AddAsync(like);
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                var like = await _context.Likes.FirstOrDefaultAsync(x => x.CommentId == commentId && x.UserId == userId);
-
-                if (like == null)
+                if (model != null && !model.Likes.Select(x => x.CommentId).Contains(commentId))
                 {
-                    throw new ArgumentNullException(nameof(like));
+                    var like = new Data.Models.Like()
+                    {
+                        Id = Guid.NewGuid(),
+                        CommentId = commentId,
+                        UserId = userId
+                    };
+
+                    await _context.Likes.AddAsync(like);
+                    await _context.SaveChangesAsync();
                 }
+                else
+                {
+                    var like = await _context.Likes.FirstOrDefaultAsync(x => x.CommentId == commentId && x.UserId == userId);
 
-                _context.Likes.Remove(like);
-                await _context.SaveChangesAsync();
+                    if (like == null)
+                    {
+                        throw new ArgumentNullException(nameof(like));
+                    }
+
+                    _context.Likes.Remove(like);
+                    await _context.SaveChangesAsync();
+                }
+            }
+            catch (Exception)
+            {
+                throw new ServiceException("An error occured while liking comment.");
             }
         }
     }

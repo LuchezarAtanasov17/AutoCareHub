@@ -17,36 +17,17 @@ namespace AutoCareHub.Services.Impl.Users
 
         public async Task<List<ENTITIES.User>> ListUsersAsync()
         {
-            var users = await _context.Users
-                .ToListAsync();
-
-            return users;
-        }
-
-        public async Task<ENTITIES.User> GetUserAsync(Guid id)
-        {
-            var user = await _context.Users
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (user == null)
+            try
             {
-                throw new ObjectNotFoundException(nameof(user));
+                var users = await _context.Users
+                    .ToListAsync();
+
+                return users;
             }
-
-            return user;
-        }
-
-        public async Task DeleteUserAsync(Guid id)
-        {
-            var user = _context.Users.FirstOrDefault(x => x.Id == id);
-
-            if (user == null)
+            catch (Exception)
             {
-                throw new ObjectNotFoundException(nameof(user));
+                throw new ServiceException("An error occured while retrieving users.");
             }
-
-            _context.Remove(user);
-            await _context.SaveChangesAsync();
         }
     }
 }

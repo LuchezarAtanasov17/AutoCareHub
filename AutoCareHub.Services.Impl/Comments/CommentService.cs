@@ -16,67 +16,65 @@ namespace AutoCareHub.Services.Impl
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public async Task<List<ENTITIES.Comment>> ListCommentsAsync(Guid? serviceId = null, Guid? userId = null)
-        {
-            var comments = await _context.Comments
-                .Include(x => x.User)
-                .Include(x => x.Service)
-                .ToListAsync();
-
-            if (serviceId != null)
-            {
-                comments = comments
-                    .Where(x => x.ServiceId == serviceId)
-                    .ToList();
-            }
-            if (userId != null)
-            {
-                comments = comments
-                    .Where(x => x.UserId == userId)
-                    .ToList();
-            }
-
-            return comments;
-        }
-
         public async Task<ENTITIES.Comment> GetCommentAsync(Guid id)
         {
-            var comment = await _context.Comments
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (comment == null)
+            try
             {
-                throw new ObjectNotFoundException(nameof(comment));
-            }
+                var comment = await _context.Comments
+                    .FirstOrDefaultAsync(x => x.Id == id);
 
-            return comment;
+                if (comment == null)
+                {
+                    throw new ObjectNotFoundException(nameof(comment));
+                }
+
+                return comment;
+            }
+            catch (Exception)
+            {
+                throw new ServiceException("An error occured while retrieving a comment.");
+            }
         }
 
         public async Task CreateCommentAsync(CreateCommentRequest request)
         {
-            if (request == null)
+            try
             {
-                throw new ArgumentNullException(nameof(request));
+                if (request == null)
+                {
+                    throw new ArgumentNullException(nameof(request));
+                }
+
+                ENTITIES.Comment entityComment = Conversion.ConvertComment(request);
+
+                await _context.Comments.AddAsync(entityComment);
+                await _context.SaveChangesAsync();
             }
-
-            ENTITIES.Comment entityComment = Conversion.ConvertComment(request);
-
-            await _context.Comments.AddAsync(entityComment);
-            await _context.SaveChangesAsync();
+            catch (Exception)
+            {
+                throw new ServiceException("An error occured while creating a comment.");
+            }
         }
 
         public async Task DeleteCommentAsync(Guid id)
         {
-            var comment = await _context.Comments
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (comment == null)
+            try
             {
-                throw new ObjectNotFoundException(nameof(comment));
-            }
+                var comment = await _context.Comments
+                    .FirstOrDefaultAsync(x => x.Id == id);
 
-            _context.Comments.Remove(comment);
-            await _context.SaveChangesAsync();
+                if (comment == null)
+                {
+                    throw new ObjectNotFoundException(nameof(comment));
+                }
+
+                _context.Comments.Remove(comment);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw new ServiceException("An error occured while deleting a comment with specified ID.");
+            }
         }
     }
 }

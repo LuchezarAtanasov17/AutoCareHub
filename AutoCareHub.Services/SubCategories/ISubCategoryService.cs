@@ -6,8 +6,6 @@ namespace AutoCareHub.Services.SubCategories
     {
         Task<List<SubCategory>> ListSubCategoriesAsync(Guid? mainCategoryId = null);
 
-        Task<SubCategory> GetSubCategoryAsync(Guid id);
-
         Task CreateSubCategoryAsync(CreateSubCategoryRequest request);
 
         Task DeleteSubCategoryAsync(Guid id);

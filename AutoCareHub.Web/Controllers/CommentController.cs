@@ -48,7 +48,7 @@ namespace AutoCareHub.Web.Controllers
         [HttpPost]
         public async Task HandleLike(string commentId)
         {
-            await _likeService.HandleLikePostAsync(Guid.Parse(commentId), Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            await _likeService.HandleLikeCommentAsync(Guid.Parse(commentId), Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)));
         }
     }
 }

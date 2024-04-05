@@ -17,66 +17,80 @@ namespace AutoCareHub.Services.Impl.SubCategories
 
         public async Task<List<ENTITIES.SubCategory>> ListSubCategoriesAsync(Guid? mainCategoryId = null)
         {
-            var subCategories = await _context.SubCategories
-                .Include(x=>x.MainCategory)
-                .ToListAsync();
-
-            if (mainCategoryId != null)
+            try
             {
-                subCategories = subCategories
-                    .Where(x => x.MainCategoryId == mainCategoryId)
-                    .ToList();
+                var subCategories = await _context.SubCategories
+                    .Include(x => x.MainCategory)
+                    .ToListAsync();
+
+                if (mainCategoryId != null)
+                {
+                    subCategories = subCategories
+                        .Where(x => x.MainCategoryId == mainCategoryId)
+                        .ToList();
+                }
+
+                return subCategories;
             }
-
-            return subCategories;
-        }
-
-        public async Task<ENTITIES.SubCategory> GetSubCategoryAsync(Guid id)
-        {
-            var subCategory = await _context.SubCategories
-                .Include(x => x.MainCategory)
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (subCategory == null)
+            catch (Exception)
             {
-                throw new ObjectNotFoundException(nameof(subCategory));
+                throw new ServiceException("An error occured while retrieving sub categories.");
             }
-
-            return subCategory;
         }
 
         public async Task CreateSubCategoryAsync(CreateSubCategoryRequest request)
         {
-            if (request == null)
+            try
             {
-                throw new ArgumentNullException(nameof(request));
+                if (request == null)
+                {
+                    throw new ArgumentNullException(nameof(request));
+                }
+
+                var entitySubCategory = Conversion.ConvertSubCategory(request);
+
+                await _context.SubCategories.AddAsync(entitySubCategory);
+                await _context.SaveChangesAsync();
             }
-
-            var entitySubCategory = Conversion.ConvertSubCategory(request);
-
-            await _context.SubCategories.AddAsync(entitySubCategory);
-            await _context.SaveChangesAsync();
+            catch (Exception)
+            {
+                throw new ServiceException("An error occured while creating a sub category.");
+            }
         }
 
         public async Task DeleteSubCategoryAsync(Guid id)
         {
-            var subCategory = await _context.SubCategories
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (subCategory == null)
+            try
             {
-                throw new ObjectNotFoundException(nameof(subCategory));
-            }
+                var subCategory = await _context.SubCategories
+                    .FirstOrDefaultAsync(x => x.Id == id);
 
-            _context.Remove(subCategory);
-            await _context.SaveChangesAsync();
+                if (subCategory == null)
+                {
+                    throw new ObjectNotFoundException(nameof(subCategory));
+                }
+
+                _context.Remove(subCategory);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw new ServiceException("An error occured while deleting a sub category with specified ID.");
+            }
         }
 
         public async Task<int> Count()
         {
-            int count = await _context.SubCategories.CountAsync();
+            try
+            {
+                int count = await _context.SubCategories.CountAsync();
 
-            return count;
+                return count;
+            }
+            catch (Exception)
+            {
+                throw new ServiceException("An error occured while retrieving the count of sub categories.");
+            }
         }
     }
 }

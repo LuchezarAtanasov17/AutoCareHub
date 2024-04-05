@@ -18,91 +18,126 @@ namespace AutoCareHub.Services.Impl
 
         public async Task<List<Appointment>> ListAppointmentsAsync(Guid? serviceId = null, Guid? userId = null)
         {
-            var appointments = await _context.Appointments
-                .Include(x => x.User)
-                .Include(x => x.Service)
-                .Include(x=>x.MainCategory)
-                .ToListAsync();
-
-            if (serviceId != null)
+            try
             {
-                appointments = appointments
-                    .Where(x => x.ServiceId == serviceId)
-                    .ToList();
-            }
-            if (userId != null)
-            {
-                appointments = appointments
-                    .Where(x => x.UserId == userId)
-                    .ToList();
-            }
+                var appointments = await _context.Appointments
+                    .Include(x => x.User)
+                    .Include(x => x.Service)
+                    .Include(x => x.MainCategory)
+                    .ToListAsync();
 
-            return appointments;
+                if (serviceId != null)
+                {
+                    appointments = appointments
+                        .Where(x => x.ServiceId == serviceId)
+                        .ToList();
+                }
+                if (userId != null)
+                {
+                    appointments = appointments
+                        .Where(x => x.UserId == userId)
+                        .ToList();
+                }
+
+                return appointments;
+            }
+            catch (Exception)
+            {
+                throw new ServiceException("An error occured while retrieving appointments.");
+            }
         }
 
         public async Task<Appointment> GetAppointmentAsync(Guid id)
         {
-            var appointment = await _context.Appointments
-                .Include(x => x.Service)
-                .Include(x => x.User)
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (appointment is null)
+            try
             {
-                throw new ObjectNotFoundException($"Could not find an appointment with ID {id}.");
-            }
+                var appointment = await _context.Appointments
+                    .Include(x => x.Service)
+                    .Include(x => x.User)
+                    .FirstOrDefaultAsync(x => x.Id == id);
 
-            return appointment;
+                if (appointment is null)
+                {
+                    throw new ObjectNotFoundException($"Could not find an appointment with ID {id}.");
+                }
+
+                return appointment;
+            }
+            catch (Exception)
+            {
+                throw new ServiceException("An error occured while retrieving an appointment with specified ID.");
+            }
         }
 
         public async Task CreateAppointmentAsync(CreateAppointmentRequest request)
         {
-            if (request == null)
+            try
             {
-                throw new ArgumentNullException(nameof(request));
+                if (request == null)
+                {
+                    throw new ArgumentNullException(nameof(request));
+                }
+
+                var entityAppointment = Conversion.ConvertAppointment(request);
+
+                await _context.Appointments.AddAsync(entityAppointment);
+                await _context.SaveChangesAsync();
             }
-
-            var entityAppointment = Conversion.ConvertAppointment(request);
-
-            await _context.Appointments.AddAsync(entityAppointment);
-            await _context.SaveChangesAsync();
+            catch (Exception)
+            {
+                throw new ServiceException("An error occured while creating an appointment.");
+            }
         }
 
         public async Task UpdateAppointmentAsync(Guid id, UpdateAppointmentRequest request)
         {
-            if (request is null)
+            try
             {
-                throw new ArgumentNullException(nameof(request));
+                if (request is null)
+                {
+                    throw new ArgumentNullException(nameof(request));
+                }
+
+                var entity = await _context.Appointments
+                    .FirstOrDefaultAsync(x => x.Id == id);
+
+                if (entity is null)
+                {
+                    throw new ObjectNotFoundException($"Could not find appointment with ID {id}.");
+                }
+
+                entity.MainCategoryId = request.MainCategoryId;
+                entity.UserId = request.UserId;
+                entity.Date = request.Date;
+                entity.Description = request.Description;
+
+                await _context.SaveChangesAsync();
             }
-
-            var entity = await _context.Appointments
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (entity is null)
+            catch (Exception)
             {
-                throw new ObjectNotFoundException($"Could not find appointment with ID {id}.");
+                throw new ServiceException("An error occured while updating an appointment with specified ID.");
             }
-
-            entity.MainCategoryId = request.MainCategoryId;
-            entity.UserId = request.UserId;
-            entity.Date = request.Date;
-            entity.Description = request.Description;
-
-            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAppointmentAsync(Guid id)
         {
-            var entity = await _context.Appointments
-                  .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (entity is null)
+            try
             {
-                throw new ObjectNotFoundException($"Could not find an appointment with ID {id}.");
-            }
+                var entity = await _context.Appointments
+                      .FirstOrDefaultAsync(x => x.Id == id);
 
-            _context.Remove(entity);
-            await _context.SaveChangesAsync();
+                if (entity is null)
+                {
+                    throw new ObjectNotFoundException($"Could not find an appointment with ID {id}.");
+                }
+
+                _context.Remove(entity);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw new ServiceException("An error occured while deleting an appointment with specified ID.");
+            }
         }
     }
 }

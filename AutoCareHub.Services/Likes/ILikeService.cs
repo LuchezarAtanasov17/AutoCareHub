@@ -2,6 +2,6 @@
 {
     public interface ILikeService
     {
-        Task HandleLikePostAsync(Guid commentId, Guid userId);
+        Task HandleLikeCommentAsync(Guid commentId, Guid userId);
     }
 }

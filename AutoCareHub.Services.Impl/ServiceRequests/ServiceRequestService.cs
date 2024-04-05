@@ -1,6 +1,7 @@
 ﻿using AutoCareHub.Data;
 using AutoCareHub.Data.Models;
 using AutoCareHub.Services.CreateServiceRequests;
+using AutoCareHub.Services.Exceptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace AutoCareHub.Services.Impl.ServiceRequests
@@ -16,60 +17,81 @@ namespace AutoCareHub.Services.Impl.ServiceRequests
 
         public async Task<List<ServiceRequest>> ListNotApproved()
         {
-            var serviceRequests = await _context.ServiceRequests
-                .Include(x=>x.Service)
-                .Include(x=>x.Service.User)
-                .Where(x => x.Service.IsApproved == false)
-                .ToListAsync();
+            try
+            {
+                var serviceRequests = await _context.ServiceRequests
+                    .Include(x => x.Service)
+                    .Include(x => x.Service.User)
+                    .Where(x => x.Service.IsApproved == false)
+                    .ToListAsync();
 
-            return serviceRequests;
+                return serviceRequests;
+            }
+            catch (Exception)
+            {
+                throw new ServiceException("An error occured while retrieving not approved service requests.");
+            }
         }
 
         public async Task Approve(Guid id)
         {
-            ServiceRequest? request = await _context.ServiceRequests
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (request is null)
+            try
             {
-                throw new ArgumentNullException(nameof(request));
+                ServiceRequest? request = await _context.ServiceRequests
+                    .FirstOrDefaultAsync(x => x.Id == id);
+
+                if (request is null)
+                {
+                    throw new ArgumentNullException(nameof(request));
+                }
+
+                var service = await _context.Services.FirstOrDefaultAsync(x => x.Id == request.ServiceId);
+
+                if (service is null)
+                {
+                    throw new ArgumentNullException(nameof(service));
+                }
+
+                service.IsApproved = true;
+
+                _context.ServiceRequests.Remove(request);
+                await _context.SaveChangesAsync();
             }
-
-            var service = await _context.Services.FirstOrDefaultAsync(x => x.Id == request.ServiceId);
-
-            if (service is null)
+            catch (Exception)
             {
-                throw new ArgumentNullException(nameof(service));
+                throw new ServiceException("An error occured while approving a service request with specified ID.");
             }
-
-            service.IsApproved = true;
-
-            _context.ServiceRequests.Remove(request);
-            await _context.SaveChangesAsync();
         }
 
         public async Task Decline(Guid id)
         {
-            var request = await _context.ServiceRequests
-                .FirstOrDefaultAsync(x => x.Id == id);
-
-            if (request is null)
+            try
             {
-                throw new ArgumentNullException(nameof(request));
+                var request = await _context.ServiceRequests
+                    .FirstOrDefaultAsync(x => x.Id == id);
+
+                if (request is null)
+                {
+                    throw new ArgumentNullException(nameof(request));
+                }
+
+                var service = await _context.Services
+                    .FirstOrDefaultAsync(x => x.Id == request.ServiceId);
+
+                if (service is null)
+                {
+                    throw new ArgumentNullException(nameof(service));
+                }
+
+                _context.ServiceRequests.Remove(request);
+                _context.Services.Remove(service);
+
+                await _context.SaveChangesAsync();
             }
-
-            var service = await _context.Services
-                .FirstOrDefaultAsync(x => x.Id == request.ServiceId);
-
-            if (service is null)
+            catch (Exception)
             {
-                throw new ArgumentNullException(nameof(service));
+                throw new ServiceException("An error occured while declining a service request with specified ID.");
             }
-
-            _context.ServiceRequests.Remove(request);
-            _context.Services.Remove(service);
-
-            await _context.SaveChangesAsync();
         }
     }
 }
