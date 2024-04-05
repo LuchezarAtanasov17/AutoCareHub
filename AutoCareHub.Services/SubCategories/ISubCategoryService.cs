@@ -11,5 +11,7 @@ namespace AutoCareHub.Services.SubCategories
         Task CreateSubCategoryAsync(CreateSubCategoryRequest request);
 
         Task DeleteSubCategoryAsync(Guid id);
+
+        Task<int> Count();
     }
 }

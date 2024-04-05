@@ -70,5 +70,12 @@ namespace AutoCareHub.Services.Impl.SubCategories
             _context.Remove(subCategory);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<int> Count()
+        {
+            int count = await _context.SubCategories.CountAsync();
+
+            return count;
+        }
     }
 }

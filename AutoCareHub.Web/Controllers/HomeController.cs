@@ -8,6 +8,7 @@ using System.Diagnostics;
 using SERVICES = AutoCareHub.Web.Models.Services;
 using MAIN_CATEGORIES = AutoCareHub.Web.Models.MainCategories;
 using USERS = AutoCareHub.Web.Models.Users;
+using AutoCareHub.Services.SubCategories;
 
 namespace AutoCareHub.Web.Controllers
 {
@@ -17,13 +18,19 @@ namespace AutoCareHub.Web.Controllers
         private readonly IServiceService _serviceService;
         private readonly IMainCategoryService _mainCategoryService;
         private readonly IUserService _userService;
+        private readonly ISubCategoryService _subCategoryService;
 
-        public HomeController(ILogger<HomeController> logger, IServiceService serviceService, IMainCategoryService mainCategoryService, IUserService userService)
+        public HomeController(ILogger<HomeController> logger,
+            IServiceService serviceService, 
+            IMainCategoryService mainCategoryService, 
+            IUserService userService,
+            ISubCategoryService subCategoryService)
         {
             _logger = logger;
             _serviceService = serviceService;
             _mainCategoryService = mainCategoryService;
             _userService = userService;
+            _subCategoryService = subCategoryService;
         }
 
         public async Task<IActionResult> Index()
@@ -34,6 +41,7 @@ namespace AutoCareHub.Web.Controllers
 
             HomePageViewModel model = new HomePageViewModel()
             {
+                SubCategoriesCount = await _subCategoryService.Count(),
                 Services = entityServices
                     .Where(x => x.IsApproved == true)
                     .Select(SERVICES.Conversion.ConvertService)
