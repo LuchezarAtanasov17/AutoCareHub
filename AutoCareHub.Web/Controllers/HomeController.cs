@@ -9,6 +9,8 @@ using SERVICES = AutoCareHub.Web.Models.Services;
 using MAIN_CATEGORIES = AutoCareHub.Web.Models.MainCategories;
 using USERS = AutoCareHub.Web.Models.Users;
 using AutoCareHub.Services.SubCategories;
+using Microsoft.AspNetCore.Diagnostics;
+using AutoCareHub.Web.Infrastructure;
 
 namespace AutoCareHub.Web.Controllers
 {
@@ -60,7 +62,18 @@ namespace AutoCareHub.Web.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
+            var statusCode = exception is not null
+                ? Helper.ProcessException(exception)
+                : StatusCodes.Status500InternalServerError;
+
+            var viewModel = new ErrorViewModel
+            {
+                StatusCode = statusCode,
+                Message = exception?.Message
+            };
+
+            return View(viewModel);
         }
     }
 }

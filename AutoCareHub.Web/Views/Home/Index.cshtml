@@ -148,12 +148,15 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="footer-link">
-                        <h2>Useful Links</h2>
-                        <a asp-controller="Home" asp-action="Index">Home</a>
-                        <a asp-controller="Service" asp-action="List">Services</a>
-                        <a asp-controller="Appointment" asp-action="ListByUser" asp-route-userId="@Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))">My Appointments</a>
-                    </div>
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <div class="footer-link">
+                            <h2>Useful Links</h2>
+                            <a asp-controller="Home" asp-action="Index">Home</a>
+                            <a asp-controller="Service" asp-action="List">Services</a>
+                            <a asp-controller="Appointment" asp-action="ListByUser" asp-route-userId="@Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))">My Appointments</a>
+                        </div>
+                    }
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-newsletter">
