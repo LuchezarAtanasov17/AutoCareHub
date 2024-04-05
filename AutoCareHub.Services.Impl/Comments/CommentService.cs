@@ -1,5 +1,6 @@
 ﻿using AutoCareHub.Data;
 using AutoCareHub.Services.Comments;
+using AutoCareHub.Services.Exceptions;
 using AutoCareHub.Services.Impl.Comments;
 using Microsoft.EntityFrameworkCore;
 using ENTITIES = AutoCareHub.Data.Models;

@@ -1,5 +1,6 @@
 ﻿using AutoCareHub.Data;
 using AutoCareHub.Data.Models;
+using AutoCareHub.Services.Exceptions;
 using AutoCareHub.Services.Image;
 using AutoCareHub.Services.Services;
 using Microsoft.EntityFrameworkCore;

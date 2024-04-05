@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace AutoCareHub.Services
+namespace AutoCareHub.Services.Exceptions
 {
     public class ObjectNotFoundException : Exception
     {

@@ -1,6 +1,7 @@
 ﻿using AutoCareHub.Data;
 using AutoCareHub.Data.Models;
 using AutoCareHub.Services.Appointments;
+using AutoCareHub.Services.Exceptions;
 using AutoCareHub.Services.Impl.Appointments;
 using Microsoft.EntityFrameworkCore;
 

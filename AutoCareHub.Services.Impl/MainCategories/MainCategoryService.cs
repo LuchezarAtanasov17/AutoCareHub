@@ -1,4 +1,5 @@
 ﻿using AutoCareHub.Data;
+using AutoCareHub.Services.Exceptions;
 using AutoCareHub.Services.MainCategories;
 using Microsoft.EntityFrameworkCore;
 using ENTITIES = AutoCareHub.Data.Models;
