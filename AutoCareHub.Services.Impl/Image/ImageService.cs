@@ -57,9 +57,9 @@ namespace AutoCareHub.Services.Impl.Image
 
                 return result.Url.ToString();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while uploading an image.");
+                throw new ServiceException("An error occured while uploading an image.", ex);
             }
         }
     }

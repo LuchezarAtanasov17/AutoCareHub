@@ -30,9 +30,9 @@ namespace AutoCareHub.Services.Impl
 
                 return comment;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while retrieving a comment.");
+                throw new ServiceException("An error occured while retrieving a comment.", ex);
             }
         }
 
@@ -50,9 +50,9 @@ namespace AutoCareHub.Services.Impl
                 await _context.Comments.AddAsync(entityComment);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while creating a comment.");
+                throw new ServiceException("An error occured while creating a comment.", ex);
             }
         }
 
@@ -71,9 +71,9 @@ namespace AutoCareHub.Services.Impl
                 _context.Comments.Remove(comment);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while deleting a comment with specified ID.");
+                throw new ServiceException("An error occured while deleting a comment with specified ID.", ex);
             }
         }
     }

@@ -41,9 +41,9 @@ namespace AutoCareHub.Services.Impl.MainCategories
 
                 return mainCategories;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while retrieving main categories.");
+                throw new ServiceException("An error occured while retrieving main categories.", ex);
             }
         }
 
@@ -61,9 +61,9 @@ namespace AutoCareHub.Services.Impl.MainCategories
                 await _context.MainCategories.AddAsync(entityMainCategory);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while creating a main category.");
+                throw new ServiceException("An error occured while creating a main category.", ex);
             }
         }
 
@@ -82,9 +82,9 @@ namespace AutoCareHub.Services.Impl.MainCategories
                 _context.Remove(mainCategory);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while deleting a main category with specified ID.");
+                throw new ServiceException("An error occured while deleting a main category with specified ID.", ex);
             }
         }
     }

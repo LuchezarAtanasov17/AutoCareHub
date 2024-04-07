@@ -45,9 +45,9 @@ namespace AutoCareHub.Services.Impl.Likes
                     await _context.SaveChangesAsync();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while liking comment.");
+                throw new ServiceException("An error occured while liking comment.", ex);
             }
         }
     }

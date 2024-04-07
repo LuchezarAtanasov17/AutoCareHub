@@ -32,9 +32,9 @@ namespace AutoCareHub.Services.Impl.SubCategories
 
                 return subCategories;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while retrieving sub categories.");
+                throw new ServiceException("An error occured while retrieving sub categories.", ex);
             }
         }
 
@@ -52,9 +52,9 @@ namespace AutoCareHub.Services.Impl.SubCategories
                 await _context.SubCategories.AddAsync(entitySubCategory);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while creating a sub category.");
+                throw new ServiceException("An error occured while creating a sub category.", ex);
             }
         }
 
@@ -73,9 +73,9 @@ namespace AutoCareHub.Services.Impl.SubCategories
                 _context.Remove(subCategory);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while deleting a sub category with specified ID.");
+                throw new ServiceException("An error occured while deleting a sub category with specified ID.", ex);
             }
         }
 
@@ -87,9 +87,9 @@ namespace AutoCareHub.Services.Impl.SubCategories
 
                 return count;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while retrieving the count of sub categories.");
+                throw new ServiceException("An error occured while retrieving the count of sub categories.", ex);
             }
         }
     }

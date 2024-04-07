@@ -24,9 +24,9 @@ namespace AutoCareHub.Services.Impl.Users
 
                 return users;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while retrieving users.");
+                throw new ServiceException("An error occured while retrieving users.", ex);
             }
         }
     }

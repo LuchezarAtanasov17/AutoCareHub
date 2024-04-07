@@ -75,9 +75,9 @@ namespace AutoCareHub.Services.Impl.Services
 
                 return services;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while retrieving services.");
+                throw new ServiceException("An error occured while retrieving services.", ex);
             }
         }
 
@@ -114,9 +114,9 @@ namespace AutoCareHub.Services.Impl.Services
 
                 return service;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while retrieving a service with specified ID.");
+                throw new ServiceException("An error occured while retrieving a service with specified ID.", ex);
             }
         }
 
@@ -165,9 +165,9 @@ namespace AutoCareHub.Services.Impl.Services
                 await _context.ServiceRequests.AddAsync(registerRequest);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while creating a service.");
+                throw new ServiceException("An error occured while creating a service.", ex);
             }
         }
 
@@ -212,9 +212,9 @@ namespace AutoCareHub.Services.Impl.Services
                 }
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while updating a service with specified ID.");
+                throw new ServiceException("An error occured while updating a service with specified ID.", ex);
             }
         }
 
@@ -233,9 +233,9 @@ namespace AutoCareHub.Services.Impl.Services
                 _context.Remove(service);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while deleting a service with specified ID.");
+                throw new ServiceException("An error occured while deleting a service with specified ID.", ex);
             }
         }
     }

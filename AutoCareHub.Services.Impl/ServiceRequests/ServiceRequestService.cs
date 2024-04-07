@@ -27,9 +27,9 @@ namespace AutoCareHub.Services.Impl.ServiceRequests
 
                 return serviceRequests;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while retrieving not approved service requests.");
+                throw new ServiceException("An error occured while retrieving not approved service requests.", ex);
             }
         }
 
@@ -57,9 +57,9 @@ namespace AutoCareHub.Services.Impl.ServiceRequests
                 _context.ServiceRequests.Remove(request);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while approving a service request with specified ID.");
+                throw new ServiceException("An error occured while approving a service request with specified ID.", ex);
             }
         }
 
@@ -88,9 +88,9 @@ namespace AutoCareHub.Services.Impl.ServiceRequests
 
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while declining a service request with specified ID.");
+                throw new ServiceException("An error occured while declining a service request with specified ID.", ex);
             }
         }
     }

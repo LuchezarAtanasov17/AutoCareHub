@@ -41,9 +41,9 @@ namespace AutoCareHub.Services.Impl
 
                 return appointments;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while retrieving appointments.");
+                throw new ServiceException("An error occured while retrieving appointments.", ex);
             }
         }
 
@@ -63,9 +63,9 @@ namespace AutoCareHub.Services.Impl
 
                 return appointment;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while retrieving an appointment with specified ID.");
+                throw new ServiceException("An error occured while retrieving an appointment with specified ID.", ex);
             }
         }
 
@@ -83,9 +83,9 @@ namespace AutoCareHub.Services.Impl
                 await _context.Appointments.AddAsync(entityAppointment);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while creating an appointment.");
+                throw new ServiceException("An error occured while creating an appointment.", ex);
             }
         }
 
@@ -113,9 +113,9 @@ namespace AutoCareHub.Services.Impl
 
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while updating an appointment with specified ID.");
+                throw new ServiceException("An error occured while updating an appointment with specified ID.", ex);
             }
         }
 
@@ -134,9 +134,9 @@ namespace AutoCareHub.Services.Impl
                 _context.Remove(entity);
                 await _context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new ServiceException("An error occured while deleting an appointment with specified ID.");
+                throw new ServiceException("An error occured while deleting an appointment with specified ID.", ex);
             }
         }
     }
