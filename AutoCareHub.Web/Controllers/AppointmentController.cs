@@ -11,17 +11,13 @@ namespace AutoCareHub.Web.Controllers
     {
         private readonly IAppointmentService _appointmentService;
         private readonly IServiceService _serviceService;
-        private readonly IMainCategoryService _mainCategoryService;
 
         public AppointmentController(
             IAppointmentService appointmentService,
-            IServiceService serviceService,
-            IMainCategoryService mainCategoryService)
+            IServiceService serviceService)
         {
             _appointmentService = appointmentService ?? throw new ArgumentNullException(nameof(appointmentService));
             _serviceService = serviceService ?? throw new ArgumentNullException(nameof(serviceService));
-            _mainCategoryService = mainCategoryService ?? throw new ArgumentNullException(nameof(mainCategoryService));
-
         }
 
         [HttpGet]
@@ -78,48 +74,6 @@ namespace AutoCareHub.Web.Controllers
             request.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
             await _appointmentService.CreateAppointmentAsync(request);
-
-            return RedirectToAction(nameof(ListByUser), new { userId = request.UserId });
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Update(Guid id)
-        {
-            var appointment = await _appointmentService.GetAppointmentAsync(id);
-
-            var model = new UpdateAppointmentRequest()
-            {
-                UserId = appointment.UserId,
-                MainCategoryId = appointment.MainCategoryId,
-                Description = appointment.Description,
-                Date = appointment.Date,
-                ServiceName = appointment.Service.Name
-            };
-
-            return View(model);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Update(Guid id, UpdateAppointmentRequest request)
-        {
-            if (request is null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
-            if (request.Date < DateTime.Now)
-            {
-                ModelState.AddModelError(nameof(request.Date), "Invalid date.");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return View("Update", request);
-            }
-
-            request.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-            await _appointmentService.UpdateAppointmentAsync(id, request);
 
             return RedirectToAction(nameof(ListByUser), new { userId = request.UserId });
         }
