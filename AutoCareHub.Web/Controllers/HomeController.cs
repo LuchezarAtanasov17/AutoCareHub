@@ -11,12 +11,14 @@ using USERS = AutoCareHub.Web.Models.Users;
 using AutoCareHub.Services.SubCategories;
 using Microsoft.AspNetCore.Diagnostics;
 using AutoCareHub.Web.Infrastructure;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AutoCareHub.Web.Controllers
 {
     /// <summary>
     /// Represents a home controller.
     /// </summary>
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly IServiceService _serviceService;

@@ -4,6 +4,7 @@ using AutoCareHub.Services.MainCategories;
 using AutoCareHub.Services.Services;
 using AutoCareHub.Services.Users;
 using AutoCareHub.Web.Models.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using MAIN_CATEGORIES = AutoCareHub.Web.Models.MainCategories;
@@ -13,6 +14,7 @@ namespace AutoCareHub.Web.Controllers
     /// <summary>
     /// Represents a service controller.
     /// </summary>
+    [Authorize]
     public class ServiceController : Controller
     {
         private readonly IServiceService _serviceService;

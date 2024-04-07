@@ -1,5 +1,6 @@
 ﻿using AutoCareHub.Services.Comments;
 using AutoCareHub.Services.Likes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -8,6 +9,7 @@ namespace AutoCareHub.Web.Controllers
     /// <summary>
     /// Represents a comment controller.
     /// </summary>
+    [Authorize]
     public class CommentController : Controller
     {
         private readonly ICommentService _commentService;
