@@ -16,19 +16,17 @@ namespace AutoCareHub.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly IServiceService _serviceService;
         private readonly IMainCategoryService _mainCategoryService;
         private readonly IUserService _userService;
         private readonly ISubCategoryService _subCategoryService;
 
-        public HomeController(ILogger<HomeController> logger,
-            IServiceService serviceService, 
-            IMainCategoryService mainCategoryService, 
+        public HomeController(
+            IServiceService serviceService,
+            IMainCategoryService mainCategoryService,
             IUserService userService,
             ISubCategoryService subCategoryService)
         {
-            _logger = logger;
             _serviceService = serviceService;
             _mainCategoryService = mainCategoryService;
             _userService = userService;
