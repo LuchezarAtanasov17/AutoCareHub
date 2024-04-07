@@ -5,7 +5,6 @@ using AutoCareHub.Services.Impl.Services;
 using AutoCareHub.Services.MainCategories;
 using AutoCareHub.Services.Services;
 using AutoCareHub.Tests.Mocks;
-using Microsoft.AspNetCore.Http;
 using Moq;
 using ENTITIES = AutoCareHub.Data.Models;
 

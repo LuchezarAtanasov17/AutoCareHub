@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace AutoCareHub.Services.Appointments
+﻿namespace AutoCareHub.Services.Appointments
 {
     /// <summary>
     /// Represents a create appointment request.

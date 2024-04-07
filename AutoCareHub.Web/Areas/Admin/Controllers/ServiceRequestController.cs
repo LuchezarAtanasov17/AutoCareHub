@@ -1,9 +1,7 @@
 ﻿using AutoCareHub.Data.Models;
 using AutoCareHub.Services.CreateServiceRequests;
-using AutoCareHub.Services.Services;
 using AutoCareHub.Web.Models.ServiceRequests;
 using Microsoft.AspNetCore.Mvc;
-using SQLitePCL;
 
 namespace AutoCareHub.Web.Areas.Admin.Controllers
 {

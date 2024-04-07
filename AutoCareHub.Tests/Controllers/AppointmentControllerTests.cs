@@ -1,6 +1,5 @@
 ﻿using AutoCareHub.Data.Models;
 using AutoCareHub.Services.Appointments;
-using AutoCareHub.Services.MainCategories;
 using AutoCareHub.Services.Services;
 using AutoCareHub.Web.Controllers;
 using AutoCareHub.Web.Models.Appointment;

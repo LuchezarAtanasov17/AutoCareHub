@@ -4,7 +4,6 @@ using AutoCareHub.Services.Users;
 using AutoCareHub.Web.Models;
 using AutoCareHub.Web.Models.Home;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using SERVICES = AutoCareHub.Web.Models.Services;
 using MAIN_CATEGORIES = AutoCareHub.Web.Models.MainCategories;
 using USERS = AutoCareHub.Web.Models.Users;

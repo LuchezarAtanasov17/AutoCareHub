@@ -1,6 +1,5 @@
 ﻿using AutoCareHub.Services.Exceptions;
 using AutoCareHub.Services.Impl.SubCategories;
-using AutoCareHub.Services.MainCategories;
 using AutoCareHub.Services.SubCategories;
 using AutoCareHub.Tests.Mocks;
 using ENTITIES = AutoCareHub.Data.Models;

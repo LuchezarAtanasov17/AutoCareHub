@@ -1,5 +1,4 @@
 ﻿using AutoCareHub.Services.Appointments;
-using AutoCareHub.Services.MainCategories;
 using AutoCareHub.Services.Services;
 using AutoCareHub.Web.Models.Appointment;
 using Microsoft.AspNetCore.Authorization;

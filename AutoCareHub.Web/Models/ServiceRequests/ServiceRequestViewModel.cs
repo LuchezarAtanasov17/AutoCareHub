@@ -1,6 +1,4 @@
-﻿using AutoCareHub.Data.Models;
-
-namespace AutoCareHub.Web.Models.ServiceRequests
+﻿namespace AutoCareHub.Web.Models.ServiceRequests
 {
     /// <summary>
     /// Represents a service request view model.
