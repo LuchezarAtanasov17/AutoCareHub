@@ -6,15 +6,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutoCareHub.Services.Impl.ServiceRequests
 {
+    /// <summary>
+    /// Represents a service request service.
+    /// </summary>
     public class ServiceRequestService : IServiceRequestService
     {
         private readonly AutoCareHubDbContext _context;
 
+        /// <summary>
+        /// Initialize a new instance of the <see cref="ServiceRequestService"/> class.
+        /// </summary>
+        /// <param name="context">the context</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public ServiceRequestService(AutoCareHubDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        /// <inheritdoc/>
         public async Task<List<ServiceRequest>> ListNotApproved()
         {
             try
@@ -33,6 +42,7 @@ namespace AutoCareHub.Services.Impl.ServiceRequests
             }
         }
 
+        /// <inheritdoc/>
         public async Task Approve(Guid id)
         {
             try
@@ -63,6 +73,7 @@ namespace AutoCareHub.Services.Impl.ServiceRequests
             }
         }
 
+        /// <inheritdoc/>
         public async Task Decline(Guid id)
         {
             try

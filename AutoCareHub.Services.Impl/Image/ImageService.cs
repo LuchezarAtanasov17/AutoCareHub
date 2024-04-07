@@ -9,17 +9,26 @@ using System.Text.Json;
 
 namespace AutoCareHub.Services.Impl.Image
 {
+    /// <summary>
+    /// Represents a image service.
+    /// </summary>
     public class ImageService : IImageService
     {
         private readonly AutoCareHubDbContext _context;
         private readonly Cloudinary _cloudinary;
 
+        /// <summary>
+        /// Initialize a new instance of the <see cref="ImageService"/> class.
+        /// </summary>
+        /// <param name="context">the context</param>
+        /// <param name="cloudinary">the cloudinary</param>
         public ImageService(AutoCareHubDbContext context, Cloudinary cloudinary)
         {
             _context = context;
             _cloudinary = cloudinary;
         }
 
+        /// <inheritdoc/>
         public async Task<string> UploadImage(IFormFile imageFile, string nameFolder, Service service)
         {
             try

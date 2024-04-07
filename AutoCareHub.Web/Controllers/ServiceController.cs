@@ -10,6 +10,9 @@ using MAIN_CATEGORIES = AutoCareHub.Web.Models.MainCategories;
 
 namespace AutoCareHub.Web.Controllers
 {
+    /// <summary>
+    /// Represents a service controller.
+    /// </summary>
     public class ServiceController : Controller
     {
         private readonly IServiceService _serviceService;
@@ -37,6 +40,11 @@ namespace AutoCareHub.Web.Controllers
             _hostEnvironment = hostEnvironment ?? throw new ArgumentNullException(nameof(hostEnvironment));
         }
 
+        /// <summary>
+        /// Lists the services.
+        /// </summary>
+        /// <param name="query">the query</param>
+        /// <returns>the list services view</returns>
         [HttpGet]
         public async Task<IActionResult> List([FromQuery] AllServicesQueryModel query)
         {
@@ -65,6 +73,11 @@ namespace AutoCareHub.Web.Controllers
             return View(query);
         }
 
+        /// <summary>
+        /// Gets a service with specified ID.
+        /// </summary>
+        /// <param name="id">the service ID</param>
+        /// <returns>a details of the service view</returns>
         [HttpGet]
         public async Task<IActionResult> Get(
             [FromRoute]
@@ -99,6 +112,10 @@ namespace AutoCareHub.Web.Controllers
             return View("Details", service);
         }
 
+        /// <summary>
+        /// Creates a create service request.
+        /// </summary>
+        /// <returns>the create service view</returns>
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -115,6 +132,12 @@ namespace AutoCareHub.Web.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Creates a service.
+        /// </summary>
+        /// <param name="request">the request for creating a service</param>
+        /// <returns>the list services view</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         [HttpPost]
         public async Task<IActionResult> Create(
             CreateServiceRequest request)
@@ -150,6 +173,11 @@ namespace AutoCareHub.Web.Controllers
             return RedirectToAction(nameof(List));
         }
 
+        /// <summary>
+        /// Creates an update service request.
+        /// </summary>
+        /// <param name="id">the service ID</param>
+        /// <returns>update service view</returns>
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
@@ -181,6 +209,13 @@ namespace AutoCareHub.Web.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Updates a specified service.
+        /// </summary>
+        /// <param name="id">the service ID</param>
+        /// <param name="request">the request for updating the service</param>
+        /// <returns>the details of the service view</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         [HttpPost]
         public async Task<IActionResult> Update(Guid id, UpdateServiceRequest request)
         {
@@ -207,6 +242,11 @@ namespace AutoCareHub.Web.Controllers
             return RedirectToAction(nameof(Get), new { Id = id });
         }
 
+        /// <summary>
+        /// Deletes a specified service.
+        /// </summary>
+        /// <param name="id">the service ID</param>
+        /// <returns>the list services view</returns>
         public async Task<IActionResult> Delete(
           [FromRoute]
             Guid id)

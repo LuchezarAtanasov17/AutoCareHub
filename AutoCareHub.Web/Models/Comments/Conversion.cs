@@ -3,8 +3,17 @@ using WEB_USERS = AutoCareHub.Web.Models.Users;
 
 namespace AutoCareHub.Web.Models.Comments
 {
+    /// <summary>
+    /// Represents a conversion class for converting web models.
+    /// </summary>
     public class Conversion
     {
+        /// <summary>
+        /// Converts a entity comment to web comment.
+        /// </summary>
+        /// <param name="source">the source</param>
+        /// <returns>the web comment</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static CommentViewModel ConvertComment(ENTITIES.Comment source)
         {
             if (source is null)

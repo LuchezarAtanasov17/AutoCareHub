@@ -5,15 +5,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutoCareHub.Services.Impl.Likes
 {
+    /// <summary>
+    /// Represents a like service.
+    /// </summary>
     public class LikeService : ILikeService
     {
         private readonly AutoCareHubDbContext _context;
 
+        /// <summary>
+        /// Initialize a new instance of the <see cref="LikeService"/> class.
+        /// </summary>
+        /// <param name="context">the context</param>
         public LikeService(AutoCareHubDbContext context)
         {
             this._context = context;
         }
 
+        /// <inheritdoc/>
         public async Task HandleLikeCommentAsync(Guid commentId, Guid userId)
         {
             try

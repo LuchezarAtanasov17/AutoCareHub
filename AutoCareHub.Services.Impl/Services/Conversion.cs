@@ -3,10 +3,19 @@ using ENTITIES = AutoCareHub.Data.Models;
 
 namespace AutoCareHub.Services.Impl.Services
 {
-    internal class Conversion
+    /// <summary>
+    /// Represents a conversion class for converting service models.
+    /// </summary>
+    public class Conversion
     {
         #region Request To Entity
 
+        /// <summary>
+        /// Converts create service request to entity service.
+        /// </summary>
+        /// <param name="source">the source</param>
+        /// <returns>the entity service</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static ENTITIES.Service ConvertService(CreateServiceRequest source)
         {
             if (source is null)

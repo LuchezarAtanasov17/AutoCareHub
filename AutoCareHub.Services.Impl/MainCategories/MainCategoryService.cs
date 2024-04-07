@@ -6,15 +6,24 @@ using ENTITIES = AutoCareHub.Data.Models;
 
 namespace AutoCareHub.Services.Impl.MainCategories
 {
+    /// <summary>
+    /// Represents a main category service.
+    /// </summary>
     public class MainCategoryService : IMainCategoryService
     {
         private readonly AutoCareHubDbContext _context;
 
+        /// <summary>
+        /// Initialize a new instance of the <see cref="MainCategoryService"/> class.
+        /// </summary>
+        /// <param name="context">the context</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public MainCategoryService(AutoCareHubDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        /// <inheritdoc/>
         public async Task<List<ENTITIES.MainCategory>> ListMainCategoriesAsync(Guid? serviceId = null)
         {
             try
@@ -47,6 +56,7 @@ namespace AutoCareHub.Services.Impl.MainCategories
             }
         }
 
+        /// <inheritdoc/>
         public async Task CreateMainCategoryAsync(CreateMainCategoryRequest request)
         {
             try
@@ -67,6 +77,7 @@ namespace AutoCareHub.Services.Impl.MainCategories
             }
         }
 
+        /// <inheritdoc/>
         public async Task DeleteMainCategoryAsync(Guid id)
         {
             try

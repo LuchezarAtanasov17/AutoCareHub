@@ -8,17 +8,27 @@ using ENTITIES = AutoCareHub.Data.Models;
 
 namespace AutoCareHub.Services.Impl.Services
 {
+    /// <summary>
+    /// Represents a service service.
+    /// </summary>
     public class ServiceService : IServiceService
     {
         private readonly AutoCareHubDbContext _context;
         private readonly IImageService _imageService;
 
+        /// <summary>
+        /// Initialize a new instance of the <see cref="ServiceService"/> class.
+        /// </summary>
+        /// <param name="context">the context</param>
+        /// <param name="imageService">the image service</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public ServiceService(AutoCareHubDbContext context, IImageService imageService)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _imageService = imageService;
         }
 
+        /// <inheritdoc/>
         public async Task<List<ENTITIES.Service>> ListServicesAsync(Guid? userId = null,
             string? category = null,
             string? city = null,
@@ -81,6 +91,7 @@ namespace AutoCareHub.Services.Impl.Services
             }
         }
 
+        /// <inheritdoc/>
         public async Task<ENTITIES.Service> GetServiceAsync(Guid id)
         {
             try
@@ -120,6 +131,7 @@ namespace AutoCareHub.Services.Impl.Services
             }
         }
 
+        /// <inheritdoc/>
         public async Task CreateServiceAsync(CreateServiceRequest request)
         {
             try
@@ -171,6 +183,7 @@ namespace AutoCareHub.Services.Impl.Services
             }
         }
 
+        /// <inheritdoc/>
         public async Task UpdateServiceAsync(Guid id, UpdateServiceRequest request)
         {
             try
@@ -218,6 +231,7 @@ namespace AutoCareHub.Services.Impl.Services
             }
         }
 
+        /// <inheritdoc/>
         public async Task DeleteServiceAsync(Guid id)
         {
             try

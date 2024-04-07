@@ -6,11 +6,20 @@ using MAIN_CATEGORIES = AutoCareHub.Web.Models.MainCategories;
 
 namespace AutoCareHub.Web.Areas.Admin.Controllers
 {
+    /// <summary>
+    /// Represents sub category controller.
+    /// </summary>
     public class SubCategoryController : BaseController
     {
         private readonly ISubCategoryService _subCategoryService;
         private readonly IMainCategoryService _mainCategoryService;
 
+        /// <summary>
+        /// Initialize new instance of <see cref="SubCategoryController"/> class.
+        /// </summary>
+        /// <param name="subCategoryService">the sub category service</param>
+        /// <param name="mainCategoryService">the main category service</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public SubCategoryController(
            ISubCategoryService subCategoryService, IMainCategoryService mainCategoryService)
         {
@@ -18,6 +27,10 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
             _mainCategoryService = mainCategoryService ?? throw new ArgumentNullException(nameof(mainCategoryService));
         }
 
+        /// <summary>
+        /// Lists sub categories.
+        /// </summary>
+        /// <returns>the list sub categories view</returns>
         [HttpGet]
         public async Task<IActionResult> List()
         {
@@ -30,6 +43,10 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
             return View("List", subCategories);
         }
 
+        /// <summary>
+        /// Creates a create sub category request
+        /// </summary>
+        /// <returns>the create sub category view</returns>
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -44,6 +61,11 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Creates sub category.
+        /// </summary>
+        /// <param name="request">the request</param>
+        /// <returns>the list sub categories view</returns>
         [HttpPost]
         public async Task<IActionResult> Create(
             CreateSubCategoryRequest request)
@@ -58,6 +80,11 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
             return RedirectToAction(nameof(List));
         }
 
+        /// <summary>
+        /// Deletes sub category with specified ID.
+        /// </summary>
+        /// <param name="id">the sub category ID</param>
+        /// <returns>the list sub categories view</returns>
         public async Task<IActionResult> Delete(
             [FromRoute]
             Guid id)

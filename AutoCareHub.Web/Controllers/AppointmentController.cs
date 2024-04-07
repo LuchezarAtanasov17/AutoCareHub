@@ -7,11 +7,20 @@ using System.Security.Claims;
 
 namespace AutoCareHub.Web.Controllers
 {
+    /// <summary>
+    /// Represents appointment controller.
+    /// </summary>
     public class AppointmentController : Controller
     {
         private readonly IAppointmentService _appointmentService;
         private readonly IServiceService _serviceService;
 
+        /// <summary>
+        /// Initialize new instance of <see cref="AppointmentController"/> class.
+        /// </summary>
+        /// <param name="appointmentService"></param>
+        /// <param name="serviceService"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public AppointmentController(
             IAppointmentService appointmentService,
             IServiceService serviceService)
@@ -20,6 +29,11 @@ namespace AutoCareHub.Web.Controllers
             _serviceService = serviceService ?? throw new ArgumentNullException(nameof(serviceService));
         }
 
+        /// <summary>
+        /// Lists the appointments by service.
+        /// </summary>
+        /// <param name="serviceId">the service ID</param>
+        /// <returns>list view relative to parameters</returns>
         [HttpGet]
         public async Task<IActionResult> ListByService(
             Guid serviceId)
@@ -33,6 +47,11 @@ namespace AutoCareHub.Web.Controllers
             return View("ListByService", appointments);
         }
 
+        /// <summary>
+        /// Lists the appointments by user.
+        /// </summary>
+        /// <param name="userId">the user ID</param>
+        /// <returns>list view relative to parameters</returns>
         [HttpGet]
         public async Task<IActionResult> ListByUser(
             Guid userId)
@@ -46,6 +65,13 @@ namespace AutoCareHub.Web.Controllers
             return View("ListByUser", appointments);
         }
 
+        /// <summary>
+        /// Creates an appointment.
+        /// </summary>
+        /// <param name="serviceId">the service ID</param>
+        /// <param name="request">the request for creating an appointment</param>
+        /// <returns>the list by user view</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         [HttpPost]
         public async Task<IActionResult> Create(
            Guid serviceId,
@@ -78,6 +104,12 @@ namespace AutoCareHub.Web.Controllers
             return RedirectToAction(nameof(ListByUser), new { userId = request.UserId });
         }
 
+        /// <summary>
+        /// Deletes an appointment with specified ID.
+        /// </summary>
+        /// <param name="id">appointment ID</param>
+        /// <param name="serviceId">service ID</param>
+        /// <returns>the list by service view</returns>
         public async Task<IActionResult> DeleteByService(Guid id, Guid serviceId)
         {
             await _appointmentService.DeleteAppointmentAsync(id);
@@ -85,6 +117,11 @@ namespace AutoCareHub.Web.Controllers
             return RedirectToAction(nameof(ListByService), new { serviceId = serviceId });
         }
 
+        /// <summary>
+        /// Deletes an appointment with specified ID.
+        /// </summary>
+        /// <param name="id">appointment ID</param>
+        /// <returns>the list by user view</returns>
         public async Task<IActionResult> DeleteByUser(
           [FromRoute]
             Guid id)

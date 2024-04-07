@@ -14,6 +14,9 @@ using AutoCareHub.Web.Infrastructure;
 
 namespace AutoCareHub.Web.Controllers
 {
+    /// <summary>
+    /// Represents a home controller.
+    /// </summary>
     public class HomeController : Controller
     {
         private readonly IServiceService _serviceService;
@@ -21,6 +24,13 @@ namespace AutoCareHub.Web.Controllers
         private readonly IUserService _userService;
         private readonly ISubCategoryService _subCategoryService;
 
+        /// <summary>
+        /// Initialize new instance of <see cref="HomeController"/> class.
+        /// </summary>
+        /// <param name="serviceService">the service service</param>
+        /// <param name="mainCategoryService">the main category service</param>
+        /// <param name="userService">the user service</param>
+        /// <param name="subCategoryService">the sub category service</param>
         public HomeController(
             IServiceService serviceService,
             IMainCategoryService mainCategoryService,
@@ -33,6 +43,10 @@ namespace AutoCareHub.Web.Controllers
             _subCategoryService = subCategoryService;
         }
 
+        /// <summary>
+        /// Loads the home page.
+        /// </summary>
+        /// <returns>the home page view</returns>
         public async Task<IActionResult> Index()
         {
             var entityServices = await _serviceService.ListServicesAsync();

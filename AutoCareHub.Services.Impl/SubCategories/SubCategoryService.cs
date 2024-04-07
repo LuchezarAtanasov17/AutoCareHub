@@ -6,15 +6,24 @@ using ENTITIES = AutoCareHub.Data.Models;
 
 namespace AutoCareHub.Services.Impl.SubCategories
 {
+    /// <summary>
+    /// Represents a sub category service.
+    /// </summary>
     public class SubCategoryService : ISubCategoryService
     {
         private readonly AutoCareHubDbContext _context;
 
+        /// <summary>
+        /// Initialize a new instance of the <see cref="SubCategoryService"/> class.
+        /// </summary>
+        /// <param name="context">the context</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public SubCategoryService(AutoCareHubDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        /// <inheritdoc/>
         public async Task<List<ENTITIES.SubCategory>> ListSubCategoriesAsync(Guid? mainCategoryId = null)
         {
             try
@@ -38,6 +47,7 @@ namespace AutoCareHub.Services.Impl.SubCategories
             }
         }
 
+        /// <inheritdoc/>
         public async Task CreateSubCategoryAsync(CreateSubCategoryRequest request)
         {
             try
@@ -58,6 +68,7 @@ namespace AutoCareHub.Services.Impl.SubCategories
             }
         }
 
+        /// <inheritdoc/>
         public async Task DeleteSubCategoryAsync(Guid id)
         {
             try
@@ -79,6 +90,7 @@ namespace AutoCareHub.Services.Impl.SubCategories
             }
         }
 
+        /// <inheritdoc/>
         public async Task<int> Count()
         {
             try

@@ -6,15 +6,24 @@ using ENTITIES = AutoCareHub.Data.Models;
 
 namespace AutoCareHub.Services.Impl.Users
 {
+    /// <summary>
+    /// Represents a user service.
+    /// </summary>
     public class UserService : IUserService
     {
         private readonly AutoCareHubDbContext _context;
 
+        /// <summary>
+        /// Initialize a new instance of the <see cref="UserService"/> class.
+        /// </summary>
+        /// <param name="context">the context</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public UserService(AutoCareHubDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        /// <inheritdoc/>
         public async Task<List<ENTITIES.User>> ListUsersAsync()
         {
             try

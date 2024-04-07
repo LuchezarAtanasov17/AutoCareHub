@@ -7,8 +7,17 @@ using System.Text.Json;
 
 namespace AutoCareHub.Web.Models.Services
 {
+    /// <summary>
+    /// Represents a conversion class for converting web models.
+    /// </summary>
     public class Conversion
     {
+        /// <summary>
+        /// Converts a entity service to web service.
+        /// </summary>
+        /// <param name="source">the source</param>
+        /// <returns>the web service</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         public static ServiceViewModel ConvertService(ENTITIES.Service source)
         {
             if (source is null)
@@ -45,12 +54,17 @@ namespace AutoCareHub.Web.Models.Services
             return target;
         }
 
-        public static ServiceMainCategory ConvertMainCategoryViewModelToServiceMainCategory(WEB_MAIN_CATEGORIES.MainCategoryViewModel request)
+        /// <summary>
+        /// Converts a web main category model to service main category model.
+        /// </summary>
+        /// <param name="source">the source</param>
+        /// <returns>the service main category</returns>
+        public static ServiceMainCategory ConvertMainCategoryViewModelToServiceMainCategory(WEB_MAIN_CATEGORIES.MainCategoryViewModel source)
         {
             var target = new ServiceMainCategory()
             {
-                Id = request.Id,
-                Name = request.Name,
+                Id = source.Id,
+                Name = source.Name,
             };
 
             return target;

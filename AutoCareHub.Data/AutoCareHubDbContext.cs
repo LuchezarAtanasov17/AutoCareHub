@@ -5,8 +5,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AutoCareHub.Data
 {
+    /// <summary>
+    /// Represents the database context.
+    /// </summary>
     public class AutoCareHubDbContext : IdentityDbContext<User, Role, Guid>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AutoCareHubDbContext"/> class.
+        /// </summary>
+        /// <param name="options">the options</param>
         public AutoCareHubDbContext(DbContextOptions<AutoCareHubDbContext> options)
             : base(options)
         {

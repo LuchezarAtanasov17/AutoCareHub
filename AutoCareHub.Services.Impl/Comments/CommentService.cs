@@ -7,15 +7,24 @@ using ENTITIES = AutoCareHub.Data.Models;
 
 namespace AutoCareHub.Services.Impl
 {
+    /// <summary>
+    /// Represents a comment service.
+    /// </summary>
     public class CommentService : ICommentService
     {
         private readonly AutoCareHubDbContext _context;
 
+        /// <summary>
+        /// Initialize a new instance of the <see cref="CommentService"/> class.
+        /// </summary>
+        /// <param name="context">the context</param>
+        /// <exception cref="ArgumentNullException"></exception>
         public CommentService(AutoCareHubDbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
+        /// <inheritdoc/>
         public async Task<ENTITIES.Comment> GetCommentAsync(Guid id)
         {
             try
@@ -36,6 +45,7 @@ namespace AutoCareHub.Services.Impl
             }
         }
 
+        /// <inheritdoc/>
         public async Task CreateCommentAsync(CreateCommentRequest request)
         {
             try
@@ -56,6 +66,7 @@ namespace AutoCareHub.Services.Impl
             }
         }
 
+        /// <inheritdoc/>
         public async Task DeleteCommentAsync(Guid id)
         {
             try

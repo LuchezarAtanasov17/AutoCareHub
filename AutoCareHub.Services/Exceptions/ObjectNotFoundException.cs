@@ -2,6 +2,9 @@
 
 namespace AutoCareHub.Services.Exceptions
 {
+    /// <summary>
+    /// Represents an object not found exception.
+    /// </summary>
     public class ObjectNotFoundException : Exception
     {
         /// <summary>
