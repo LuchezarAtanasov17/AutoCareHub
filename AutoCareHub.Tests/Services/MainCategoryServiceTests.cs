@@ -13,7 +13,6 @@ namespace AutoCareHub.Tests.Services
         {
             #region Arrange
 
-
             using var data = DatabaseMock.Instance;
             data.MainCategories.Add(new ENTITIES.MainCategory
             {
