@@ -93,7 +93,6 @@ namespace AutoCareHub.Web.Controllers
                 {
                     StatusCode = statusCode,
                     Message = exception?.Message,
-                    InnerExceptionMessage = exception?.InnerException?.Message,
                 };
 
                 return View(viewModel);
