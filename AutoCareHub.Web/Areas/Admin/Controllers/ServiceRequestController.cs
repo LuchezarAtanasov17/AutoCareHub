@@ -30,14 +30,21 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            List<ServiceRequest> entityRequests = await _serviceRequestService
-                .ListNotApproved();
+            try
+            {
+                List<ServiceRequest> entityRequests = await _serviceRequestService
+                    .ListNotApproved();
 
-            var requests = entityRequests
-                .Select(Conversion.ConvertServiceRequest)
-                .ToList();
+                var requests = entityRequests
+                    .Select(Conversion.ConvertServiceRequest)
+                    .ToList();
 
-            return View(requests);
+                return View(requests);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -49,9 +56,16 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
             [FromRoute]
             Guid id)
         {
-            await _serviceRequestService.Decline(id);
+            try
+            {
+                await _serviceRequestService.Decline(id);
 
-            return RedirectToAction(nameof(List));
+                return RedirectToAction(nameof(List));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -64,9 +78,17 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
             [FromRoute]
             Guid id)
         {
-            await _serviceRequestService.Approve(id);
+            try
+            {
+                await _serviceRequestService.Approve(id);
 
-            return RedirectToAction(nameof(List));
+                return RedirectToAction(nameof(List));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

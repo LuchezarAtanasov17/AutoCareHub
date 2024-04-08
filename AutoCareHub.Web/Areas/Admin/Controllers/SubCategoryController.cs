@@ -34,13 +34,20 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var entitySubCategories = await _subCategoryService.ListSubCategoriesAsync();
+            try
+            {
+                var entitySubCategories = await _subCategoryService.ListSubCategoriesAsync();
 
-            List<SubCategoryViewModel> subCategories = entitySubCategories
-                .Select(Conversion.ConvertSubCategory)
-                .ToList();
+                List<SubCategoryViewModel> subCategories = entitySubCategories
+                    .Select(Conversion.ConvertSubCategory)
+                    .ToList();
 
-            return View("List", subCategories);
+                return View("List", subCategories);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -50,15 +57,22 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var mainCategories = await _mainCategoryService.ListMainCategoriesAsync();
-            var model = new CreateSubCategoryRequest()
+            try
             {
-                MainCategories = mainCategories
-                .Select(MAIN_CATEGORIES.Conversion.ConvertSelectMainCategory)
-                .ToList(),
-            };
+                var mainCategories = await _mainCategoryService.ListMainCategoriesAsync();
+                var model = new CreateSubCategoryRequest()
+                {
+                    MainCategories = mainCategories
+                    .Select(MAIN_CATEGORIES.Conversion.ConvertSelectMainCategory)
+                    .ToList(),
+                };
 
-            return View(model);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -70,14 +84,21 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Create(
             CreateSubCategoryRequest request)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(request);
+                if (!ModelState.IsValid)
+                {
+                    return View(request);
+                }
+
+                await _subCategoryService.CreateSubCategoryAsync(request);
+
+                return RedirectToAction(nameof(List));
             }
-
-            await _subCategoryService.CreateSubCategoryAsync(request);
-
-            return RedirectToAction(nameof(List));
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -89,9 +110,16 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
             [FromRoute]
             Guid id)
         {
-            await _subCategoryService.DeleteSubCategoryAsync(id);
+            try
+            {
+                await _subCategoryService.DeleteSubCategoryAsync(id);
 
-            return RedirectToAction(nameof(List));
+                return RedirectToAction(nameof(List));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

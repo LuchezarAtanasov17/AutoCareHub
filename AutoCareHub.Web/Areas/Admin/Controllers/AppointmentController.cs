@@ -29,15 +29,21 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var entityAppointments = await _appointmentService.ListAppointmentsAsync();
+            try
+            {
+                var entityAppointments = await _appointmentService.ListAppointmentsAsync();
 
-            List<AppointmentViewModel> appointments = entityAppointments
-                .Select(Conversion.ConvertAppointment)
-                .ToList();
+                List<AppointmentViewModel> appointments = entityAppointments
+                    .Select(Conversion.ConvertAppointment)
+                    .ToList();
 
-            return View("List", appointments);
+                return View("List", appointments);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
-
         /// <summary>
         /// Deletes a specified appointment.
         /// </summary>
@@ -47,9 +53,16 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
             [FromRoute]
             Guid id)
         {
-            await _appointmentService.DeleteAppointmentAsync(id);
+            try
+            {
+                await _appointmentService.DeleteAppointmentAsync(id);
 
-            return RedirectToAction(nameof(List));
+                return RedirectToAction(nameof(List));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

@@ -29,14 +29,21 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var entityServices = await _serviceService
-                .ListServicesAsync();
+            try
+            {
+                var entityServices = await _serviceService
+                    .ListServicesAsync();
 
-            var services = entityServices
-             .Select(Conversion.ConvertService)
-             .ToList();
+                var services = entityServices
+                 .Select(Conversion.ConvertService)
+                 .ToList();
 
-            return View(services);
+                return View(services);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -48,9 +55,17 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
          [FromRoute]
             Guid id)
         {
-            await _serviceService.DeleteServiceAsync(id);
+            try
+            {
+                await _serviceService.DeleteServiceAsync(id);
 
-            return RedirectToAction(nameof(List));
+                return RedirectToAction(nameof(List));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

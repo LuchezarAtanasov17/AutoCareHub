@@ -39,17 +39,26 @@ namespace AutoCareHub.Web.Controllers
             Guid id,
             CreateCommentRequest request)
         {
-            if (request is null)
+            try
             {
-                throw new ArgumentNullException(nameof(request));
+                if (request is null)
+                {
+                    throw new ArgumentNullException(nameof(request));
+                }
+
+                request.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                request.ServiceId = id;
+
+                await _commentService.CreateCommentAsync(request);
+
+                return RedirectToAction("Get", "Service", new { id = request.ServiceId });
+
             }
+            catch (Exception)
+            {
 
-            request.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            request.ServiceId = id;
-
-            await _commentService.CreateCommentAsync(request);
-
-            return RedirectToAction("Get", "Service", new { id = request.ServiceId });
+                throw;
+            }
         }
 
         /// <summary>
@@ -59,13 +68,20 @@ namespace AutoCareHub.Web.Controllers
         /// <returns>the details of the service view</returns>
         public async Task<IActionResult> Delete(Guid id)
         {
-            var comment = await _commentService.GetCommentAsync(id);
+            try
+            {
+                var comment = await _commentService.GetCommentAsync(id);
 
-            var serviceId = comment.ServiceId;
+                var serviceId = comment.ServiceId;
 
-            await _commentService.DeleteCommentAsync(id);
+                await _commentService.DeleteCommentAsync(id);
 
-            return RedirectToAction("Get", "Service", new { id = serviceId });
+                return RedirectToAction("Get", "Service", new { id = serviceId });
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -75,7 +91,15 @@ namespace AutoCareHub.Web.Controllers
         [HttpPost]
         public async Task HandleLike(string commentId)
         {
-            await _likeService.HandleLikeCommentAsync(Guid.Parse(commentId), Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            try
+            {
+                await _likeService.HandleLikeCommentAsync(Guid.Parse(commentId), Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

@@ -28,13 +28,20 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var userServices = await _userService.ListUsersAsync();
+            try
+            {
+                var userServices = await _userService.ListUsersAsync();
 
-            var users = userServices
-                .Select(Conversion.ConvertUser)
-                .ToList();
+                var users = userServices
+                    .Select(Conversion.ConvertUser)
+                    .ToList();
 
-            return View(users);
+                return View(users);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

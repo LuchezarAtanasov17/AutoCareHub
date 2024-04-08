@@ -50,43 +50,58 @@ namespace AutoCareHub.Web.Controllers
         /// <returns>the home page view</returns>
         public async Task<IActionResult> Index()
         {
-            var entityServices = await _serviceService.ListServicesAsync();
-            var entityMainCategories = await _mainCategoryService.ListMainCategoriesAsync();
-            var entityUsers = await _userService.ListUsersAsync();
-
-            HomePageViewModel model = new HomePageViewModel()
+            try
             {
-                SubCategoriesCount = await _subCategoryService.Count(),
-                Services = entityServices
-                    .Where(x => x.IsApproved == true)
-                    .Select(SERVICES.Conversion.ConvertService)
-                    .ToList(),
-                MainCategories = entityMainCategories
-                    .Select(MAIN_CATEGORIES.Conversion.ConvertMainCategory)
-                    .ToList(),
-                Users = entityUsers
-                    .Select(USERS.Conversion.ConvertUser)
-                    .ToList(),
-            };
+                var entityServices = await _serviceService.ListServicesAsync();
+                var entityMainCategories = await _mainCategoryService.ListMainCategoriesAsync();
+                var entityUsers = await _userService.ListUsersAsync();
 
-            return View(model);
+                HomePageViewModel model = new HomePageViewModel()
+                {
+                    SubCategoriesCount = await _subCategoryService.Count(),
+                    Services = entityServices
+                        .Where(x => x.IsApproved == true)
+                        .Select(SERVICES.Conversion.ConvertService)
+                        .ToList(),
+                    MainCategories = entityMainCategories
+                        .Select(MAIN_CATEGORIES.Conversion.ConvertMainCategory)
+                        .ToList(),
+                    Users = entityUsers
+                        .Select(USERS.Conversion.ConvertUser)
+                        .ToList(),
+                };
+
+                return View(model);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            var exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
-            var statusCode = exception is not null
-                ? Helper.ProcessException(exception)
-                : StatusCodes.Status500InternalServerError;
-
-            var viewModel = new ErrorViewModel
+            try
             {
-                StatusCode = statusCode,
-                Message = exception?.Message
-            };
+                var exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
+                var statusCode = exception is not null
+                    ? Helper.ProcessException(exception)
+                    : StatusCodes.Status500InternalServerError;
 
-            return View(viewModel);
+                var viewModel = new ErrorViewModel
+                {
+                    StatusCode = statusCode,
+                    Message = exception?.Message,
+                    InnerExceptionMessage = exception?.InnerException?.Message,
+                };
+
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

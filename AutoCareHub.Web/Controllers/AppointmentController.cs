@@ -39,13 +39,20 @@ namespace AutoCareHub.Web.Controllers
         public async Task<IActionResult> ListByService(
             Guid serviceId)
         {
-            var entityAppointments = await _appointmentService.ListAppointmentsAsync(serviceId: serviceId);
+            try
+            {
+                var entityAppointments = await _appointmentService.ListAppointmentsAsync(serviceId: serviceId);
 
-            List<AppointmentViewModel> appointments = entityAppointments
-                .Select(Conversion.ConvertAppointment)
-                .ToList();
+                List<AppointmentViewModel> appointments = entityAppointments
+                    .Select(Conversion.ConvertAppointment)
+                    .ToList();
 
-            return View("ListByService", appointments);
+                return View("ListByService", appointments);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -57,13 +64,20 @@ namespace AutoCareHub.Web.Controllers
         public async Task<IActionResult> ListByUser(
             Guid userId)
         {
-            var entityAppointments = await _appointmentService.ListAppointmentsAsync(userId: userId);
+            try
+            {
+                var entityAppointments = await _appointmentService.ListAppointmentsAsync(userId: userId);
 
-            List<AppointmentViewModel> appointments = entityAppointments
-                .Select(Conversion.ConvertAppointment)
-                .ToList();
+                List<AppointmentViewModel> appointments = entityAppointments
+                    .Select(Conversion.ConvertAppointment)
+                    .ToList();
 
-            return View("ListByUser", appointments);
+                return View("ListByUser", appointments);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -78,31 +92,39 @@ namespace AutoCareHub.Web.Controllers
            Guid serviceId,
            CreateAppointmentRequest request)
         {
-            if (request is null)
+            try
             {
-                throw new ArgumentNullException(nameof(request));
-            }
+                if (request is null)
+                {
+                    throw new ArgumentNullException(nameof(request));
+                }
 
-            if (request.Date < DateTime.Now)
+                if (request.Date < DateTime.Now)
+                {
+                    ModelState.AddModelError(nameof(request.Date), "Invalid date.");
+                }
+                if (request.Description == null)
+                {
+                    ModelState.AddModelError(nameof(request.Description), "The description field is required.");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return RedirectToAction("Get", "Service", new { id = serviceId });
+                }
+
+                request.ServiceId = serviceId;
+                request.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+                await _appointmentService.CreateAppointmentAsync(request);
+
+                return RedirectToAction(nameof(ListByUser), new { userId = request.UserId });
+
+            }
+            catch (Exception)
             {
-                ModelState.AddModelError(nameof(request.Date), "Invalid date.");
+                throw;
             }
-            if (request.Description == null)
-            {
-                ModelState.AddModelError(nameof(request.Description), "The description field is required.");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return RedirectToAction("Get", "Service", new { id = serviceId });
-            }
-
-            request.ServiceId = serviceId;
-            request.UserId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-
-            await _appointmentService.CreateAppointmentAsync(request);
-
-            return RedirectToAction(nameof(ListByUser), new { userId = request.UserId });
         }
 
         /// <summary>
@@ -113,9 +135,17 @@ namespace AutoCareHub.Web.Controllers
         /// <returns>the list by service view</returns>
         public async Task<IActionResult> DeleteByService(Guid id, Guid serviceId)
         {
-            await _appointmentService.DeleteAppointmentAsync(id);
+            try
+            {
+                await _appointmentService.DeleteAppointmentAsync(id);
 
-            return RedirectToAction(nameof(ListByService), new { serviceId = serviceId });
+                return RedirectToAction(nameof(ListByService), new { serviceId = serviceId });
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>
@@ -127,11 +157,19 @@ namespace AutoCareHub.Web.Controllers
           [FromRoute]
             Guid id)
         {
-            var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            try
+            {
+                var userId = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
 
-            await _appointmentService.DeleteAppointmentAsync(id);
+                await _appointmentService.DeleteAppointmentAsync(id);
 
-            return RedirectToAction(nameof(ListByUser), new { userId = userId });
+                return RedirectToAction(nameof(ListByUser), new { userId = userId });
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

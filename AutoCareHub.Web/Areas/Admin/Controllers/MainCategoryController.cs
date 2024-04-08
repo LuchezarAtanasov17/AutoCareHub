@@ -29,13 +29,21 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> List()
         {
-            var entityMainCategories = await _mainCategoryService.ListMainCategoriesAsync();
+            try
+            {
+                var entityMainCategories = await _mainCategoryService.ListMainCategoriesAsync();
 
-            List<MainCategoryViewModel> mainCategories = entityMainCategories
-                .Select(Conversion.ConvertMainCategory)
-                .ToList();
+                List<MainCategoryViewModel> mainCategories = entityMainCategories
+                    .Select(Conversion.ConvertMainCategory)
+                    .ToList();
 
-            return View("List", mainCategories);
+                return View("List", mainCategories);
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -45,9 +53,16 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            var model = new CreateMainCategoryRequest();
+            try
+            {
+                var model = new CreateMainCategoryRequest();
 
-            return View(model);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -59,14 +74,21 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
         public async Task<IActionResult> Create(
             CreateMainCategoryRequest request)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return View(request);
+                if (!ModelState.IsValid)
+                {
+                    return View(request);
+                }
+
+                await _mainCategoryService.CreateMainCategoryAsync(request);
+
+                return RedirectToAction(nameof(List));
             }
-
-            await _mainCategoryService.CreateMainCategoryAsync(request);
-
-            return RedirectToAction(nameof(List));
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -78,9 +100,17 @@ namespace AutoCareHub.Web.Areas.Admin.Controllers
             [FromRoute]
             Guid id)
         {
-            await _mainCategoryService.DeleteMainCategoryAsync(id);
+            try
+            {
+                await _mainCategoryService.DeleteMainCategoryAsync(id);
 
-            return RedirectToAction(nameof(List));
+                return RedirectToAction(nameof(List));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
