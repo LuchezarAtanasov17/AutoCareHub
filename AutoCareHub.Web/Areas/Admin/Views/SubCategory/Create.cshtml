@@ -24,7 +24,12 @@
                 <span asp-validation-for="MainCategoryId" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <input class="btn btn-primary" asp-area="Admin" asp-controller="SubCategory" asp-action="Create" type="submit" value="Save" />
+                <input asp-area="Admin"
+                       asp-controller="SubCategory"
+                       asp-action="Create"
+                    class="btn btn-primary" 
+                        type="submit"
+                        value="Save" />
             </div>
         </form>
     </div>

@@ -958,7 +958,7 @@ a {
 .facts {
     position: relative;
     width: 100%;
-    min-height: 400px;
+    min-height: 300px;
     margin: 45px 0;
     display: flex;
     align-items: center;
@@ -2256,3 +2256,6 @@ a {
                 .footer .copyright p a:hover {
                     color: #ffffff;
                 }
+body {
+    background-color: #fafafa !important;
+}
