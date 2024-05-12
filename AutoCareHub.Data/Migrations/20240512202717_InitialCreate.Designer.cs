@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AutoCareHub.Data.Migrations
 {
     [DbContext(typeof(AutoCareHubDbContext))]
-    [Migration("20240404201647_InitialCreate")]
+    [Migration("20240512202717_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -209,6 +209,12 @@ namespace AutoCareHub.Data.Migrations
                         },
                         new
                         {
+                            Id = new Guid("714e4f35-b1ee-441a-9b0b-ec11c6040837"),
+                            MainCategoryId = new Guid("d8ca8195-48f6-4041-ac87-8b919d651e67"),
+                            ServiceId = new Guid("dc4ee450-7e0d-4d13-b93f-474487d355d0")
+                        },
+                        new
+                        {
                             Id = new Guid("29b077dd-c570-42a7-ba9b-fee2832aa7bd"),
                             MainCategoryId = new Guid("8317f4c5-3f8b-4020-bbcf-2adb5e30639b"),
                             ServiceId = new Guid("ba0914fa-d680-4f2d-97b4-b6197e7a3902")
@@ -325,7 +331,7 @@ namespace AutoCareHub.Data.Migrations
                             City = "Gabrovo",
                             CloseTime = new TimeSpan(0, 18, 0, 0, 0),
                             Description = "Welcome to ServiceSelect — your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!",
-                            ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png\"]",
+                            ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png\",\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1715545065/ljtqjrrxabv2fwv2dzjt.jpg\",\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1715545065/xsipzdrhxkvio0o7g9zg.jpg\"]",
                             IsApproved = true,
                             Name = "ServiceSelect",
                             OpenTime = new TimeSpan(0, 9, 0, 0, 0),
@@ -338,7 +344,7 @@ namespace AutoCareHub.Data.Migrations
                             City = "Sofia",
                             CloseTime = new TimeSpan(0, 18, 0, 0, 0),
                             Description = "Experience the ultimate in automotive convenience with DriveEase. Say goodbye to long wait times and tedious phone calls—we've streamlined the process for you. From routine maintenance to emergency repairs, our platform connects you with skilled professionals ready to serve. Relax and let DriveEase take the wheel on your car care journey.",
-                            ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg\"]",
+                            ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1715545065/l83z4mztcynvad3sjl1s.jpg\"]",
                             IsApproved = true,
                             Name = "CarProCare",
                             OpenTime = new TimeSpan(0, 9, 0, 0, 0),
@@ -351,7 +357,7 @@ namespace AutoCareHub.Data.Migrations
                             City = "Varna",
                             CloseTime = new TimeSpan(0, 18, 0, 0, 0),
                             Description = "Welcome to AutoCare Connect—your one-stop destination for hassle-free car service. Browse, book, and relax as we connect you with trusted mechanics for all your automotive needs. Experience convenience at your fingertips. Get started today!",
-                            ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg\"]",
+                            ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1715545065/pxhazwh3ofhmiccpvide.jpg\"]",
                             IsApproved = true,
                             Name = "CarServiceCentral",
                             OpenTime = new TimeSpan(0, 8, 0, 0, 0),
@@ -364,7 +370,7 @@ namespace AutoCareHub.Data.Migrations
                             City = "Plovdiv",
                             CloseTime = new TimeSpan(0, 17, 0, 0, 0),
                             Description = "Welcome to AutoPureWash, where your vehicle's shine is our priority. Treat your car to a rejuvenating experience with our expert team and state-of-the-art equipment. From exterior washes to meticulous detailing, we offer a range of services tailored to suit your needs. Experience the ultimate in cleanliness and convenience at AutoPureWash—where every wash leaves your car sparkling like new.",
-                            ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg\"]",
+                            ImageUrls = "[\"https://res.cloudinary.com/ddbrt2xfu/image/upload/v1715545065/fp7c40sasgvs2fy4kwqq.jpg\"]",
                             IsApproved = true,
                             Name = "AutoPureWash",
                             OpenTime = new TimeSpan(0, 8, 0, 0, 0),
@@ -805,7 +811,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("1456c79b-7080-4586-8467-900a3cb033fe"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c49b6c53-6035-4e5a-8588-089192bcf5f8",
+                            ConcurrencyStamp = "21d62ed3-e51a-41a6-9c89-ca859d3cc6b8",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             FirstName = "Luchezar",
@@ -822,7 +828,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("62448744-4356-44dc-a005-0bfb6ba9e8b2"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ea9ba76d-1ea2-4595-b73d-f0c367899c71",
+                            ConcurrencyStamp = "f4ab6a1a-b47e-40fe-b041-891e3b305327",
                             Email = "dimitar@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",
@@ -839,7 +845,7 @@ namespace AutoCareHub.Data.Migrations
                         {
                             Id = new Guid("c895a6a4-113d-4669-aa7a-5fecfe3b504c"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "da3fff58-3847-4d6f-b450-3efd80505039",
+                            ConcurrencyStamp = "7a6d5714-b2d8-4b54-9684-aae046729148",
                             Email = "simonipal@mail.com",
                             EmailConfirmed = false,
                             FirstName = "Dimitar",

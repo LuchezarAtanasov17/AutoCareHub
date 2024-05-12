@@ -31,7 +31,9 @@ namespace AutoCareHub.Data.Configuration
                     IsApproved = true,
                     ImageUrls = JsonSerializer.Serialize( new List<string>()
                     {
-                        "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png"
+                        "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708796935/a4jdxgbvivhpsctgjtku.png",
+                        "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1715545065/ljtqjrrxabv2fwv2dzjt.jpg",
+                        "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1715545065/xsipzdrhxkvio0o7g9zg.jpg",
                     })
                 },
                 new()
@@ -50,7 +52,7 @@ namespace AutoCareHub.Data.Configuration
                     IsApproved = true,
                     ImageUrls = JsonSerializer.Serialize(new List<string>()
                     {
-                        "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797988/nonue5t35kqw6tgsemng.jpg"
+                        "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1715545065/l83z4mztcynvad3sjl1s.jpg"
                     })
                 },
                 new()
@@ -68,7 +70,7 @@ namespace AutoCareHub.Data.Configuration
                     IsApproved = true,
                     ImageUrls = JsonSerializer.Serialize( new List<string>()
                     {
-                        "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708798216/zvk1f91ntnsvofjmu5hk.jpg"
+                        "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1715545065/pxhazwh3ofhmiccpvide.jpg"
                     }),
                 },
                 new()
@@ -87,7 +89,7 @@ namespace AutoCareHub.Data.Configuration
                     IsApproved = true,
                     ImageUrls =JsonSerializer.Serialize( new List<string>()
                     {
-                        "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1708797989/jhqtxfrhy22egoizyxia.jpg"
+                        "https://res.cloudinary.com/ddbrt2xfu/image/upload/v1715545065/fp7c40sasgvs2fy4kwqq.jpg"
                     })
                 }
             };

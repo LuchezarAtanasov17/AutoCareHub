@@ -22,6 +22,12 @@ namespace AutoCareHub.Data.Configuration
                 },
                 new ()
                 {
+                    Id = Guid.Parse("714e4f35-b1ee-441a-9b0b-ec11c6040837"),
+                    MainCategoryId = Guid.Parse("d8ca8195-48f6-4041-ac87-8b919d651e67"),
+                    ServiceId = Guid.Parse("dc4ee450-7e0d-4d13-b93f-474487d355d0")
+                },
+                new ()
+                {
                     Id = Guid.Parse("29b077dd-c570-42a7-ba9b-fee2832aa7bd"),
                     MainCategoryId = Guid.Parse("8317f4c5-3f8b-4020-bbcf-2adb5e30639b"),
                     ServiceId = Guid.Parse("ba0914fa-d680-4f2d-97b4-b6197e7a3902")
