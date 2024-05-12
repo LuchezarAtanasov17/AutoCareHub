@@ -1,5 +1,6 @@
 ﻿@using AutoCareHub.Web.Models.Home
 @using System.Security.Claims
+@using AutoCareHub.Web.Models.Services
 @model HomePageViewModel
 
 <!DOCTYPE html>
@@ -72,7 +73,9 @@
                 {
                     <div class="col-lg-4 col-md-6">
                         <div class="service-item">
-                            <h3 style="text-align: center;">@mainCategory.Name</h3>
+                            <h3 style="text-align: center;">
+                                @Html.ActionLink($"{mainCategory.Name}", "List", "Service", new AllServicesQueryModel() { MainCategory = mainCategory.Name.ToString() })
+                            </h3>
                             <div class="row">
                                 @foreach (var subCategory in mainCategory.SubCategories.OrderBy(x => x.Name))
                                 {
